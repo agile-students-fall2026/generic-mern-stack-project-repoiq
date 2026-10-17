@@ -7,6 +7,13 @@
 
 ## [Here](https://www.figma.com/proto/KblWH70bD1B9II49iF0S8b/Wireframe?node-id=28-21&t=7PYAkJ2AfVD2TSsg-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=24%3A11&show-proto-sidebar=1) is the link to our prototype. 
 
+## We split the work as follows:
+ ### App Map: Worked on it all together
+ ### Wireframes (and linking as prototype): 
+ #### Aditi: FirstScreen, Login, Signup, Email Verification (both),Home, Add Repository
+ #### Asia: Component Details, Dependency Details, Search Results (repository-level),Search Result Details, Empty States
+ #### Mariam: Add Repository (Error (using Asia's assets)), Analysis Progress (both), Analysis Results, Interactive Map (all versions), Search Results (user-level), Repository Details, Analysis Complete (and error)
+
 ## App map
 
 The app map shows how the main screens connect.
