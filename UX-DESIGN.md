@@ -10,9 +10,9 @@
 ## We split the work as follows:
  ### App Map: Worked on it all together
  ### Wireframes (and linking as prototype): 
- #### Aditi: FirstScreen, Login, Signup, Email Verification (both),Home, Add Repository
- #### Asia: Component Details, Dependency Details, Search Results (repository-level),Search Result Details, Empty States
- #### Mariam: Add Repository (Error (using Asia's assets)), Analysis Progress (both), Analysis Results, Interactive Map (all versions), Search Results (user-level), Repository Details, Analysis Complete (and error)
+ #### Aditi (AditiAdhikari05): FirstScreen, Login, Signup, Email Verification (both),Home, Add Repository
+ #### Asia (maomao274): Component Details, Dependency Details, Search Results (repository-level),Search Result Details, Empty States
+ #### Mariam (st6rgazing): Add Repository (Error (using Asia's assets)), Analysis Progress (both), Analysis Results, Interactive Map (all versions), Search Results (user-level), Repository Details, Analysis Complete (and error)
 
 ## App map
 
