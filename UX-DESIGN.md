@@ -3,7 +3,7 @@
 **RepoIQ** helps users understand a GitHub codebase through repository analysis, search, and an interactive code map.
 
 
-## [Here](https://www.figma.com/design/KblWH70bD1B9II49iF0S8b/Wireframe?node-id=0-1&t=GFbFkCqHAO67KCcj-1) is the link to the Figma project. 
+## [Here](https://www.figma.com/design/KblWH70bD1B9II49iF0S8b/Wireframe?node-id=0-1&t=GFbFkCqHAO67KCcj-1) is the link to the Wireframe/Prototype Figma project. 
 
 ## [Here](https://www.figma.com/proto/KblWH70bD1B9II49iF0S8b/Wireframe?node-id=28-21&t=7PYAkJ2AfVD2TSsg-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=24%3A11&show-proto-sidebar=1) is the link to our prototype. 
 
@@ -12,6 +12,10 @@
 The app map shows how the main screens connect.
 
 <a href="ux-design/App Map.png"><img src="ux-design/App Map.png" width="900"></a>
+
+
+## [Here](https://www.figma.com/board/L5Dv30LxFuzI3nT3Jmnupg/App-Map?node-id=0-1&t=pPUwhPhtwwRhPGwQ-1) is the link to the App Map Figma project. 
+
 
 ## Wireframes
 
