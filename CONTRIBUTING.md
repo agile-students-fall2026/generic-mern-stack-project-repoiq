@@ -1,3 +1,5 @@
-# Guide to Contributing
 
-Delete the contents of this file and replace with the contents of a proper guide to contributing to this project, as described in the [instructions](./instructions-0c-project-setup#contributingmd)
+
+## Git Workflow
+
+### Whenever a member wants to add code, we first create a branch for the feature we want to implement, write in our branch (and push), and then create a pull request where another member of the team needs to approve for it to be merged into main. 
