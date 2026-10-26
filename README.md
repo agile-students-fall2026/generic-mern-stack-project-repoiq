@@ -1,6 +1,6 @@
 # RepoIQ
 
-## RepoIQ is a web-app that is intended to help developers manage and understand their codebases visually and easily. By visually showing the codebase, making dependencies, parent-child relations, and showing function definitions and calls, the app will make it very easy to lookup how your code works.
+RepoIQ is a web-app that is intended to help developers manage and understand their codebases visually and easily. By visually showing the codebase, making dependencies, parent-child relations, and showing function definitions and calls, the app will make it very easy to lookup how your code works.
 
 # Product Vision Statement
 
@@ -27,25 +27,24 @@ For developers who have to work in large or unfamiliar codebases, RepoIQ turns a
 
 # History
 
-## There is no worse feeling then spending hours looking through 100 files trying to figure out how an API call is handled. This tool is by developers for developers meant to be a good quality of life upgrade to coding/dealing with large codebases. The student with the original idea for the project unfortunately is not on the project however all of our teams' members see this to be a worthwhile project to develop.
+There is no worse feeling then spending hours looking through 100 files trying to figure out how an API call is handled. This tool is by developers for developers meant to be a good quality of life upgrade to coding/dealing with large codebases. The student with the original idea for the project unfortunately is not on the project however all of our teams' members see this to be a worthwhile project to develop.
 
 ---
 
 # Contributing
 
-### You can see how to contribute to the project [here](CONTRIBUTING.md).
+You can see how to contribute to the project [here](CONTRIBUTING.md).
 
 ---
 
 # Building and Testing
 
-## We haven't started writing code yet, so there's nothing to build or test right now. We'll add the steps here once the front-end and back-end are set up. For local setup, see the Local Development Setup section in [CONTRIBUTING.md](CONTRIBUTING.md).
+We haven't started writing code yet, so there's nothing to build or test right now. We'll add the steps here once the front-end and back-end are set up. For local setup, see the Local Development Setup section in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
 # Relevant Reading
-
-## NONE FOR NOW
+ NONE FOR NOW
 
 ---
 
