@@ -6,14 +6,29 @@ The core team consists of Mariam, Asia, Aditi, and Justin. Contributors should r
 
 > Draft for team review: all four members should review these proposed norms. 
 
-## Team Norms
 
-### Respect and Collaboration
 
-- Communicate respectfully and give everyone an opportunity to contribute.
-- Give constructive feedback focused on the work.
-- Share knowledge and ask for help when needed.
-- Discuss significant technical and scope decisions together before implementation. Aim for consensus; if agreement cannot be reached, document the options and seek guidance from the course staff.
+### Team Values
+- We will work together by assigning tasks together and ensuring all of us complete the tasks correctly in a timely manner.
+- In the event any of us need help, we keep open communication through Discord and other channels and are quick to respond to eachother's requests
+- We resolve conflicts by presenting issues to the group and possibly admins if needed to see what changes may need to be done
+
+### Sprint Cadence
+- Our sprint duration is 2 weeks
+
+### Daily Standups
+- Normally Wednesdays, Thursdays, and Fridays but these are tentative as the group is very flexible
+- We are all present synchronously
+- Members will not cover for other members who do not participate.
+- Members who make no progress on a task for two standups or more in a row will be reported to management
+
+### Coding Standards
+- We all use VS Code and Prettier extension for linting
+- All code must be peer-reviewed and pass tests before merging into main
+- Keep the tree clean and delete branches once they have been merged
+- Make sure to remove any commented out/dead code 
+- Make sure your commit messages are clear
+- For code that is not straightforward, use comments
 
 ### Communication and Accountability
 
@@ -134,14 +149,9 @@ Reviewers should check correctness, readability, scope, documentation, and testi
 
 ## Building and Testing
 
-This section will be updated when the build and test tooling is established. Record the actual commands and the directory from which each should run.
+This section will be updated when the build and test tooling is established. 
 
-| Task | Command and working directory |
-| --- | --- |
-| Build the project | [TO BE ADDED] |
-| Run automated tests | [TO BE ADDED] |
-| Run lint checks | [TO BE ADDED] |
-| Check formatting | [TO BE ADDED] |
+
 
 
 
