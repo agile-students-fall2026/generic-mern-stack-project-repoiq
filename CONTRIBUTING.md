@@ -84,7 +84,7 @@ Contributions may include bug fixes, agreed features, documentation, tests, acce
 - Create or comment on an issue describing the problem, proposed change, and completion criteria.
 - Discuss significant changes, such as architectural changes or new dependencies, with the team before implementation.
 
-### Code and Documentation Standards
+### Contribution Requirements
 
 - Follow the project's existing code style and directory structure.
 - Keep changes small and focused on the agreed issue or task.
@@ -112,7 +112,7 @@ Reviewers should check correctness, readability, scope, documentation, and testi
 
 > Complete this section using the actual repository structure and configuration before contributors rely on it.
 
-1. Install Git and the required runtime and package manager: [NAMES AND VERSIONS].
+1. Install Git and the required runtime and package manager.
 2. Clone the project and enter its directory:
 
    ```bash
