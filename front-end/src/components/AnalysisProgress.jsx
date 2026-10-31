@@ -4,6 +4,7 @@ import './AnalysisProgress.css'
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(0)
+  const [error, setError] = useState(false)
 
   {/* increase steps every 2 seconds */}
   useEffect(() => {
@@ -19,9 +20,23 @@ function AnalysisProgress({ setPage }) {
       setPage('complete')
     }
   }, [step,setPage])
+  if (error) {
+  return (
+    <div>
+      <h2>Analysis Failed</h2>
+      <p>We cannot analyze this repository. Please try again.</p>
 
+      <button onClick={() => {
+        setStep(0)
+        setError(false)
+      }}>Retry Analysis</button>
+
+      <button onClick={() => setPage('repositories')}>
+        Back to Repositories
+      </button>
+    </div>
+  )
   
-
   return (
     
     <div className="analysis">
@@ -58,13 +73,7 @@ function AnalysisProgress({ setPage }) {
         </div>
       </div>
 
-      <button onClick={() => {
-        if (confirm("Analysis Failed. Retry analysis?")) {
-          setStep(0)
-        } else {
-          setPage('progress')
-        }
-      }}>
+      <button onClick={() => setError(true)}>
         Cancel Analysis
       </button>
       
