@@ -4,21 +4,20 @@ import { useState, useEffect } from 'react'
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(1)
 
-  // increase steps every 2 seconds
+  {/* increase steps every 2 seconds */}
   useEffect(() => {
     const timer = setInterval(() => {
       setStep(step => step + 1)
-    }, 2000)
+    }, 4000)
     return () => clearInterval(timer)
   }, [])
 
-  // when steps finish setpage complete
+  {/* when steps finish setpage complete */}
   useEffect(() => {
     if (step >= 4) {
       setPage('complete')
     }
   }, [step, setPage])
-
 
   return (
     
