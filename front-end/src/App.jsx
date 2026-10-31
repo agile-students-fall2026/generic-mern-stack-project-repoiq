@@ -6,7 +6,7 @@ import AnalysisProgress from './components/AnalysisProgress'
 import './App.css'
 
 function App() {
-  const [page, setPage] = useState('progress')
+  const [page, setPage] = useState('')
 
   if (page === 'progress') {
     return <AnalysisProgress setPage={setPage} />

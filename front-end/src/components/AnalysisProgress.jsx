@@ -3,6 +3,22 @@
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(1)
+
+  // increase steps every 2 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setStep(step => step + 1)
+    }, 2000)
+  }, [])
+
+  // when steps finish setpage complete
+  useEffect(() => {
+    if (step >= 4) {
+      setPage('complete')
+    }
+  }, [step, setPage])
+
+
   return (
     
     <div>
@@ -14,9 +30,31 @@ function AnalysisProgress({ setPage }) {
         <p>https://github.com/username/repo</p>
       </div>
 
+      <div className="steps">
+        <div className="step">
+          <b>Fetching repository files</b>
+          <p>Completed</p>
+        </div>
+
+        <div className="step">
+          <b>Parsing source code</b>
+          <p>{step === 1 ? 'In Progress...' : 'Completed'}</p>
+        </div>
+
+        <div className="step">
+          <b>Building dependency graph</b>
+          <p>{step < 2 ? 'Pending' : step === 2 ? 'In Progress...' : 'Completed'}</p>
+        </div>
+
+        <div className="step">
+          <b>Generating interactive map</b>
+          <p>{step < 3 ? 'Pending' : step === 3 ? 'In Progress...' : 'Completed'}</p>
+        </div>
+      </div>
+
 
       <button onClick={() => setPage('complete')}>
-        Next
+        Set to Complete
       </button>
     </div>
   )
