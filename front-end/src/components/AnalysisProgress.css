@@ -86,3 +86,8 @@ button {
   color: gray;
   font-size: 12px;
 }
+
+.complete h1 {
+  font-size: 30px;
+  line-height: 1.2;
+}
