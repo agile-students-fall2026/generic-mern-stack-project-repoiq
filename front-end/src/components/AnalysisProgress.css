@@ -66,6 +66,9 @@ button {
 
 .half {
   background: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .half::after {
