@@ -54,3 +54,32 @@ button {
   margin-top: 15px;
   padding: 10px;
 }
+
+.steps {
+  margin: 40px;
+  text-align: left;
+}
+
+.step.done {
+  border-left: 2px solid gray;
+}
+
+.half {
+  background: gray;
+}
+
+.half::after {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  background: white;
+  border-radius: 50%;
+  margin: 2.5px;
+}
+
+.step p {
+  margin-top: 5px;
+  color: gray;
+  font-size: 12px;
+}
