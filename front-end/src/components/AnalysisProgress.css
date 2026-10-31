@@ -11,25 +11,20 @@
 }
 
 .step {
-  margin: 35px 0;
+  border-left: 2px solid gray;
+  padding: 0 0 40px 30px;
+  position: relative;
 }
-
 
 button {
   padding: 10px;
 }
 
-.step {
-  border-left: 2px solid gray;
-  padding: 0 0 30px 30px;
-  position: relative;
-}
-
 .dot {
   position: absolute;
   left: -10px;
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   border: 2px solid gray;
   border-radius: 50%;
   background: white;
@@ -37,5 +32,9 @@ button {
 
 .filled {
   background: gray;
+}
+
+.step:last-child {
+  border-left: none;
 }
 

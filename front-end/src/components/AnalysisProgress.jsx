@@ -32,7 +32,7 @@ function AnalysisProgress({ setPage }) {
 
       <div className="steps">
         <div className="step">
-          <span className="dot filled"></span>
+          <span className={step >= 1 ? 'dot filled' : 'dot'}></span>
           <b>Fetching repository files</b>
           <p>{step === 0 ? 'In Progress...' : 'Completed'}</p>
         </div>
@@ -44,13 +44,13 @@ function AnalysisProgress({ setPage }) {
         </div>
 
         <div className="step">
-          <span className={step >= 2 ? 'dot filled' : 'dot'}></span>
+         <span className={step >= 3 ? 'dot filled' : 'dot'}></span>
           <b>Building dependency graph</b>
           <p>{step < 2 ? 'Pending' : step === 2 ? 'In Progress...' : 'Completed'}</p>
         </div>
 
         <div className="step">
-          <span className={step >= 3 ? 'dot filled' : 'dot'}></span>
+          <span className={step >= 4 ? 'dot filled' : 'dot'}></span>
           <b>Generating interactive map</b>
           <p>{step < 3 ? 'Pending' : step === 3 ? 'In Progress...' : 'Completed'}</p>
         </div>
