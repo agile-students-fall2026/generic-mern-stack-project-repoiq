@@ -38,3 +38,19 @@ button {
   border-left: none;
 }
 
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: light-gray;
+  border-radius: 15px;
+  width: 250px;
+  text-align: center;
+}
+
+.popup button {
+  display: block;
+  width: 75%;
+  margin-top: 15px;
+  padding: 10px;
+}

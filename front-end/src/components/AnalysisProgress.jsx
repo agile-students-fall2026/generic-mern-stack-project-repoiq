@@ -11,6 +11,8 @@ function AnalysisProgress({ setPage }) {
     const timer = setInterval(() => {
       setStep(step => step + 1)
     }, 4000)
+
+
     return () => clearInterval(timer)
   }, [])
 
@@ -21,22 +23,23 @@ function AnalysisProgress({ setPage }) {
     }
   }, [step,setPage])
   if (error) {
-  return (
-    <div>
-      <h2>Analysis Failed</h2>
-      <p>We cannot analyze this repository. Please try again.</p>
 
-      <button onClick={() => {
-        setStep(0)
-        setError(false)
-      }}>Retry Analysis</button>
+    return (
+      <div className="popup">
+        <h2>Analysis Failed</h2>
+        <p>We cannot analyze this repository. Please try again.</p>
 
-      <button onClick={() => setPage('repositories')}>
-        Back to Repositories
-      </button>
-    </div>
-  )
-  
+        <button onClick={() => {
+          setStep(0)
+          setError(false)
+        }}>Retry Analysis</button>
+  {/* repositories still not implemented */}
+        <button onClick={() => setPage('repositories')}>
+          Back to Repositories
+        </button>
+      </div>
+    )
+  }
   return (
     
     <div className="analysis">
