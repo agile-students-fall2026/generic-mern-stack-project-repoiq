@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import './AnalysisProgress.css'
 
 function AnalysisProgress({ setPage }) {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
 
   {/* increase steps every 2 seconds */}
   useEffect(() => {
@@ -32,26 +32,29 @@ function AnalysisProgress({ setPage }) {
 
       <div className="steps">
         <div className="step">
+          <span className="dot filled"></span>
           <b>Fetching repository files</b>
-          <p>Completed</p>
+          <p>{step === 0 ? 'In Progress...' : 'Completed'}</p>
         </div>
 
         <div className="step">
+          <span className={step >= 2 ? 'dot filled' : 'dot'}></span>
           <b>Parsing source code</b>
-          <p>{step === 1 ? 'In Progress...' : 'Completed'}</p>
+           <p>{step < 1 ? 'Pending' : step === 1 ? 'In Progress...' : 'Completed'}</p>
         </div>
 
         <div className="step">
+          <span className={step >= 2 ? 'dot filled' : 'dot'}></span>
           <b>Building dependency graph</b>
           <p>{step < 2 ? 'Pending' : step === 2 ? 'In Progress...' : 'Completed'}</p>
         </div>
 
         <div className="step">
+          <span className={step >= 3 ? 'dot filled' : 'dot'}></span>
           <b>Generating interactive map</b>
           <p>{step < 3 ? 'Pending' : step === 3 ? 'In Progress...' : 'Completed'}</p>
         </div>
       </div>
-
 
       <button onClick={() => setPage('complete')}>
         Set to Complete

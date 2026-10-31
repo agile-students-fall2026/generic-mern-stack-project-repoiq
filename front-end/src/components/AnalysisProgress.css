@@ -14,11 +14,28 @@
   margin: 35px 0;
 }
 
-.step p {
-  color: gray;
-  font-size: 12px;
-}
 
 button {
   padding: 10px;
 }
+
+.step {
+  border-left: 2px solid gray;
+  padding: 0 0 30px 30px;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  left: -10px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid gray;
+  border-radius: 50%;
+  background: white;
+}
+
+.filled {
+  background: gray;
+}
+
