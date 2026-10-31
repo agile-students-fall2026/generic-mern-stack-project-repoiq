@@ -1,8 +1,9 @@
-
-import { useState } from 'react'
+import { useState } from 'react';
 
 function InteractiveMap({ setPage }) {
-  const [zoom, setZoom] = useState(1)
+  const [zoom, setZoom] = useState(1);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
   return (
     <div>
@@ -11,10 +12,19 @@ function InteractiveMap({ setPage }) {
       <input placeholder="Search in codebase..." />
 
       <div style={{ position: 'relative', width: 350, height: 450 }}>
-
-        <svg width="350" height="450">
-          <g transform={`translate(175 225) scale(${zoom}) translate(-175 -225)`}>
-
+        <svg
+          width="350"
+          height="450"
+          onMouseMove={(e) => {
+            if (e.buttons === 1) {
+              setX((x) => x + e.movementX);
+              setY((y) => y + e.movementY);
+            }
+          }}
+        >
+          <g
+            transform={`translate(${x} ${y}) translate(175 225) scale(${zoom}) translate(-175 -225)`}
+          >
             <line x1="175" y1="200" x2="100" y2="100" stroke="gray" />
             <line x1="175" y1="200" x2="250" y2="100" stroke="gray" />
             <line x1="175" y1="200" x2="80" y2="300" stroke="gray" />
@@ -46,19 +56,19 @@ function InteractiveMap({ setPage }) {
             <circle cx="300" cy="50" r="8" fill="gray" />
             <circle cx="40" cy="370" r="8" fill="gray" />
             <circle cx="310" cy="370" r="8" fill="gray" />
-
           </g>
         </svg>
 
-        <div style={{ position: 'absolute', top: 10, left: 10 }}>
+        <div
+          style={{ position: 'absolute', top: 10, right: 10, display: 'grid' }}
+        >
           <button onClick={() => setZoom(zoom + 0.2)}>+</button>
           <button onClick={() => setZoom(Math.max(0.2, zoom - 0.2))}>−</button>
           <button onClick={() => setZoom(1)}>Reset</button>
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default InteractiveMap
+export default InteractiveMap;
