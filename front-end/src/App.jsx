@@ -8,7 +8,7 @@ import InteractiveMap from './components/InteractiveMap.jsx'
 import './App.css'
 
 function App() {
-  const [page, setPage] = useState('complete')
+  const [page, setPage] = useState('map')
 
   if (page === 'progress') {
     return <AnalysisProgress setPage={setPage} />
