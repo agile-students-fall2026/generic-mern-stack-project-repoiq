@@ -1,5 +1,5 @@
 
-
+import { useState, useEffect } from 'react'
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(1)
