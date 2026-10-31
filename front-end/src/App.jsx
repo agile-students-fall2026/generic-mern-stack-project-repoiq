@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import AnalysisProgress from './components/AnalysisProgress.jsx'
 import AnalysisComplete from './components/AnalysisComplete.jsx'
+import InteractiveMap from './components/InteractiveMap.jsx'
 import './App.css'
 
 function App() {
