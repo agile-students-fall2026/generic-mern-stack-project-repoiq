@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react'
+import './AnalysisProgress.css'
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(1)
@@ -24,7 +25,6 @@ function AnalysisProgress({ setPage }) {
     <div>
       <h1>Analysis Progress</h1>
 
-      // repository info at the top
       <div className="repository">
         <h3>repository-name</h3>
         <p>https://github.com/username/repo</p>
