@@ -2,7 +2,7 @@ import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
-import AnalysisProgress from './components/AnalysisProgress'
+import AnalysisProgress from './pages/AnalysisProgress'
 import './App.css'
 
 function App() {

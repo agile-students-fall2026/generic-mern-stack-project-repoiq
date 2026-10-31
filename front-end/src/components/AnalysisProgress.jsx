@@ -9,6 +9,7 @@ function AnalysisProgress({ setPage }) {
     const timer = setInterval(() => {
       setStep(step => step + 1)
     }, 2000)
+    return () => clearInterval(timer)
   }, [])
 
   // when steps finish setpage complete
