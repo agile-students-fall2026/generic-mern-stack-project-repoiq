@@ -18,11 +18,13 @@ function AnalysisProgress({ setPage }) {
     if (step >= 4) {
       setPage('complete')
     }
-  }, [step, setPage])
+  }, [step,setPage])
+
+  
 
   return (
     
-    <div>
+    <div className="analysis">
       <h1>Analysis Progress</h1>
 
       <div className="repository">
@@ -56,9 +58,16 @@ function AnalysisProgress({ setPage }) {
         </div>
       </div>
 
-      <button onClick={() => setPage('complete')}>
-        Set to Complete
+      <button onClick={() => {
+        if (confirm("Analysis Failed. Retry analysis?")) {
+          setStep(0)
+        } else {
+          setPage('progress')
+        }
+      }}>
+        Cancel Analysis
       </button>
+      
     </div>
   )
 }
