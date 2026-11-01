@@ -22,7 +22,6 @@ function ComponentDetails() {
 
       <div>
         <button
-          type="button"
           onClick={() => setActiveTab("contents")}
           disabled={activeTab === "contents"}
         >
@@ -30,7 +29,6 @@ function ComponentDetails() {
         </button>
 
         <button
-          type="button"
           onClick={() => setActiveTab("dependencies")}
           disabled={activeTab === "dependencies"}
         >
@@ -44,7 +42,8 @@ function ComponentDetails() {
           <ul>
             {sample.functions.map((name) => (
               <li key={name}>{name}</li>
-            ))}c
+            ))}
+            c
           </ul>
 
           <h2>Classes</h2>
@@ -72,15 +71,13 @@ function ComponentDetails() {
             ))}
           </ul>
 
-          <button type="button" disabled>
-            View all dependencies
-          </button>
+          {/*add later*/}
+          <button>View all dependencies</button>
         </section>
       )}
 
-      <button type="button" disabled>
-        View source on GitHub
-      </button>
+      {/*add later*/}
+      <button>View source on GitHub</button>
     </div>
   );
 }

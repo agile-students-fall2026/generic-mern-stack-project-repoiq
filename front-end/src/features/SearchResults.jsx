@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./SearchResults.css";
 
+// replace later when we have real data
 const sampleRes = [
   {
     id: 1,
@@ -21,14 +22,18 @@ function SearchResults() {
   const [selectedType, setSelectedType] = useState("All"); // store selected category
 
   // create array that stores res matching search
-  const filteredRes = sampleRes.filter((result) => {
+  const filteredRes = [];
+
+  for (const result of sampleRes) {
     const matchesText =
       result.name.includes(searchText) || result.path.includes(searchText);
 
     const matchesType = selectedType === "All" || result.type === selectedType;
 
-    return matchesText && matchesType;
-  });
+    if (matchesText && matchesType) {
+      filteredRes.push(result);
+    }
+  }
 
   return (
     <div className="search-results">
@@ -39,19 +44,15 @@ function SearchResults() {
         <input
           id="search-input"
           type="search"
-          placeholder="Search files, functions, or classes"
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
         />
 
-        <button type="button" onClick={() => setSearchText("")}>
-          Clear
-        </button>
+        <button onClick={() => setSearchText("")}>Clear</button>
       </div>
 
       <div>
         <button
-          type="button"
           onClick={() => setSelectedType("All")}
           disabled={selectedType === "All"}
         >
@@ -59,7 +60,6 @@ function SearchResults() {
         </button>
 
         <button
-          type="button"
           onClick={() => setSelectedType("File")}
           disabled={selectedType === "File"}
         >
@@ -67,7 +67,6 @@ function SearchResults() {
         </button>
 
         <button
-          type="button"
           onClick={() => setSelectedType("Function")}
           disabled={selectedType === "Function"}
         >
@@ -75,7 +74,6 @@ function SearchResults() {
         </button>
 
         <button
-          type="button"
           onClick={() => setSelectedType("Class")}
           disabled={selectedType === "Class"}
         >
