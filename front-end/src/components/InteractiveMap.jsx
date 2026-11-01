@@ -6,6 +6,7 @@ function InteractiveMap({ setPage }) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
+  const [search, setSearch] = useState('');
   let details = null;
 
   if (selected) {
@@ -31,7 +32,11 @@ function InteractiveMap({ setPage }) {
     <div>
       <button onClick={() => setPage('complete')}>←</button>
       <h2>repository-name</h2>
-      <input placeholder="Search in codebase..." />
+      <input
+        placeholder="Search in codebase..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div style={{ textAlign: 'left', fontSize: 12 }}>
         <p style={{ color: 'gray' }}>— Imports</p>
         <p style={{ color: 'blue' }}>— Calls</p>
@@ -69,20 +74,24 @@ function InteractiveMap({ setPage }) {
               );
             })}
 
-            {nodes.map((node) => (
-              <g key={node.id} onClick={() => setSelected(node)}>
-                <circle
-                  cx={node.x}
-                  cy={node.y}
-                  r="25"
-                  fill="lightgray"
-                  stroke="gray"
-                />
-                <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
-                  {node.name}
-                </text>
-              </g>
-            ))}
+            {nodes
+              .filter((node) =>
+                node.name.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((node) => (
+                <g key={node.id} onClick={() => setSelected(node)}>
+                  <circle
+                    cx={node.x}
+                    cy={node.y}
+                    r="25"
+                    fill="lightgray"
+                    stroke="gray"
+                  />
+                  <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
+                    {node.name}
+                  </text>
+                </g>
+              ))}
           </g>
         </svg>
 
