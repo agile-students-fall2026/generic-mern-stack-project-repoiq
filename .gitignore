@@ -131,3 +131,5 @@ typings/
 .claude
 .automations
 
+
+.prettierrc
