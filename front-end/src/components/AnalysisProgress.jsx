@@ -46,8 +46,11 @@ function AnalysisProgress({ setPage }) {
     );
   }
   return (
-    <div className="analysis">
+    <div className="analysis phone">
       <h1>Analysis Progress</h1>
+      <button className="back" onClick={() => setPage('complete')}>
+        ←
+      </button>
 
       <div className="repository">
         <h3>repository-name</h3>

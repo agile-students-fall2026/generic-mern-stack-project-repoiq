@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { nodes, connections, repository } from '../data/mockData';
+import './InteractiveMap.css';
 
 function InteractiveMap({ setPage }) {
   const [zoom, setZoom] = useState(1);
@@ -7,12 +8,13 @@ function InteractiveMap({ setPage }) {
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState('');
+
   let details = null;
 
   if (selected) {
     details = (
-      <div style={{ fontSize: 12 }}>
-        <h3 style={{ fontSize: 16 }}>{selected.name}</h3>
+      <div className="details">
+        <h3>{selected.name}</h3>
         <p>{selected.info}</p>
         <p>Connections:</p>
 
@@ -28,21 +30,27 @@ function InteractiveMap({ setPage }) {
       </div>
     );
   }
+
   return (
-    <div>
-      <button onClick={() => setPage('complete')}>←</button>
+    <div className="phone">
+      <button className="back" onClick={() => setPage('complete')}>
+        ←
+      </button>
       <h2>repository-name</h2>
+
       <input
         placeholder="Search in codebase..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div style={{ textAlign: 'left', fontSize: 12 }}>
-        <p style={{ color: 'gray' }}>— Imports</p>
-        <p style={{ color: 'blue' }}>— Calls</p>
-        <p style={{ color: 'orange' }}>— Dependencies</p>
+
+      <div className="legend">
+        <p className="import">— Imports</p>
+        <p className="call">— Calls</p>
+        <p className="dependency">— Dependencies</p>
       </div>
-      <div style={{ position: 'relative', width: 350, height: 350 }}>
+
+      <div className="map">
         <svg
           width="350"
           height="450"
@@ -59,9 +67,11 @@ function InteractiveMap({ setPage }) {
             {connections.map((connection, i) => {
               const from = nodes.find((node) => node.id === connection.from);
               const to = nodes.find((node) => node.id === connection.to);
+
               let color = 'orange';
               if (connection.type === 'import') color = 'gray';
               if (connection.type === 'call') color = 'blue';
+
               return (
                 <line
                   key={i}
@@ -93,6 +103,7 @@ function InteractiveMap({ setPage }) {
                   }
                   stroke="gray"
                 />
+
                 <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
                   {node.name}
                 </text>
@@ -101,14 +112,13 @@ function InteractiveMap({ setPage }) {
           </g>
         </svg>
 
-        <div
-          style={{ position: 'absolute', top: 10, right: 10, display: 'grid' }}
-        >
+        <div className="controls">
           <button onClick={() => setZoom(zoom + 0.2)}>+</button>
           <button onClick={() => setZoom(Math.max(0.2, zoom - 0.2))}>−</button>
           <button onClick={() => setZoom(1)}>Reset</button>
         </div>
       </div>
+
       {details}
     </div>
   );
