@@ -74,24 +74,30 @@ function InteractiveMap({ setPage }) {
               );
             })}
 
-            {nodes
-              .filter((node) =>
-                node.name.toLowerCase().includes(search.toLowerCase())
-              )
-              .map((node) => (
-                <g key={node.id} onClick={() => setSelected(node)}>
-                  <circle
-                    cx={node.x}
-                    cy={node.y}
-                    r="25"
-                    fill="lightgray"
-                    stroke="gray"
-                  />
-                  <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
-                    {node.name}
-                  </text>
-                </g>
-              ))}
+            {nodes.map((node) => (
+              <g key={node.id} onClick={() => setSelected(node)}>
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r={
+                    search &&
+                    node.name.toLowerCase().includes(search.toLowerCase())
+                      ? 40
+                      : 30
+                  }
+                  fill={
+                    search &&
+                    node.name.toLowerCase().includes(search.toLowerCase())
+                      ? 'gray'
+                      : 'lightgray'
+                  }
+                  stroke="gray"
+                />
+                <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
+                  {node.name}
+                </text>
+              </g>
+            ))}
           </g>
         </svg>
 
