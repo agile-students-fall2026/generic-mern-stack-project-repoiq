@@ -1,6 +1,6 @@
 export const repository = {
-  name: 'my-react-project',
-  url: 'https://github.com/username/repo',
+  name: 'repo-iq',
+  url: 'https://github.com/agilef26/repoiq',
   files: 342,
   functions: 28,
   classes: 65,
@@ -25,3 +25,5 @@ export const connections = [
   { from: 3, to: 6, type: 'call' },
   { from: 4, to: 6, type: 'dependency' }
 ]
+
+

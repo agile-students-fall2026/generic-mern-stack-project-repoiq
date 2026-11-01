@@ -24,7 +24,7 @@
   margin-bottom: 25px;
 }
 
-.complete button {
+.complete button:not(.back) {
   display: block;
   width: 100%;
   padding: 12px;
