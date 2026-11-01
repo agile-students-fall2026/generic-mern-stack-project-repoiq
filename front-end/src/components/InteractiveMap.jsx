@@ -10,8 +10,8 @@ function InteractiveMap({ setPage }) {
 
   if (selected) {
     details = (
-      <div>
-        <h3>{selected.name}</h3>
+      <div style={{ fontSize: 12 }}>
+        <h3 style={{ fontSize: 16 }}>{selected.name}</h3>
         <p>{selected.info}</p>
         <p>Connections:</p>
 
@@ -32,12 +32,12 @@ function InteractiveMap({ setPage }) {
       <button onClick={() => setPage('complete')}>←</button>
       <h2>repository-name</h2>
       <input placeholder="Search in codebase..." />
-      <div>
-        <p style={{ color: 'gray' }}> — Imports</p>
-        <p style={{ color: 'blue' }}> — Calls</p>
-        <p style={{ color: 'orange' }}> — Dependencies</p>
+      <div style={{ textAlign: 'left', fontSize: 12 }}>
+        <p style={{ color: 'gray' }}>— Imports</p>
+        <p style={{ color: 'blue' }}>— Calls</p>
+        <p style={{ color: 'orange' }}>— Dependencies</p>
       </div>
-      <div style={{ position: 'relative', width: 350, height: 450 }}>
+      <div style={{ position: 'relative', width: 350, height: 350 }}>
         <svg
           width="350"
           height="450"
@@ -74,11 +74,11 @@ function InteractiveMap({ setPage }) {
                 <circle
                   cx={node.x}
                   cy={node.y}
-                  r="30"
+                  r="25"
                   fill="lightgray"
                   stroke="gray"
                 />
-                <text x={node.x} y={node.y} textAnchor="middle" fontSize="9">
+                <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
                   {node.name}
                 </text>
               </g>
