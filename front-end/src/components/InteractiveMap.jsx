@@ -5,13 +5,38 @@ function InteractiveMap({ setPage }) {
   const [zoom, setZoom] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
+  const [selected, setSelected] = useState(null);
+  let details = null;
 
+  if (selected) {
+    details = (
+      <div>
+        <h3>{selected.name}</h3>
+        <p>{selected.info}</p>
+        <p>Connections:</p>
+
+        {connections.map((c, i) => {
+          if (c.from === selected.id)
+            return <p key={i}>{nodes[c.to - 1].name}</p>;
+
+          if (c.to === selected.id)
+            return <p key={i}>{nodes[c.from - 1].name}</p>;
+
+          return null;
+        })}
+      </div>
+    );
+  }
   return (
     <div>
       <button onClick={() => setPage('complete')}>←</button>
       <h2>repository-name</h2>
       <input placeholder="Search in codebase..." />
-
+      <div>
+        <p style={{ color: 'gray' }}> — Imports</p>
+        <p style={{ color: 'blue' }}> — Calls</p>
+        <p style={{ color: 'orange' }}> — Dependencies</p>
+      </div>
       <div style={{ position: 'relative', width: 350, height: 450 }}>
         <svg
           width="350"
@@ -29,7 +54,9 @@ function InteractiveMap({ setPage }) {
             {connections.map((connection, i) => {
               const from = nodes.find((node) => node.id === connection.from);
               const to = nodes.find((node) => node.id === connection.to);
-
+              let color = 'orange';
+              if (connection.type === 'import') color = 'gray';
+              if (connection.type === 'call') color = 'blue';
               return (
                 <line
                   key={i}
@@ -37,20 +64,24 @@ function InteractiveMap({ setPage }) {
                   y1={from.y}
                   x2={to.x}
                   y2={to.y}
-                  stroke="gray"
+                  stroke={color}
                 />
               );
             })}
 
             {nodes.map((node) => (
-              <circle
-                key={node.id}
-                cx={node.x}
-                cy={node.y}
-                r="12"
-                fill="lightgray"
-                onClick={() => setSelected(node.name)}
-              />
+              <g key={node.id} onClick={() => setSelected(node)}>
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r="30"
+                  fill="lightgray"
+                  stroke="gray"
+                />
+                <text x={node.x} y={node.y} textAnchor="middle" fontSize="9">
+                  {node.name}
+                </text>
+              </g>
             ))}
           </g>
         </svg>
@@ -63,6 +94,7 @@ function InteractiveMap({ setPage }) {
           <button onClick={() => setZoom(1)}>Reset</button>
         </div>
       </div>
+      {details}
     </div>
   );
 }
