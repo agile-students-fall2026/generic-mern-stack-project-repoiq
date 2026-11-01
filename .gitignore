@@ -127,3 +127,9 @@ typings/
 ## Jekyll artifacts
 **/.jekyll-cache
 **/_site/
+.cursor
+.claude
+.automations
+
+
+.prettierrc

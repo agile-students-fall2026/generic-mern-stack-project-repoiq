@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./SearchResults.css";
 
 const sampleRes = [
   {
@@ -30,7 +31,7 @@ function SearchResults() {
   });
 
   return (
-    <main>
+    <div className="search-results">
       <h1>Search</h1>
 
       <div>
@@ -97,7 +98,7 @@ function SearchResults() {
           ))}
         </ul>
       )}
-    </main>
+    </div>
   );
 }
 

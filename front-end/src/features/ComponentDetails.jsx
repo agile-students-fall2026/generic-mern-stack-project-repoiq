@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ComponentDetails.css";
 
 const sample = {
   name: "example.js",
@@ -13,7 +14,7 @@ function ComponentDetails() {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
 
   return (
-    <main>
+    <div className="component-details">
       <h1>Component Details</h1>
 
       <h2>{sample.name}</h2>
@@ -43,7 +44,7 @@ function ComponentDetails() {
           <ul>
             {sample.functions.map((name) => (
               <li key={name}>{name}</li>
-            ))}
+            ))}c
           </ul>
 
           <h2>Classes</h2>
@@ -80,7 +81,7 @@ function ComponentDetails() {
       <button type="button" disabled>
         View source on GitHub
       </button>
-    </main>
+    </div>
   );
 }
 

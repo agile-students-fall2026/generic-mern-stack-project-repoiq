@@ -182,3 +182,17 @@
     border-right-color: var(--border);
   }
 }
+
+#root {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.phone {
+  position: relative;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+}
