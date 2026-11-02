@@ -1,0 +1,21 @@
+.component-details {
+    width: 350px;
+    margin: auto;
+    text-align:left;
+}
+
+.component-details button {
+    padding: 8px;
+    margin: 4px;
+}
+
+.component-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.component-details li{
+    border: 1px solid gray;
+    padding: 10px;
+    margin-bottom: 10px;
+}
