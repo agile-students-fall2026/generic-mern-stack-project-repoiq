@@ -1,3 +1,5 @@
+import "./SearchResultDetails.css";
+
 const sample = {
   name: "func1",
   type: "function",
@@ -6,15 +8,15 @@ const sample = {
 };
 function SearchResultDetails() {
   return (
-    <div>
+    <div className="result">
       <h1>{sample.name}</h1>
       <p>{sample.type}</p>
       <hr />
 
-      <h2>Defined in</h2>
+      <h3>Defined in</h3>
       <p>{sample.path}</p>
 
-      <h2>Used in</h2>
+      <h3>Used in</h3>
       <ul>
         {sample.usedIn.map((path) => (
           <li key={path}>{path}</li>
