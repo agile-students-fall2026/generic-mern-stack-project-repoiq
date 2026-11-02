@@ -9,10 +9,14 @@ import SearchResults from "./components/SearchResults.jsx";
 import SearchResultsDetails from "./components/SearchResultsDetails.jsx";
 import ComponentDetails from "./components/ComponentDetails.jsx";
 import DependencyDetails from "./components/DependencyDetails.jsx";
+import Welcome from "./features/welcome.jsx";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState("map");
+  if (page === "welcome") {
+    return <Welcome setPage={setPage} />;
+  }
 
   if (page === "progress") {
     return <AnalysisProgress setPage={setPage} />;

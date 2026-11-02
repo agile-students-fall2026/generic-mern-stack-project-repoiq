@@ -1,0 +1,30 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 16px;
+}
+
+.placeholder-img {
+  width: 170px;
+  height: 170px;
+  background-color: #f4f4f4;
+  border: 1px solid black;
+}
+
+.btn {
+  width: 80%;
+  padding: 16px;
+  font-size: 16px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.btn-outline {
+  background-color: white;
+}
+
+.btn-gray {
+  background-color: #cccccc;
+}
