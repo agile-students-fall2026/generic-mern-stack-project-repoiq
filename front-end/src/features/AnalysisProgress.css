@@ -1,0 +1,93 @@
+.analysis {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+}
+
+.repository {
+  border: 1px solid gray;
+  padding: 15px;
+  margin: 30px 0;
+}
+
+.step {
+  border-left: 2px solid gray;
+  padding: 0 0 40px 30px;
+  position: relative;
+}
+
+button {
+  padding: 10px;
+}
+
+.dot {
+  position: absolute;
+  left: -10px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid gray;
+  border-radius: 50%;
+  background: white;
+}
+
+.filled {
+  background: gray;
+}
+
+.step:last-child {
+  border-left: none;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: light-gray;
+  border-radius: 15px;
+  width: 250px;
+  text-align: center;
+}
+
+.popup button {
+  display: block;
+  width: 75%;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.steps {
+  margin: 40px;
+  text-align: left;
+}
+
+.step.done {
+  border-left: 2px solid gray;
+}
+
+.half {
+  background: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.half::after {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  background: white;
+  border-radius: 50%;
+  margin: 2.5px;
+}
+
+.step p {
+  margin-top: 5px;
+  color: gray;
+  font-size: 12px;
+}
+
+.complete h1 {
+  font-size: 30px;
+  line-height: 1.2;
+}
