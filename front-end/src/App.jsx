@@ -2,17 +2,21 @@ import { useState } from "react";
 import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
-import AnalysisProgress from "./components/AnalysisProgress.jsx";
-import AnalysisComplete from "./components/AnalysisComplete.jsx";
-import InteractiveMap from "./components/InteractiveMap.jsx";
-import SearchResults from "./components/SearchResults.jsx";
-import SearchResultsDetails from "./components/SearchResultsDetails.jsx";
-import ComponentDetails from "./components/ComponentDetails.jsx";
-import DependencyDetails from "./components/DependencyDetails.jsx";
+import AnalysisProgress from "./features/AnalysisProgress.jsx";
+import AnalysisComplete from "./features/AnalysisComplete.jsx";
+import InteractiveMap from "./features/InteractiveMap.jsx";
+import SearchResults from "./features/SearchResults.jsx";
+import SearchResultsDetails from "./features/SearchResultsDetails.jsx";
+import ComponentDetails from "./features/ComponentDetails.jsx";
+import DependencyDetails from "./features/DependencyDetails.jsx";
+import Welcome from "./features/Welcome.jsx";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("map");
+  const [page, setPage] = useState("welcome");
+  if (page === "welcome") {
+    return <Welcome setPage={setPage} />;
+  }
 
   if (page === "progress") {
     return <AnalysisProgress setPage={setPage} />;
