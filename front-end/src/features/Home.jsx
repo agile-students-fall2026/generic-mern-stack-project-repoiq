@@ -2,7 +2,7 @@ function Home() {
   return (
     <div className="home">
       <h1>RepoIQ</h1>
-      <h2>Good morning, User</h2> // User's name should be dynamically inserted here
+      <h2>Good morning, User</h2> {/* User's name should be dynamically inserted here */}
       <p>Explore your repositories and discover your codebase.</p>
     
       <input
