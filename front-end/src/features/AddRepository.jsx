@@ -43,7 +43,11 @@ function AddRepository({ setPage }) {
       
       {error && <p className="add-error">{error}</p>}
       
-      <button type="button" onClick={handleAnalyze}>
+      <button
+        type="button"
+        onClick={handleAnalyze}
+        disabled={!url.trim()}
+      >
         Analyse Repository
       </button>
 
