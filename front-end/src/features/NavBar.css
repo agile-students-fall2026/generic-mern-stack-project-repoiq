@@ -1,0 +1,12 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px;
+  font-size: 24px;
+  background-color: #eeeeee;
+  border-top: 1px solid #999999;
+}
+
+.navbar span {
+  cursor: pointer;
+}
