@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function DependencyDetails() {
+function DependencyDetails({setPage}) {
   const [tab, setTab] = useState("depends"); // remembers what tab selected
 
   // replace when we have actual data/links

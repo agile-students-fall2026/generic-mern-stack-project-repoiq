@@ -4,7 +4,7 @@ const sample = {
   path: "src/example",
   usedIn: ["examplepath1", "examplepath2", "examplepath3"],
 };
-function SearchResultDetails() {
+function SearchResultDetails({setPage}) {
   return (
     <div>
       <h1>{sample.name}</h1>

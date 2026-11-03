@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './AnalysisProgress.css';
+import NavBar from "./NavBar.jsx";
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(0);
@@ -99,6 +100,7 @@ function AnalysisProgress({ setPage }) {
       </div>
 
       <button onClick={() => setError(true)}>Cancel Analysis</button>
+      <NavBar setPage={setPage} />
     </div>
   );
 }

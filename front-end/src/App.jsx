@@ -15,7 +15,7 @@ import Signup from "./features/signup.jsx";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("welcome");
+  const [page, setPage] = useState("Welcome");
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -26,6 +26,10 @@ function App() {
   if (page === "signup") {
     return <Signup setPage={setPage} />;
   }
+  if (page === "home") {
+    return <Home setPage={setPage} />;
+  }
+
 
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
