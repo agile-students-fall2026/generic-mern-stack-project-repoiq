@@ -1,3 +1,5 @@
+import "./AnalysisResults.css";
+
 function AnalysisResults({ setPage }) {
   return (
     <div className="analysis-results">
