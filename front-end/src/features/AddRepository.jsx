@@ -25,7 +25,11 @@ function AddRepository({ setPage }) {
         Analyse Repository
       </button>
 
-      <p>OR</p>
+      <div className="add-divider">
+        <hr />
+        <span>OR</span>
+        <hr />
+      </div>
 
       <button type="button">
         Connect to GitHub

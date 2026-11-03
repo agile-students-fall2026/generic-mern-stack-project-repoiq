@@ -50,3 +50,20 @@
 .add-repository-page > button:last-of-type {
   background-color: white;
 }
+
+.add-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.add-divider hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #aaa;
+}
+
+.add-divider span {
+  font-size: 14px;
+}
