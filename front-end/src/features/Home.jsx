@@ -1,5 +1,6 @@
 import './Home.css';
-function Home() {
+import NavBar from "./NavBar.jsx";
+function Home({ setPage }) {
   return (
     <div className="home">
       <div className="home-header">
@@ -41,11 +42,7 @@ function Home() {
         + Add Repository
       </button>
       
-      <nav className="home-nav">
-        <button type="button">Home</button> {/* This button should navigate to the home page */}
-        <button type="button">Search</button> {/* This button should navigate to the search page */}
-        <button type="button">Code Map</button> {/* This button should navigate to the code map page */}
-      </nav>
+     <NavBar setPage={setPage} />
 
     </div>
   );
