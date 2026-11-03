@@ -67,3 +67,9 @@
 .add-divider span {
   font-size: 14px;
 }
+
+.add-error {
+  color: red;
+  font-size: 14px;
+  margin: 0 0 15px;
+}

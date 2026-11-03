@@ -3,6 +3,17 @@ import { useState } from "react";
 
 function AddRepository({ setPage }) {
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
+
+  function handleAnalyze() {
+    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(url.trim())) {
+        setError("Please enter a valid GitHub repository URL.");
+        return;
+    }
+
+    setError("");
+    setPage("progress");
+  }
 
   return (
     <div className="add-repository-page">
@@ -25,8 +36,10 @@ function AddRepository({ setPage }) {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
-
-      <button type="button" onClick={() => setPage("progress")}>
+      
+      {error && <p className="error-message">{error}</p>}
+      
+      <button type="button" onClick={handleAnalyze}>
         Analyse Repository
       </button>
 
