@@ -1,6 +1,9 @@
 import './Home.css';
 import NavBar from "./NavBar.jsx";
+import { useState } from "react";
+
 function Home({ setPage }) {
+  const [search, setSearch] = useState("");
   return (
     <div className="home">
       <div className="home-header">
@@ -14,6 +17,8 @@ function Home({ setPage }) {
       <input
         type="text"
         placeholder="Search repositories..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
 
       <div className="recent-header">
