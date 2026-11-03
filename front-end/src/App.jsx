@@ -19,6 +19,7 @@ import "./App.css";
 
 function App() {
   const [page, setPage] = useState("Welcome");
+  const [selectedRepo, setSelectedRepo] = useState(null);
   if (page === "Welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -26,13 +27,13 @@ function App() {
   if (page === "login") {
     return <Login setPage={setPage} />;
   }
-  
+
   if (page === "signup") {
     return <Signup setPage={setPage} />;
   }
 
   if (page === "home") {
-    return <Home setPage={setPage} />;
+    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} />;
   }
 
   if (page === "add-repository") {
@@ -40,7 +41,7 @@ function App() {
   }
 
   if (page === "repository-details") {
-    return <RepositoryDetails setPage={setPage} />;
+    return <RepositoryDetails setPage={setPage} selectedRepo={selectedRepo} />;
   }
 
   if (page === "map") {
