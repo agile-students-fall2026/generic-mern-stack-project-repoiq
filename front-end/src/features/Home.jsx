@@ -34,17 +34,24 @@ function Home({ setPage }) {
       </div>
 
       <div className="repository-list">
-        <div className="repository">
+        <div
+          className="repository"
+          onClick={() => setPage("repository-details")}
+        >
           <h4>Repository 1</h4>
           <p>GitHub Repository</p>
         </div>
-
-        <div className="repository">
+        <div
+          className="repository"
+          onClick={() => setPage("repository-details")}
+        >
           <h4>Repository 2</h4>
           <p>GitHub Repository</p>
         </div>
-
-        <div className="repository">
+        <div
+          className="repository"
+          onClick={() => setPage("repository-details")}
+        >
           <h4>Repository 3</h4>
           <p>GitHub Repository</p>
         </div>
