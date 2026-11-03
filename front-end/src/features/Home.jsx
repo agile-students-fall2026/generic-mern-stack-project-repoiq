@@ -2,7 +2,11 @@ import './Home.css';
 function Home() {
   return (
     <div className="home">
-      <h1>RepoIQ</h1>
+      <div className="home-header">
+        <div className="logo-placeholder">Logo</div>
+        <h1>RepoIQ</h1>
+        <div className="user-placeholder">User</div>
+      </div>
       <h2>Good morning, User</h2> {/* User's name should be dynamically inserted here */}
       <p>Explore your repositories and discover your codebase.</p>
     
