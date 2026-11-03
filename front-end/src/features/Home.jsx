@@ -50,7 +50,10 @@ function Home({ setPage }) {
         </div>
       </div>
 
-      <button className="add-repository">  
+      <button
+        className="add-repository"
+        onClick={() => setPage("add-repository")}
+      >
         + Add Repository
       </button>
       
