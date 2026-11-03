@@ -1,3 +1,4 @@
+import './Home.css';
 function Home() {
   return (
     <div className="home">
@@ -10,7 +11,10 @@ function Home() {
         placeholder="Search repositories..."
       />
 
-      <h3>Recent Repositories</h3>
+      <div className="recent-header">
+        <h3>Recent Repositories</h3>
+        <span>View all</span>
+      </div>
 
       <div className="repository-list">
         <div className="repository">

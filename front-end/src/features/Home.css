@@ -28,3 +28,17 @@
 .repository h4 {
   margin: 0;
 }
+
+.recent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recent-header h3 {
+  margin-bottom: 0;
+}
+
+.recent-header span {
+  font-size: 14px;
+}
