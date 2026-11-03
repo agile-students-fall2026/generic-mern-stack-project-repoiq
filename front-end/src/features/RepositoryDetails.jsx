@@ -19,6 +19,10 @@ function RepositoryDetails({ setPage, selectedRepo }) {
             View Code Map
         </button>
 
+        <button type="button" onClick={() => setPage("analysis-results")}>
+            View Analysis Results
+        </button>
+
         <button type="button" onClick={() => setPage("progress")}>
             Re-Analyse
         </button>
