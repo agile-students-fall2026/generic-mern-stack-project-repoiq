@@ -40,7 +40,7 @@ function AddRepository({ setPage }) {
         }}
       />
       
-      {error && <p className="error-message">{error}</p>}
+      {error && <p className="add-error">{error}</p>}
       
       <button type="button" onClick={handleAnalyze}>
         Analyse Repository

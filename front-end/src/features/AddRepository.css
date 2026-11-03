@@ -1,4 +1,3 @@
-
 .add-repository-page {
   padding: 20px;
   text-align: center;
@@ -49,6 +48,7 @@
 
 .add-repository-page > button:last-of-type {
   background-color: white;
+  color: black;
 }
 
 .add-divider {
@@ -72,4 +72,5 @@
   color: red;
   font-size: 14px;
   margin: 0 0 15px;
+  text-align: left;
 }
