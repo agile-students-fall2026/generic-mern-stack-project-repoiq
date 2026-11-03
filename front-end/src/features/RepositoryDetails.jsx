@@ -8,10 +8,10 @@ function RepositoryDetails({ setPage, selectedRepo }) {
       </button>
 
       <h2>Repository Details</h2>
-      <h3>{selectedRepo || "No repository selected"}</h3>
+      <h3>{selectedRepo?.name || "No repository selected"}</h3>
       <div className="repository-info">
-        <p>Language: JavaScript</p>
-        <p>Last updated: 2 days ago</p>
+        <p>Language: {selectedRepo?.language || "Not specified"}</p>
+        <p>Last updated: {selectedRepo?.updated || "Not specified"}</p>
         <p>Analysis status: Completed</p>
       </div>
       <div className="repository-actions">

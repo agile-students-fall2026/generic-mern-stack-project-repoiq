@@ -37,27 +37,41 @@ function Home({ setPage, setSelectedRepo }) {
         <div
           className="repository"
           onClick={() => {
-            setSelectedRepo("Repository 1");
+            setSelectedRepo({
+              name: "Repository 1",
+              language: "JavaScript",
+              updated: "2 days ago"
+            });
             setPage("repository-details");
           }}
         >
           <h4>Repository 1</h4>
           <p>GitHub Repository</p>
         </div>
+
         <div
           className="repository"
           onClick={() => {
-            setSelectedRepo("Repository 2");
+            setSelectedRepo({
+              name: "Repository 2",
+              language: "Python",
+              updated: "5 days ago"
+            });
             setPage("repository-details");
           }}
         >
           <h4>Repository 2</h4>
           <p>GitHub Repository</p>
         </div>
+
         <div
           className="repository"
           onClick={() => {
-            setSelectedRepo("Repository 3");
+            setSelectedRepo({
+              name: "Repository 3",
+              language: "Python",
+              updated: "1 week ago"
+            });
             setPage("repository-details");
           }}
         >
