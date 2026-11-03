@@ -34,7 +34,10 @@ function AddRepository({ setPage }) {
         type="text"
         placeholder="https://github.com/username/repo"
         value={url}
-        onChange={(e) => setUrl(e.target.value)}
+        onChange={(e) => {
+            setUrl(e.target.value);
+            setError("");
+        }}
       />
       
       {error && <p className="error-message">{error}</p>}
