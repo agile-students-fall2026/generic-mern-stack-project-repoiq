@@ -13,9 +13,17 @@ import Welcome from "./features/welcome.jsx";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("welcome");
+  const [page, setPage] = useState("map");
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
+  }
+
+  if (page === "login") {
+    return <Login setPage={setPage} />;
+  }
+
+  if (page === "map") {
+    return <InteractiveMap setPage={setPage} />;
   }
 
   if (page === "progress") {
