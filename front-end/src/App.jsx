@@ -15,7 +15,7 @@ import Signup from "./features/signup.jsx";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("Welcome");
+  const [page, setPage] = useState("welcome");
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }

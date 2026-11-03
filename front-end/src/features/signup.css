@@ -17,34 +17,38 @@
   display: flex;
   gap: 12px;
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .signup-input-box input {
   flex: 1;
   border: none;
   font-size: 16px;
-  color: black;
+  color: var(--text);
 }
 
 .signup-hint {
   font-size: 11px;
+  color: var(--text-muted);
 }
 
 .signup-btn {
   padding: 16px;
   font-size: 16px;
-  border: 1px solid black;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
 }
 
 .signup-btn-gray {
-  background-color: #cccccc;
+  background-color: var(--primary);
+  color: white;
 }
 
 .signup-btn-outline {
   background-color: white;
 
-  color: black;
+  color: var(--primary);
 }
 
 .signup-center {

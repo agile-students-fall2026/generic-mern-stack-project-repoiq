@@ -65,3 +65,8 @@ p {
   font-family: var(--font-code);
   font-size: 14px;
 }
+
+button,
+input {
+  font-family: var(--font);
+}

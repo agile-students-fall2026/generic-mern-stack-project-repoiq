@@ -21,15 +21,16 @@
   flex: 1;
   padding: 10px;
   background-color: white;
-  border: 1px solid black;
-  color: black;
+  border: 1px solid var(--border);
+  color: var(--text);
 }
 
 .login-input-box {
   display: flex;
   gap: 12px;
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .login-input-box input {
@@ -45,13 +46,14 @@
 .login-btn {
   padding: 16px;
   font-size: 16px;
-  border: 1px solid black;
-  color: black;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  color: var(--primary);
 }
 
 .login-btn-gray {
-  background-color: #cccccc;
-  color: black;
+  background-color: var(--primary);
+  color: white;
 }
 
 .login-btn-outline {
