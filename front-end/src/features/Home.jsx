@@ -28,7 +28,9 @@ function Home({ setPage }) {
 
       <div className="recent-header">
         <h3>Recent Repositories</h3>
-        <span>View all</span>
+        <button type="button" onClick={() => setPage("searchresult")}>
+          View all
+        </button>
       </div>
 
       <div className="repository-list">
