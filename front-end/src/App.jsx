@@ -12,11 +12,12 @@ import DependencyDetails from "./features/DependencyDetails.jsx";
 import Welcome from "./features/welcome.jsx";
 import Login from "./features/login.jsx";
 import Signup from "./features/signup.jsx";
+import Home from "./features/Home.jsx";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState("Welcome");
-  if (page === "welcome") {
+  if (page === "Welcome") {
     return <Welcome setPage={setPage} />;
   }
 
@@ -30,7 +31,6 @@ function App() {
     return <Home setPage={setPage} />;
   }
 
-
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
   }
@@ -41,10 +41,6 @@ function App() {
 
   if (page === "complete") {
     return <AnalysisComplete setPage={setPage} />;
-  }
-
-  if (page === "map") {
-    return <InteractiveMap setPage={setPage} />;
   }
 
   if (page === "searchresult") {
