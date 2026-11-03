@@ -31,7 +31,10 @@ function Home() {
           <h4>Repository 3</h4>
           <p>GitHub Repository</p>
         </div>
-      </div>    
+      </div>
+      <button className="add-repository">  
+        + Add Repository
+      </button>  
     </div>
   );
 }

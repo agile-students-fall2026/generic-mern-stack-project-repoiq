@@ -42,3 +42,11 @@
 .recent-header span {
   font-size: 14px;
 }
+
+.add-repository {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
