@@ -1,3 +1,4 @@
+import "./RepositoryDetails.css";
 
 function RepositoryDetails({ setPage }) {
   return (
