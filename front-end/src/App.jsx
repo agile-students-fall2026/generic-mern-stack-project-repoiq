@@ -17,14 +17,10 @@ import "./App.css";
 
 function App() {
   const [page, setPage] = useState("Welcome");
-  if (page === "welcome") {
+  if (page === "Welcome") {
     return <Welcome setPage={setPage} />;
   }
 
-  if (page === "home") {
-    return <Home setPage={setPage} />;
-  }
-  
   if (page === "login") {
     return <Login setPage={setPage} />;
   }
@@ -34,7 +30,6 @@ function App() {
   if (page === "home") {
     return <Home setPage={setPage} />;
   }
-
 
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
@@ -46,10 +41,6 @@ function App() {
 
   if (page === "complete") {
     return <AnalysisComplete setPage={setPage} />;
-  }
-
-  if (page === "map") {
-    return <InteractiveMap setPage={setPage} />;
   }
 
   if (page === "searchresult") {
