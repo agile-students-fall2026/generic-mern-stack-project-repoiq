@@ -15,6 +15,7 @@ import Signup from "./features/signup.jsx";
 import Home from "./features/Home.jsx";
 import AddRepository from "./features/AddRepository.jsx";
 import RepositoryDetails from "./features/RepositoryDetails.jsx";
+import AnalysisResults from "./features/AnalysisResults.jsx";
 import "./App.css";
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
     return <RepositoryDetails setPage={setPage} selectedRepo={selectedRepo} />;
   }
 
+  if (page === "analysis-results") {
+    return <AnalysisResults setPage={setPage} />;
+  }
+  
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
   }
