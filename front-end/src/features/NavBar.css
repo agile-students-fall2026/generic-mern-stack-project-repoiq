@@ -5,7 +5,13 @@
   font-size: 24px;
   background-color: #eeeeee;
   border-top: 1px solid #999999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
+
 
 .navbar span {
   cursor: pointer;
