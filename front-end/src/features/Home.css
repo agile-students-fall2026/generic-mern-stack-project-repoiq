@@ -50,3 +50,17 @@
   border: 1px solid #ccc;
   cursor: pointer;
 }
+
+.home-nav {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #ccc;
+  margin-top: 40px;
+  padding: 15px 0;
+}
+
+.home-nav button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

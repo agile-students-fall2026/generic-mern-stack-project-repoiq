@@ -32,9 +32,17 @@ function Home() {
           <p>GitHub Repository</p>
         </div>
       </div>
+
       <button className="add-repository">  
         + Add Repository
-      </button>  
+      </button>
+      
+      <nav className="home-nav">
+        <button type="button">Home</button> {/* This button should navigate to the home page */}
+        <button type="button">Search</button> {/* This button should navigate to the search page */}
+        <button type="button">Code Map</button> {/* This button should navigate to the code map page */}
+      </nav>
+
     </div>
   );
 }
