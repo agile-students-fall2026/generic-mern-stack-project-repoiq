@@ -1,6 +1,6 @@
 import "./RepositoryDetails.css";
 
-function RepositoryDetails({ setPage }) {
+function RepositoryDetails({ setPage, selectedRepo }) {
   return (
     <div className="repository-details">
       <button type="button" onClick={() => setPage("home")}>
@@ -8,7 +8,7 @@ function RepositoryDetails({ setPage }) {
       </button>
 
       <h2>Repository Details</h2>
-      <h3>repository-name</h3>
+      <h3>{selectedRepo || "No repository selected"}</h3>
       <div className="repository-info">
         <p>Language: JavaScript</p>
         <p>Last updated: 2 days ago</p>

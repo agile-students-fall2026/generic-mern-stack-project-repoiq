@@ -2,7 +2,7 @@ import './Home.css';
 import NavBar from "./NavBar.jsx";
 import { useState } from "react";
 
-function Home({ setPage }) {
+function Home({ setPage, setSelectedRepo }) {
   const [search, setSearch] = useState("");
   return (
     <div className="home">
@@ -36,21 +36,30 @@ function Home({ setPage }) {
       <div className="repository-list">
         <div
           className="repository"
-          onClick={() => setPage("repository-details")}
+          onClick={() => {
+            setSelectedRepo("Repository 1");
+            setPage("repository-details");
+          }}
         >
           <h4>Repository 1</h4>
           <p>GitHub Repository</p>
         </div>
         <div
           className="repository"
-          onClick={() => setPage("repository-details")}
+          onClick={() => {
+            setSelectedRepo("Repository 2");
+            setPage("repository-details");
+          }}
         >
           <h4>Repository 2</h4>
           <p>GitHub Repository</p>
         </div>
         <div
           className="repository"
-          onClick={() => setPage("repository-details")}
+          onClick={() => {
+            setSelectedRepo("Repository 3");
+            setPage("repository-details");
+          }}
         >
           <h4>Repository 3</h4>
           <p>GitHub Repository</p>
