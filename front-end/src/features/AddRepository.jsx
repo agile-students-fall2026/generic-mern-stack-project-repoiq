@@ -1,6 +1,9 @@
 import "./AddRepository.css";
+import { useState } from "react";
 
 function AddRepository({ setPage }) {
+  const [url, setUrl] = useState("");
+
   return (
     <div className="add-repository-page">
       <div className="add-header">
@@ -19,6 +22,8 @@ function AddRepository({ setPage }) {
       <input
         type="text"
         placeholder="https://github.com/username/repo"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
       />
 
       <button type="button" onClick={() => setPage("progress")}>
