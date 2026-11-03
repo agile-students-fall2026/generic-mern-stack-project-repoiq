@@ -1,3 +1,4 @@
+import "./AddRepository.css";
 
 function AddRepository({ setPage }) {
   return (
