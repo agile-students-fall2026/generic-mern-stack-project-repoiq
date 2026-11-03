@@ -75,3 +75,15 @@
   margin: 12px 0;
   font-size: 12px;
 }
+
+.analysis-metrics span {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.analysis-metrics strong {
+  display: block;
+  font-size: 22px;
+  font-weight: normal;
+}

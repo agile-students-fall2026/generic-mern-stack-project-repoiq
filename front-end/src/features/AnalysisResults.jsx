@@ -22,23 +22,23 @@ function AnalysisResults({ setPage, selectedRepo }) {
         <hr />
 
         <div className="analysis-info-row">
-            <span>Last analyzed</span>
-            <span>Oct 14, 2026 · 9:31 pm</span>
+          <span>Last analyzed</span>
+          <span>Oct 14, 2026 · 9:31 pm</span>
         </div>
 
         <div className="analysis-info-row">
-            <span>Status</span>
-            <span>{selectedRepo?.status || "Unknown"}</span>
+          <span>Status</span>
+          <span>{selectedRepo?.status || "Unknown"}</span>
         </div>
       </div>
 
       <h3>Statistics</h3>
 
       <div className="analysis-metrics">
-        <div>Files: 342</div>
-        <div>Functions: 28</div>
-        <div>Classes: 65</div>
-        <div>Relationships: 19</div>
+        <div><span>Files</span><strong>342</strong></div>
+        <div><span>Functions</span><strong>28</strong></div>
+        <div><span>Classes</span><strong>65</strong></div>
+        <div><span>Relationships</span><strong>19</strong></div>
       </div>
 
       <div className="analysis-actions">
