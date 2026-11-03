@@ -12,6 +12,7 @@ import DependencyDetails from "./features/DependencyDetails.jsx";
 import Welcome from "./features/welcome.jsx";
 import Login from "./features/login.jsx";
 import Signup from "./features/signup.jsx";
+import Home from "./features/home.jsx";
 import "./App.css";
 
 function App() {
@@ -26,6 +27,11 @@ function App() {
   if (page === "signup") {
     return <Signup setPage={setPage} />;
   }
+  if (page === "home") {
+    return <Home setPage={setPage} />;
+  }
+
+  
 
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;

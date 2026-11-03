@@ -29,7 +29,7 @@ function Login({ setPage }) {
 
       <p className="login-right">Forgot password?</p>
 
-      <button className="login-btn login-btn-gray" onClick={() => setPage("map")}>
+      <button className="login-btn login-btn-gray" onClick={() => setPage("home")}>
         Log In
       </button>
 
