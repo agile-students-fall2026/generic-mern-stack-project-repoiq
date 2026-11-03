@@ -1,5 +1,6 @@
 import "./AddRepository.css";
 import { useState } from "react";
+import NavBar from "./NavBar.jsx";
 
 function AddRepository({ setPage }) {
   const [url, setUrl] = useState("");
@@ -51,7 +52,8 @@ function AddRepository({ setPage }) {
         <span>OR</span>
         <hr />
       </div>
-
+      
+      <NavBar setPage={setPage} />
       <button type="button">
         Connect to GitHub
       </button>
