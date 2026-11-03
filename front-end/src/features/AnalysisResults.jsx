@@ -1,23 +1,39 @@
 import "./AnalysisResults.css";
+import NavBar from "./NavBar.jsx";
 
 function AnalysisResults({ setPage, selectedRepo }) {
   return (
     <div className="analysis-results">
-      <button type="button" onClick={() => setPage("home")}>
+      <button type="button" onClick={() => setPage("repository-details")}>
         ←
       </button>
 
-      <h2>Analysis Results</h2>
-      <p>Repository analysis overview</p>
+      <h2>Repository Analysis Details</h2>
+
       <div className="analysis-summary">
-        <div className="analysis-summary">
-        <h3>Analysis Summary</h3>
-        <p>Repository: {selectedRepo?.name || "Unknown"}</p>
-        <p>Files Analyzed: 42</p>
-        <p>Total Lines of Code: 3,250</p>
-        <p>Primary Language: {selectedRepo?.language || "Unknown"}</p>
-        </div>
+        <h3>{selectedRepo?.name || "Repository"}</h3>
+        <p>https://github.com/username/repo</p>
+        <p>Last analyzed: Oct 14, 2026</p>
+        <p>Status: {selectedRepo?.status || "Unknown"}</p>
       </div>
+
+      <h3>Statistics</h3>
+
+      <div className="analysis-metrics">
+        <div>Files: 342</div>
+        <div>Functions: 28</div>
+        <div>Classes: 65</div>
+        <div>Relationships: 19</div>
+      </div>
+
+      <div className="analysis-actions">
+        <button type="button" onClick={() => setPage("progress")}>
+          Re-Analyze
+        </button>
+        <button type="button">Remove Repository</button>
+      </div>
+
+      <NavBar setPage={setPage} />
     </div>
   );
 }
