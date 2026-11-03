@@ -11,10 +11,25 @@ function AnalysisResults({ setPage, selectedRepo }) {
       <h2>Repository Analysis Details</h2>
 
       <div className="analysis-summary">
-        <h3>{selectedRepo?.name || "Repository"}</h3>
-        <p>https://github.com/username/repo</p>
-        <p>Last analyzed: Oct 14, 2026</p>
-        <p>Status: {selectedRepo?.status || "Unknown"}</p>
+        <div className="analysis-repo-header">
+          <div className="analysis-repo-icon"></div>
+          <div>
+          <h3>{selectedRepo?.name || "Repository"}</h3>
+          <p>https://github.com/username/repo</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div className="analysis-info-row">
+            <span>Last analyzed</span>
+            <span>Oct 14, 2026 · 9:31 pm</span>
+        </div>
+
+        <div className="analysis-info-row">
+            <span>Status</span>
+            <span>{selectedRepo?.status || "Unknown"}</span>
+        </div>
       </div>
 
       <h3>Statistics</h3>

@@ -55,3 +55,23 @@
   padding: 12px;
   cursor: pointer;
 }
+
+.analysis-repo-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.analysis-repo-icon {
+  width: 45px;
+  height: 45px;
+  border: 1px solid #888;
+  flex-shrink: 0;
+}
+
+.analysis-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 12px;
+}
