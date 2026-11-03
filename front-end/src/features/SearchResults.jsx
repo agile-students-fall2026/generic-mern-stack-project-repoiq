@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./SearchResults.css";
+import NavBar from "./NavBar.jsx";
+
 
 // replace later when we have real data
 const sampleRes = [
@@ -17,7 +19,7 @@ const sampleRes = [
   },
 ];
 
-function SearchResults() {
+function SearchResults({setPage}) {
   const [searchText, setSearchText] = useState(""); // store input text
   const [selectedType, setSelectedType] = useState("All"); // store selected category
 
@@ -96,6 +98,7 @@ function SearchResults() {
           ))}
         </ul>
       )}
+      <NavBar setPage={setPage} />
     </div>
   );
 }

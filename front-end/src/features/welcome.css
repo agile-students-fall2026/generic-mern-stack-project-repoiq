@@ -23,8 +23,10 @@
 
 .btn-outline {
   background-color: white;
+  color: black;
 }
 
 .btn-gray {
   background-color: #cccccc;
+  color: black;
 }
