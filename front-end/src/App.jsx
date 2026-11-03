@@ -13,6 +13,7 @@ import Welcome from "./features/welcome.jsx";
 import Login from "./features/login.jsx";
 import Signup from "./features/signup.jsx";
 import Home from "./features/Home.jsx";
+import AddRepository from "./features/AddRepository.jsx";
 import "./App.css";
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
     return <Home setPage={setPage} />;
   }
 
+  if (page === "add-repository") {
+    return <AddRepository setPage={setPage} />;
+  }
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
   }
