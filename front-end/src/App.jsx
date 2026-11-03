@@ -46,9 +46,9 @@ function App() {
   }
 
   if (page === "analysis-results") {
-    return <AnalysisResults setPage={setPage} />;
+    return <AnalysisResults setPage={setPage} selectedRepo={selectedRepo} />;
   }
-  
+
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
   }
