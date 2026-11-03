@@ -1,0 +1,30 @@
+
+.home {
+  padding: 20px;
+}
+
+.home h1 {
+  margin-bottom: 30px;
+}
+
+.home input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  box-sizing: border-box;
+}
+
+.repository-list {
+  margin-top: 15px;
+}
+
+.repository {
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.repository h4 {
+  margin: 0;
+}

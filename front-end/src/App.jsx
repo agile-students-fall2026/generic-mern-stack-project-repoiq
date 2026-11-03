@@ -10,12 +10,17 @@ import SearchResultsDetails from "./features/SearchResultDetails.jsx";
 import ComponentDetails from "./features/ComponentDetails.jsx";
 import DependencyDetails from "./features/DependencyDetails.jsx";
 import Welcome from "./features/welcome.jsx";
+import Home from "./features/Home.jsx";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("welcome");
+  const [page, setPage] = useState("home"); // Default page is set to "home". Further changes needed
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
+  }
+
+  if (page === "home") {
+    return <Home setPage={setPage} />;
   }
 
   if (page === "progress") {
