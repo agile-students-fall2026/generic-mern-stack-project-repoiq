@@ -15,13 +15,43 @@
   margin: 20px 0;
 }
 
+
 .analysis-summary {
-  margin-top: 25px;
+  margin: 20px 0 30px;
   padding: 15px;
   border: 1px solid #888;
-  border-radius: 8px;
+  border-radius: 4px;
+}
+
+.analysis-summary h3 {
+  margin: 0 0 10px;
 }
 
 .analysis-summary p {
   margin: 12px 0;
+  font-size: 13px;
+}
+
+.analysis-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 15px 0 20px;
+}
+
+.analysis-metrics div {
+  padding: 15px;
+  border: 1px solid #888;
+  border-radius: 4px;
+}
+
+.analysis-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.analysis-actions button {
+  padding: 12px;
+  cursor: pointer;
 }
