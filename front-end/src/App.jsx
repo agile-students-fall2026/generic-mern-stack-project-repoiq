@@ -16,8 +16,8 @@ import Home from "./features/Home.jsx";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("Welcome");
-  if (page === "Welcome") {
+  const [page, setPage] = useState("welcome");
+  if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
 
