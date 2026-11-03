@@ -87,3 +87,38 @@
   font-size: 22px;
   font-weight: normal;
 }
+
+.analysis-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.analysis-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.analysis-header button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.analysis-actions button {
+  width: 100%;
+  border: 1px solid #888;
+  border-radius: 0;
+}
+
+.analysis-actions button:first-child {
+  background: #555;
+  color: white;
+}
+
+.analysis-actions button:last-child {
+  background: transparent;
+  color: inherit;
+}

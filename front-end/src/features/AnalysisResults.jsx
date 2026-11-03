@@ -4,9 +4,12 @@ import NavBar from "./NavBar.jsx";
 function AnalysisResults({ setPage, selectedRepo }) {
   return (
     <div className="analysis-results">
-      <button type="button" onClick={() => setPage("repository-details")}>
-        ←
-      </button>
+      <div className="analysis-header">
+        <button type="button" onClick={() => setPage("repository-details")}>
+            ←
+        </button>
+        <h2>Repository Analysis Details</h2>
+      </div>
 
       <h2>Repository Analysis Details</h2>
 
