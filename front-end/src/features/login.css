@@ -22,6 +22,7 @@
   padding: 10px;
   background-color: white;
   border: 1px solid black;
+  color: black;
 }
 
 .login-input-box {
@@ -45,10 +46,12 @@
   padding: 16px;
   font-size: 16px;
   border: 1px solid black;
+  color: black;
 }
 
 .login-btn-gray {
   background-color: #cccccc;
+  color: black;
 }
 
 .login-btn-outline {

@@ -33,13 +33,13 @@ function Signup({ setPage }) {
         <span>👁️</span>
       </div>
 
-      <button className="signup-btn signup-btn-gray" onClick={() => setPage("map")}>
+      <button className="signup-btn signup-btn-gray" onClick={() => setPage("home")}>
         Sign Up
       </button>
 
       <p className="signup-center">——— or continue with ———</p>
 
-      <button className="signup-btn signup-btn-outline">Continue with GitHub</button>
+      <button className="signup-btn signup-btn-outline" onClick={()=>setPage("github")}>Continue with GitHub</button>
 
       <p className="signup-center">
         Already have an account?{" "}
