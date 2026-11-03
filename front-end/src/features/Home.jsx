@@ -40,7 +40,8 @@ function Home({ setPage, setSelectedRepo }) {
             setSelectedRepo({
               name: "Repository 1",
               language: "JavaScript",
-              updated: "2 days ago"
+              updated: "2 days ago",
+              status: "Completed"
             });
             setPage("repository-details");
           }}
@@ -55,7 +56,8 @@ function Home({ setPage, setSelectedRepo }) {
             setSelectedRepo({
               name: "Repository 2",
               language: "Python",
-              updated: "5 days ago"
+              updated: "5 days ago",
+              status: "Completed"
             });
             setPage("repository-details");
           }}
@@ -70,7 +72,8 @@ function Home({ setPage, setSelectedRepo }) {
             setSelectedRepo({
               name: "Repository 3",
               language: "Python",
-              updated: "1 week ago"
+              updated: "1 week ago",
+              status: "Completed"
             });
             setPage("repository-details");
           }}

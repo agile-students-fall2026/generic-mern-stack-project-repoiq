@@ -12,7 +12,7 @@ function RepositoryDetails({ setPage, selectedRepo }) {
       <div className="repository-info">
         <p>Language: {selectedRepo?.language || "Not specified"}</p>
         <p>Last updated: {selectedRepo?.updated || "Not specified"}</p>
-        <p>Analysis status: Completed</p>
+        <p>Analysis status: {selectedRepo?.status || "Unknown"}</p>
       </div>
       <div className="repository-actions">
         <button type="button" onClick={() => setPage("map")}>
