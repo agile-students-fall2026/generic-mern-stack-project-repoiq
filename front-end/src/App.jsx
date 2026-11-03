@@ -14,10 +14,12 @@ import Login from "./features/login.jsx";
 import Signup from "./features/signup.jsx";
 import Home from "./features/Home.jsx";
 import AddRepository from "./features/AddRepository.jsx";
+import RepositoryDetails from "./features/RepositoryDetails.jsx";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState("Welcome");
+  const [selectedRepo, setSelectedRepo] = useState(null);
   if (page === "Welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -25,16 +27,23 @@ function App() {
   if (page === "login") {
     return <Login setPage={setPage} />;
   }
+
   if (page === "signup") {
     return <Signup setPage={setPage} />;
   }
+
   if (page === "home") {
-    return <Home setPage={setPage} />;
+    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} />;
   }
 
   if (page === "add-repository") {
     return <AddRepository setPage={setPage} />;
   }
+
+  if (page === "repository-details") {
+    return <RepositoryDetails setPage={setPage} selectedRepo={selectedRepo} />;
+  }
+
   if (page === "map") {
     return <InteractiveMap setPage={setPage} />;
   }
