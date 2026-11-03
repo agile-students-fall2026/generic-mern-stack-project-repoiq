@@ -19,6 +19,11 @@ function Home({ setPage }) {
         placeholder="Search repositories..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && search.trim()) {
+            setPage("searchresult");
+          }
+        }}
       />
 
       <div className="recent-header">
