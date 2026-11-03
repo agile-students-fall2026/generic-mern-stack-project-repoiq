@@ -27,3 +27,26 @@
   border: 1px solid #888;
   margin: 0 auto 30px;
 }
+
+.add-repository-page input {
+  width: 100%;
+  padding: 12px;
+  margin: 20px 0 15px;
+  box-sizing: border-box;
+  border: 1px solid #888;
+}
+
+.add-repository-page > button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #888;
+  cursor: pointer;
+}
+
+.add-repository-page > button:first-of-type {
+  background-color: #ccc;
+}
+
+.add-repository-page > button:last-of-type {
+  background-color: white;
+}
