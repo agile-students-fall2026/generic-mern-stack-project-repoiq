@@ -1,0 +1,60 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 16px;
+  text-align: left;
+}
+
+.login-back {
+  width: 40px;
+  background: none;
+  border: none;
+  font-size: 24px;
+}
+
+.login-tabs {
+  display: flex;
+}
+
+.login-tab {
+  flex: 1;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.login-input-box {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.login-input-box input {
+  flex: 1;
+  border: none;
+  font-size: 16px;
+}
+
+.login-right {
+  text-align: right;
+}
+
+.login-btn {
+  padding: 16px;
+  font-size: 16px;
+  border: 1px solid black;
+}
+
+.login-btn-gray {
+  background-color: #cccccc;
+}
+
+.login-btn-outline {
+  background-color: white;
+}
+
+.login-center {
+  text-align: center;
+}

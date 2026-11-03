@@ -10,12 +10,25 @@ import SearchResultsDetails from "./features/SearchResultDetails.jsx";
 import ComponentDetails from "./features/ComponentDetails.jsx";
 import DependencyDetails from "./features/DependencyDetails.jsx";
 import Welcome from "./features/welcome.jsx";
+import Login from "./features/login.jsx";
+import Signup from "./features/signup.jsx";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState("welcome");
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
+  }
+
+  if (page === "login") {
+    return <Login setPage={setPage} />;
+  }
+  if (page === "signup") {
+    return <Signup setPage={setPage} />;
+  }
+
+  if (page === "map") {
+    return <InteractiveMap setPage={setPage} />;
   }
 
   if (page === "progress") {
