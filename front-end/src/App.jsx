@@ -6,10 +6,10 @@ import AnalysisProgress from "./features/AnalysisProgress.jsx";
 import AnalysisComplete from "./features/AnalysisComplete.jsx";
 import InteractiveMap from "./features/InteractiveMap.jsx";
 import SearchResults from "./features/SearchResults.jsx";
-import SearchResultsDetails from "./features/SearchResultsDetails.jsx";
+import SearchResultsDetails from "./features/SearchResultDetails.jsx";
 import ComponentDetails from "./features/ComponentDetails.jsx";
 import DependencyDetails from "./features/DependencyDetails.jsx";
-import Welcome from "./features/Welcome.jsx";
+import Welcome from "./features/welcome.jsx";
 import "./App.css";
 
 function App() {
