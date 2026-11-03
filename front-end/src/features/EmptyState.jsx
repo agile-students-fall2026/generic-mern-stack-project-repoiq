@@ -1,3 +1,5 @@
+import "./EmptyState.css";
+
 function EmptyState({ setPage }) {
   return (
     <div className="empty-state">

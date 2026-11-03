@@ -1,0 +1,23 @@
+
+.empty-state {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.empty-state h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.empty-state p {
+  color: #aaa;
+  margin: 10px 0;
+}
+
+.empty-state button {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  cursor: pointer;
+}
