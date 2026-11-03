@@ -2,7 +2,17 @@
 function AddRepository({ setPage }) {
   return (
     <div className="add-repository-page">
-      <h2>Add a Github Repository</h2>
+      <div className="add-header">
+        <button type="button" onClick={() => setPage("home")}>
+            ←
+      </button>
+        <h2>Add Repository</h2>
+      </div>
+
+      <div className="add-image"></div>
+
+      <h3>Add a Github Repository</h3>
+      
       <p>Paste the repository URL or link your Github account</p>
 
       <input
