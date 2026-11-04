@@ -1,7 +1,7 @@
 import "./AnalysisResults.css";
 import NavBar from "./NavBar.jsx";
 
-function AnalysisResults({ setPage, selectedRepo }) {
+function AnalysisResults({ setPage, selectedRepo, removeRepository }) {
   return (
     <div className="analysis-results">
       <div className="analysis-header">
@@ -48,7 +48,17 @@ function AnalysisResults({ setPage, selectedRepo }) {
         <button type="button" onClick={() => setPage("progress")}>
           Re-Analyze
         </button>
-        <button type="button">Remove Repository</button>
+        <button
+        type="button"
+        onClick={() => {
+          if (selectedRepo && window.confirm("Are you sure you want to remove this repository?")) {
+            removeRepository(selectedRepo.name);
+            setPage("home");
+          }
+        }}
+      >
+        Remove Repository
+      </button>
       </div>
 
       <NavBar setPage={setPage} />
