@@ -34,3 +34,8 @@ export const componentDetailSample = {
   usedBy: ["src/App.jsx"],
 };
 
+export const sampleDependsOn = [
+    { name: "example1.jsx", path: "src/App.jsx" },
+    { name: "example2.jsx", path: "src/data/sample.jsx" },
+  ];
+export const sampleUsedBy = [{ name: "example3.jsx", path: "src/sample2.jsx" }];
