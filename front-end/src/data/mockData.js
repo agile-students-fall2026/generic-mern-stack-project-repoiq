@@ -7,7 +7,6 @@ export const repository = {
   relationships: 19
 }
 
-
 export const nodes = [
   { id: 1, name: 'App.jsx', x: 175, y: 200, info: 'Main application' },
   { id: 2, name: 'Navbar.jsx', x: 100, y: 100, info: 'Navigation bar' },
@@ -26,4 +25,12 @@ export const connections = [
   { from: 4, to: 6, type: 'dependency' }
 ]
 
+export const componentDetailSample = {
+  name: "example.js",
+  path: "src/example.js",
+  functions: ["func1", "func2"],
+  classes: ["class1", "class2"],
+  imports: ["src/helper.js"],
+  usedBy: ["src/App.jsx"],
+};
 
