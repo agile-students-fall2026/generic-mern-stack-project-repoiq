@@ -1,10 +1,9 @@
 import { EyeOff, Lock, Mail, User } from 'lucide-react';
+import BackButton from './BackButton.jsx';
 function Signup({ setPage }) {
   return (
     <div className="signup">
-      <button className="signup-back" onClick={() => setPage('welcome')}>
-        &lt;
-      </button>
+      <BackButton setPage={setPage} to="welcome" />
 
       <h1>Create an account</h1>
       <p className="intro">Join RepoiQ and start exploring any codebase.</p>

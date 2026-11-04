@@ -18,9 +18,7 @@ function AddRepository({ setPage }) {
   return (
     <div className="add-repository-page">
       <div className="add-header">
-        <button type="button" onClick={() => setPage('home')}>
-          ←
-        </button>
+        <BackButton setPage={setPage} to="home" />
         <h1>Add Repository</h1>
       </div>
 

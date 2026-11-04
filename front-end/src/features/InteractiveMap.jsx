@@ -34,9 +34,7 @@ function InteractiveMap({ setPage }) {
 
   return (
     <div className="phone">
-      <button className="back" onClick={() => setPage('complete')}>
-        ←
-      </button>
+      <BackButton setPage={setPage} to="complete" />
       <h2>repository-name</h2>
 
       <input

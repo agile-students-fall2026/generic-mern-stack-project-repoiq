@@ -1,22 +1,31 @@
-const sample = {
-  name: "func1",
-  type: "function",
-  path: "src/example",
-  usedIn: ["examplepath1", "examplepath2", "examplepath3"],
-};
-function SearchResultDetails({setPage}) {
+import BackButton from './BackButton.jsx';
+import NavBar from './NavBar.jsx';
+
+function SearchResultDetails({ result, setPage }) {
+  if (!result) {
+    return <p>No result selected.</p>;
+  }
+
   return (
     <div>
-      <h1>{sample.name}</h1>
-      <p>{sample.type}</p>
+      <BackButton setPage={setPage} to="searchresult" />
+
+      <h1>{result.name}</h1>
+      <p>{result.type}</p>
       <hr />
 
+      <h2>Repository</h2>
+      <p>{result.repo}</p>
+
       <h2>Defined in</h2>
-      <p>{sample.path}</p>
+      <p>{result.path}</p>
+
+      <h2>Last edited</h2>
+      <p>{result.lastEdited}</p>
 
       <h2>Used in</h2>
       <ul>
-        {sample.usedIn.map((path) => (
+        {result.usedIn.map((path) => (
           <li key={path}>{path}</li>
         ))}
       </ul>
@@ -26,6 +35,8 @@ function SearchResultDetails({setPage}) {
 
       {/* link to source later */}
       <button>View source on GitHub</button>
+
+      <NavBar setPage={setPage} />
     </div>
   );
 }

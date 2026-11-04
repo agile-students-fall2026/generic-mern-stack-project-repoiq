@@ -3,7 +3,7 @@ import NavBar from './NavBar.jsx';
 function Repositories({ repositories, setPage }) {
   return (
     <div className="repositories">
-      <button onClick={() => setPage('home')}>←</button>
+      <BackButton setPage={setPage} to="home" />
 
       <h1>Repositories</h1>
 

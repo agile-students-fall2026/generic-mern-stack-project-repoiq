@@ -18,7 +18,7 @@ const sampleRes = [
   },
 ];
 
-function SearchResults({ setPage }) {
+function SearchResults({ setPage, setSelectedResult }) {
   const [searchText, setSearchText] = useState(''); // store input text
   const [selectedType, setSelectedType] = useState('All'); // store selected category
 
@@ -89,7 +89,14 @@ function SearchResults({ setPage }) {
         <ul>
           {filteredRes.map((result) => (
             <li key={result.id} className="row">
-              <p>{result.name}</p>
+              <button
+                onClick={() => {
+                  setSelectedResult(result);
+                  setPage('searchresultdetails');
+                }}
+              >
+                {result.name}
+              </button>
               <p className="small">{result.path}</p>
             </li>
           ))}
