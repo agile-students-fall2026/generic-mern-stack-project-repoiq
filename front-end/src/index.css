@@ -221,3 +221,52 @@ button.outline {
 .add-header button {
   margin: 0;
 }
+
+.steps {
+  margin: 24px 0;
+}
+
+.step {
+  position: relative;
+  margin-bottom: 0;
+  padding: 0 0 24px 34px;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 22px;
+  bottom: 0;
+  width: 2px;
+  background: #999;
+}
+
+.step:last-child::before {
+  display: none;
+}
+
+.dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  border: 2px solid #999;
+  border-radius: 50%;
+  background: white;
+}
+
+.dot.filled {
+  background: #999;
+}
+
+.dot.half {
+  border-width: 6px;
+}
+
+.step p {
+  font-size: 12px;
+  color: #666;
+}
