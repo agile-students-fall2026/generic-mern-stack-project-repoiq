@@ -63,8 +63,7 @@ function ComponentDetails({ setPage }) {
             ))}
           </ul>
 
-          {/*add later*/}
-          <button>View all dependencies</button>
+          <button onClick={() => setPage('dependencydetails')}>View all dependencies</button>
         </section>
       )}
 
