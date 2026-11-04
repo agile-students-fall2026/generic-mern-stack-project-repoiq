@@ -1,0 +1,25 @@
+.empty-state {
+  padding: 20px;
+}
+
+.empty-card {
+  padding: 20px 10px;
+  border: 1px solid #888;
+  text-align: center;
+}
+
+.empty-card h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.empty-card p {
+  font-size: 12px;
+  margin: 20px 0;
+}
+
+.empty-card button {
+  width: 100%;
+  padding: 8px;
+  cursor: pointer;
+}

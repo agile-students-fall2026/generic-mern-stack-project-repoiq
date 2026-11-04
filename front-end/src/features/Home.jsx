@@ -1,9 +1,11 @@
 import './Home.css';
 import NavBar from "./NavBar.jsx";
 import { useState } from "react";
+import EmptyState from "./EmptyState.jsx";
 
-function Home({ setPage }) {
+function Home({ setPage, setSelectedRepo }) {
   const [search, setSearch] = useState("");
+  const repositoryCount = 3;
   return (
     <div className="home">
       <div className="home-header">
@@ -32,23 +34,61 @@ function Home({ setPage }) {
           View all
         </button>
       </div>
-
+    
+      {repositoryCount === 0 ? (
+        <EmptyState setPage={setPage} />
+      ) : (
+      
       <div className="repository-list">
-        <div className="repository">
+        <div
+          className="repository"
+          onClick={() => {
+            setSelectedRepo({
+              name: "Repository 1",
+              language: "JavaScript",
+              updated: "2 days ago",
+              status: "Completed"
+            });
+            setPage("repository-details");
+          }}
+        >
           <h4>Repository 1</h4>
           <p>GitHub Repository</p>
         </div>
 
-        <div className="repository">
+        <div
+          className="repository"
+          onClick={() => {
+            setSelectedRepo({
+              name: "Repository 2",
+              language: "Python",
+              updated: "5 days ago",
+              status: "Completed"
+            });
+            setPage("repository-details");
+          }}
+        >
           <h4>Repository 2</h4>
           <p>GitHub Repository</p>
         </div>
 
-        <div className="repository">
+        <div
+          className="repository"
+          onClick={() => {
+            setSelectedRepo({
+              name: "Repository 3",
+              language: "Python",
+              updated: "1 week ago",
+              status: "Completed"
+            });
+            setPage("repository-details");
+          }}
+        >
           <h4>Repository 3</h4>
           <p>GitHub Repository</p>
         </div>
       </div>
+      )}
 
       <button
         className="add-repository"
