@@ -1,15 +1,9 @@
 import { useState } from "react";
+import BackButton from "./BackButton.jsx";
 import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
 function DependencyDetails({ setPage }) {
   const [tab, setTab] = useState("depends"); // remembers what tab selected
-
-  // replace when we have actual data/links
-  const sampleDependsOn = [
-    { name: "example1.jsx", path: "src/App.jsx" },
-    { name: "example2.jsx", path: "src/data/sample.jsx" },
-  ];
-  const sampleUsedBy = [{ name: "example3.jsx", path: "src/sample2.jsx" }];
 
   let files = [];
 
@@ -21,13 +15,14 @@ function DependencyDetails({ setPage }) {
 
   return (
     <div className="dependencies">
+      <BackButton setPage={setPage} to="componentdetails" />
       <h1>Dependencies</h1>
 
-      <button onClick={() => setTab("depends")}>
+      <button onClick={() => setTab("depends")} disabled={tab === "depends"}>
         Depends on ({sampleDependsOn.length})
       </button>
 
-      <button onClick={() => setTab("used")}>
+      <button onClick={() => setTab("used")} disabled={tab === "used"}>
         Used by ({sampleUsedBy.length})
       </button>
 

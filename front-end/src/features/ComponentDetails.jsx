@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { componentDetailSample } from '../data/mockData.js';
+import { useState } from "react";
+import BackButton from "./BackButton.jsx";
+import { componentDetailSample } from "../data/mockData.js";
 
-function ComponentDetails() {
-  const [activeTab, setActiveTab] = useState('contents'); // save chosen tab: content/dependencies
+function ComponentDetails({ setPage }) {
+  const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
 
   return (
     <div className="component-details">
+      <BackButton setPage={setPage} to="map" />
       <h1>Component Details</h1>
 
       <h2>{componentDetailSample.name}</h2>
@@ -13,21 +15,21 @@ function ComponentDetails() {
 
       <div>
         <button
-          onClick={() => setActiveTab('contents')}
-          disabled={activeTab === 'contents'}
+          onClick={() => setActiveTab("contents")}
+          disabled={activeTab === "contents"}
         >
           Contents
         </button>
 
         <button
-          onClick={() => setActiveTab('dependencies')}
-          disabled={activeTab === 'dependencies'}
+          onClick={() => setActiveTab("dependencies")}
+          disabled={activeTab === "dependencies"}
         >
           Dependencies
         </button>
       </div>
 
-      {activeTab === 'contents' ? (
+      {activeTab === "contents" ? (
         <section>
           <h2>Functions</h2>
           <ul>
@@ -61,8 +63,7 @@ function ComponentDetails() {
             ))}
           </ul>
 
-          {/*add later*/}
-          <button>View all dependencies</button>
+          <button onClick={() => setPage('dependencydetails')}>View all dependencies</button>
         </section>
       )}
 

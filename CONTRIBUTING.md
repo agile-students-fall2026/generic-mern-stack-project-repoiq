@@ -32,7 +32,7 @@ Draft for team review: all four members should review these proposed norms.
 
 ### Communication and Accountability
 
-- Use repoiq channel for daily coordination.
+- Use the repoiq channel for daily coordination.
 - Respond to questions and review requests within 1-2 days.
 - Take responsibility for assigned tasks.
 - keep their status current on the project board.
@@ -134,7 +134,7 @@ Reviewers should check correctness, readability, scope, documentation, and testi
    cd front-end && npm run dev
    ```
 
-7. Open http://localhost:5173 and verify that the RepoIQ home page loads without errors in the browser console, and that the back-end terminal shows the server listening on port 3000 and a successful database connection.
+7. Open [RepoIQ in your browser](http://localhost:5173) and verify that the RepoIQ home page loads without errors in the browser console.
 
 ## Building and Testing
 
