@@ -23,7 +23,7 @@ function SearchResults({ setPage, setSelectedResult }) {
 
   return (
     <div className="search-results">
-      <BackButton setPage={setPage} to="repositories" />
+      <BackButton setPage={setPage} to="repository-details" />
       <h1>Search</h1>
 
       <div>

@@ -59,7 +59,7 @@ function App() {
     return <AddRepository setPage={setPage} />;
   }
   if (page === 'map') {
-    return <InteractiveMap setPage={setPage} />;
+    return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
   }
 
   if (page === 'progress') {

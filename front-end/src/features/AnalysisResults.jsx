@@ -6,7 +6,7 @@ function AnalysisResults({ setPage, selectedRepo }) {
   return (
     <div className="analysis-results">
       <div className="analysis-header">
-        <BackButton setPage={setPage} to="repositories" />
+        <BackButton setPage={setPage} to="repository-details" />
         <h2>Repository Analysis Details</h2>
       </div>
 
