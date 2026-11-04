@@ -2,7 +2,17 @@ import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
 
-function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
+function Home({
+  setPage,
+  setSelectedRepo,
+  setRepoBack,
+  removedRepos = [],
+  search,
+  setSearch,
+}) {
+  const repositories = sampleRepositories.filter(
+    (repo) => !removedRepos.includes(repo.name)
+  );
   return (
     <div className="home">
       <div className="home-header">
@@ -30,11 +40,11 @@ function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
           View all
         </button>
       </div>
-      {sampleRepositories.length === 0 ? (
+      {repositories.length === 0 ? (
         <EmptyState setPage={setPage} />
       ) : (
         <div className="repository-list">
-          {sampleRepositories.map((repo) => (
+          {repositories.map((repo) => (
             <div
               className="repository"
               key={repo.id}
