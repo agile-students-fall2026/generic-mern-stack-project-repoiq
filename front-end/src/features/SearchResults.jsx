@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
 import { nodes } from '../data/mockData';
 
@@ -23,6 +23,7 @@ function SearchResults({ setPage, setSelectedResult }) {
 
   return (
     <div className="search-results">
+      <BackButton setPage={setPage} to="repositories" />
       <h1>Search</h1>
 
       <div>

@@ -3,7 +3,7 @@ import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
 
-function Home({ setPage, setSelectedRepo }) {
+function Home({ setPage, setSelectedRepo, search, setSearch }) {
   const [search, setSearch] = useState('');
   return (
     <div className="home">
@@ -22,13 +22,13 @@ function Home({ setPage, setSelectedRepo }) {
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' && search.trim()) {
-            setPage('searchresult');
+            setPage('repositories');
           }
         }}
       />
       <div className="recent-header">
         <h3>Recent Repositories</h3>
-        <button type="button" onClick={() => setPage('searchresult')}>
+        <button type="button" onClick={() => setPage('repositories')}>
           View all
         </button>
       </div>
