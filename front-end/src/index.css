@@ -1,0 +1,120 @@
+:root {
+  --primary: #3f5fb5;
+  --text: #222;
+  --muted: #666;
+  --border: #ddd;
+}
+
+body {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  line-height: 1.4;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 22px;
+
+  margin: 0 0 16px;
+}
+
+h2,
+h3,
+h4 {
+  font-size: 15px;
+  margin: 20px 0 10px;
+}
+
+p {
+  margin: 0;
+}
+
+input {
+  display: block;
+  width: 95%;
+  box-sizing: border-box;
+  padding: 7px 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font: inherit;
+}
+
+button {
+  padding: 0;
+  margin: 0 10px 8px 0;
+  border: none;
+  background: none;
+  color: #3f5fb5;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #222;
+  font-weight: bold;
+  cursor: default;
+}
+
+button.primary {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin: 8px 0;
+  border-radius: 4px;
+  background: #3f5fb5;
+  color: white;
+}
+
+button.primary:disabled {
+  font-weight: normal;
+  opacity: 0.6;
+}
+
+.link {
+  color: #3f5fb5;
+}
+
+.nav {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.nav .link {
+  margin: 0 8px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li,
+.row,
+.repository,
+.file,
+.step {
+  margin-bottom: 12px;
+}
+
+.row h3,
+.repository h3,
+.repository h4 {
+  margin: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin: 16px 0;
+}
+
+.add-error {
+  color: red;
+}
