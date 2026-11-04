@@ -1,11 +1,28 @@
 import NavBar from './NavBar.jsx';
+import BackButton from './BackButton.jsx';
+import { sampleRepositories } from '../data/mockData.js';
 
-function Repositories({ repositories, setPage }) {
+function Repositories({
+  setPage,
+  setSelectedRepo,
+  setRepoBack,
+  search,
+  setSearch,
+}) {
+  const repositories = sampleRepositories.filter((repo) =>
+    repo.name.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <div className="repositories">
       <BackButton setPage={setPage} to="home" />
 
       <h1>Repositories</h1>
+      <input
+        type="text"
+        placeholder="Search repositories..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
       {repositories.length === 0 ? (
         <>
@@ -15,9 +32,19 @@ function Repositories({ repositories, setPage }) {
       ) : (
         <ul>
           {repositories.map((repo) => (
-            <li key={repo.url} className="row">
+            <li
+              key={repo.id}
+              className="row"
+              onClick={() => {
+                setSelectedRepo(repo);
+                setRepoBack('repositories');
+                setPage('repository-details');
+              }}
+            >
               <p>{repo.name}</p>
-              <p className="small">{repo.url}</p>
+              <p className="small">
+                updated {repo.updated} · {repo.language}
+              </p>
             </li>
           ))}
         </ul>

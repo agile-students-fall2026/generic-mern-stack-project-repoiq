@@ -44,28 +44,6 @@ export const sampleDependsOn = [
 ];
 export const sampleUsedBy = [{ name: "example3.jsx", path: "src/sample2.jsx" }];
 
-export const searchResDetailsSample = {
-  name: "func1",
-  type: "function",
-  path: "src/example",
-  usedIn: ["examplepath1", "examplepath2", "examplepath3"],
-};
-
-export const sampleRes = [
-  {
-    id: 1,
-    name: "App.jsx",
-    path: "src/App.jsx",
-    type: "File",
-  },
-  {
-    id: 2,
-    name: "searchRepository",
-    path: "src/search.js",
-    type: "Function",
-  },
-];
-
 export const sampleRepositories = [
   { id: 1, name: 'Repository 1', language: 'JavaScript', updated: '2 days ago', status: 'Completed' },
   { id: 2, name: 'Repository 2', language: 'Python', updated: '5 days ago', status: 'Completed' },

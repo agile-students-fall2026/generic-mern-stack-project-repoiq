@@ -7,11 +7,11 @@
 
 ## [Here](https://www.figma.com/proto/KblWH70bD1B9II49iF0S8b/Wireframe?node-id=28-21&t=7PYAkJ2AfVD2TSsg-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=24%3A11&show-proto-sidebar=1) is the link to our prototype. 
 
-## We split the work as follows:
+## We split the work as follows
  ### App Map: Worked on it all together
  ### Wireframes (and linking as prototype): 
- #### Aditi (AditiAdhikari05): FirstScreen, Login, Signup, Email Verification (both),Home, Add Repository
- #### Asia (maomao274): Component Details, Dependency Details, Search Results (repository-level),Search Result Details, Empty States
+ #### Aditi (AditiAdhikari05): FirstScreen, Login, Signup, Email Verification (both), Home, Add Repository
+ #### Asia (maomao274): Component Details, Dependency Details, Search Results (repository-level), Search Result Details, Empty States
  #### Mariam (st6rgazing): Add Repository (Error (using Asia's assets)), Analysis Progress (both), Analysis Results, Interactive Map (all versions), Search Results (user-level), Repository Details, Analysis Complete (and error)
 
 ## App map
@@ -120,7 +120,7 @@ Buttons **Retry Analysis** or **Back to Repositories** when analysis fails.
 
 #### Analysis complete
 
-Confirms success and summarizes files, functions, classes, and relationships. **Explore Codebase** links to the interactive map **Remove Repository** removes the saved entry.
+Confirms success and summarizes files, functions, classes, and relationships. **Explore Codebase** links to the interactive map. **Remove Repository** removes the saved entry.
 
 <a href="ux-design/Analysis Complete.png"><img src="ux-design/Analysis Complete.png" width="393"></a>
 
