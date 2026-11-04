@@ -6,11 +6,14 @@ function Repositories({
   setPage,
   setSelectedRepo,
   setRepoBack,
+  removedRepos = [],
   search,
   setSearch,
 }) {
-  const repositories = sampleRepositories.filter((repo) =>
-    repo.name.toLowerCase().includes(search.toLowerCase())
+  const repositories = sampleRepositories.filter(
+    (repo) =>
+      !removedRepos.includes(repo.name) &&
+      repo.name.toLowerCase().includes(search.toLowerCase())
   );
   return (
     <div className="repositories">

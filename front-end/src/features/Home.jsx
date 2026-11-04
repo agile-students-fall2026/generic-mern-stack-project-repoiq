@@ -2,12 +2,17 @@ import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
 
-function Home({ setPage, setSelectedRepo, removedRepos = [] }) {
-  const [search, setSearch] = useState('');
+function Home({
+  setPage,
+  setSelectedRepo,
+  setRepoBack,
+  removedRepos = [],
+  search,
+  setSearch,
+}) {
   const repositories = sampleRepositories.filter(
     (repo) => !removedRepos.includes(repo.name)
   );
-function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
   return (
     <div className="home">
       <div className="home-header">

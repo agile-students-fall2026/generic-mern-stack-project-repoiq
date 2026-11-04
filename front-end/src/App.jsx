@@ -40,7 +40,6 @@ function App() {
     return <Signup setPage={setPage} />;
   }
   if (page === 'home') {
-    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} removedRepos={removedRepos} />;
     return (
       <Home
         setPage={setPage}
@@ -60,6 +59,7 @@ function App() {
         setRepoBack={setRepoBack}
         search={repoSearch}
         setSearch={setRepoSearch}
+        removedRepos={removedRepos}
       />
     );
   }
@@ -107,7 +107,13 @@ function App() {
   }
 
   if (page === 'analysis-results') {
-    return <AnalysisResults setPage={setPage} selectedRepo={selectedRepo} removeRepository={removeRepository} />;
+    return (
+      <AnalysisResults
+        setPage={setPage}
+        selectedRepo={selectedRepo}
+        removeRepository={removeRepository}
+      />
+    );
   }
 }
 export default App;
