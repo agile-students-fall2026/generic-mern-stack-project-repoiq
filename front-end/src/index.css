@@ -101,3 +101,9 @@ li,
 .step {
   margin-bottom: 12px;
 }
+
+.row h3,
+.repository h3,
+.repository h4 {
+  margin: 0;
+}
