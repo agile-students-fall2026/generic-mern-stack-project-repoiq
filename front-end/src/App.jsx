@@ -15,10 +15,13 @@ import Signup from './features/signup.jsx';
 import Home from './features/Home.jsx';
 import AddRepository from './features/AddRepository.jsx';
 import Repositories from './features/Repositories.jsx';
+import RepositoryDetails from './features/RepositoryDetails.jsx';
+import AnalysisResults from './features/AnalysisResults.jsx';
 
 function App() {
   const [page, setPage] = useState('welcome');
   const [selectedResult, setSelectedResult] = useState(null);
+  const [selectedRepo, setSelectedRepo] = useState(null);
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
@@ -33,7 +36,7 @@ function App() {
     return <Signup setPage={setPage} />;
   }
   if (page === 'home') {
-    return <Home setPage={setPage} />;
+    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} />;
   }
 
   if (page === 'add-repository') {
@@ -67,6 +70,13 @@ function App() {
 
   if (page === 'componentdetails') {
     return <ComponentDetails setPage={setPage} />;
+  }
+  if (page === 'repository-details') {
+    return <RepositoryDetails setPage={setPage} selectedRepo={selectedRepo} />;
+  }
+
+  if (page === 'analysis-results') {
+    return <AnalysisResults setPage={setPage} selectedRepo={selectedRepo} />;
   }
 }
 export default App;

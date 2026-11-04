@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import NavBar from './NavBar.jsx';
+import EmptyState from './EmptyState.jsx';
+import { sampleRepositories } from '../data/mockData.js';
 
-function Home({ setPage }) {
+function Home({ setPage, setSelectedRepo }) {
   const [search, setSearch] = useState('');
   return (
     <div className="home">
@@ -30,25 +32,30 @@ function Home({ setPage }) {
           View all
         </button>
       </div>
-      <div className="repository-list">
-        <div className="repository">
-          <div className="repo-placeholder"></div>
-          <h4>Repository 1</h4>
-          <p>GitHub Repository</p>
+      {sampleRepositories.length === 0 ? (
+        <EmptyState setPage={setPage} />
+      ) : (
+        <div className="repository-list">
+          {sampleRepositories.map((repo) => (
+            <div
+              className="repository"
+              key={repo.id}
+              onClick={() => {
+                setSelectedRepo(repo);
+                setPage('repository-details');
+              }}
+            >
+              <div className="repo-placeholder"></div>
+              <div>
+                <h4>{repo.name}</h4>
+                <p className="small">
+                  updated {repo.updated} · {repo.language}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
-
-        <div className="repository">
-          <div className="repo-placeholder"></div>
-          <h4>Repository 2</h4>
-          <p>GitHub Repository</p>
-        </div>
-
-        <div className="repository">
-          <div className="repo-placeholder"></div>
-          <h4>Repository 3</h4>
-          <p>GitHub Repository</p>
-        </div>
-      </div>
+      )}
       <button
         className="add-repository"
         onClick={() => setPage('add-repository')}

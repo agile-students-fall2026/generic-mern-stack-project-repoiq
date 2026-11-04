@@ -1,3 +1,12 @@
+export const repository = {
+  name: 'repo-iq',
+  url: 'https://github.com/agilef26/repoiq',
+  files: 342,
+  functions: 28,
+  classes: 65,
+  relationships: 19
+}
+
 export const nodes = [
   { id: 1, name: 'App.jsx', x: 175, y: 200, info: 'Main application', type: 'File', path: 'src/App.jsx', repo: 'repo-iq', lastEdited: '2 days ago', usedIn: ['src/main.jsx'] },
   { id: 2, name: 'Navbar.jsx', x: 100, y: 100, info: 'Navigation bar', type: 'File', path: 'src/Navbar.jsx', repo: 'repo-iq', lastEdited: '3 days ago', usedIn: ['src/App.jsx'] },
@@ -19,3 +28,46 @@ export const connections = [
   { from: 1, to: 7, type: 'call' },
   { from: 1, to: 8, type: 'import' }
 ]
+
+export const componentDetailSample = {
+  name: "example.js",
+  path: "src/example.js",
+  functions: ["func1", "func2"],
+  classes: ["class1", "class2"],
+  imports: ["src/helper.js"],
+  usedBy: ["src/App.jsx"],
+};
+
+export const sampleDependsOn = [
+  { name: "example1.jsx", path: "src/App.jsx" },
+  { name: "example2.jsx", path: "src/data/sample.jsx" },
+];
+export const sampleUsedBy = [{ name: "example3.jsx", path: "src/sample2.jsx" }];
+
+export const searchResDetailsSample = {
+  name: "func1",
+  type: "function",
+  path: "src/example",
+  usedIn: ["examplepath1", "examplepath2", "examplepath3"],
+};
+
+export const sampleRes = [
+  {
+    id: 1,
+    name: "App.jsx",
+    path: "src/App.jsx",
+    type: "File",
+  },
+  {
+    id: 2,
+    name: "searchRepository",
+    path: "src/search.js",
+    type: "Function",
+  },
+];
+
+export const sampleRepositories = [
+  { id: 1, name: 'Repository 1', language: 'JavaScript', updated: '2 days ago', status: 'Completed' },
+  { id: 2, name: 'Repository 2', language: 'Python', updated: '5 days ago', status: 'Completed' },
+  { id: 3, name: 'Repository 3', language: 'Python', updated: '1 week ago', status: 'Completed' },
+];

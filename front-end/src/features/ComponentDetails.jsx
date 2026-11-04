@@ -1,13 +1,5 @@
 import { useState } from 'react';
-
-const sample = {
-  name: 'example.js',
-  path: 'src/example.js',
-  functions: ['func1', 'func2'],
-  classes: ['class1', 'class2'],
-  imports: ['src/helper.js'],
-  usedBy: ['src/App.jsx'],
-};
+import { componentDetailSample } from '../data/mockData.js';
 
 function ComponentDetails() {
   const [activeTab, setActiveTab] = useState('contents'); // save chosen tab: content/dependencies
@@ -16,8 +8,8 @@ function ComponentDetails() {
     <div className="component-details">
       <h1>Component Details</h1>
 
-      <h2>{sample.name}</h2>
-      <p>{sample.path}</p>
+      <h2>{componentDetailSample.name}</h2>
+      <p>{componentDetailSample.path}</p>
 
       <div>
         <button
@@ -39,16 +31,15 @@ function ComponentDetails() {
         <section>
           <h2>Functions</h2>
           <ul>
-            {sample.functions.map((name) => (
+            {componentDetailSample.functions.map((name) => (
               <li key={name}>{name}</li>
             ))}
-            c
           </ul>
 
           <h2>Classes</h2>
 
           <ul>
-            {sample.classes.map((name) => (
+            {componentDetailSample.classes.map((name) => (
               <li key={name}>{name}</li>
             ))}
           </ul>
@@ -58,14 +49,14 @@ function ComponentDetails() {
           <h2>Imports</h2>
 
           <ul>
-            {sample.imports.map((path) => (
+            {componentDetailSample.imports.map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
-            {sample.usedBy.map((path) => (
+            {componentDetailSample.usedBy.map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>

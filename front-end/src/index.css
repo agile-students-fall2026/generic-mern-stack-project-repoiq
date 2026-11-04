@@ -51,13 +51,11 @@ button {
   background: none;
   color: #3f5fb5;
   font: inherit;
-  cursor: pointer;
 }
 
 button:disabled {
   color: #222;
   font-weight: bold;
-  cursor: default;
 }
 
 button.primary {
@@ -200,10 +198,6 @@ button.outline {
   justify-content: space-around;
   background: #eee;
   border-top: 1px solid #ddd;
-}
-
-.navbar span {
-  cursor: pointer;
 }
 
 .add-repository-page {
