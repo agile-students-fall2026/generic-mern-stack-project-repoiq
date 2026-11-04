@@ -19,6 +19,8 @@ function App() {
   const [page, setPage] = useState('welcome');
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
+  const [repoSearch, setRepoSearch] = useState('');
+  const [repoBack, setRepoBack] = useState('home');
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
@@ -33,14 +35,34 @@ function App() {
     return <Signup setPage={setPage} />;
   }
   if (page === 'home') {
-    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} />;
+    return (
+      <Home
+        setPage={setPage}
+        setSelectedRepo={setSelectedRepo}
+        search={repoSearch}
+        setSearch={setRepoSearch}
+        setRepoBack={setRepoBack}
+      />
+    );
+  }
+
+  if (page === 'repositories') {
+    return (
+      <Repositories
+        setPage={setPage}
+        setSelectedRepo={setSelectedRepo}
+        setRepoBack={setRepoBack}
+        search={repoSearch}
+        setSearch={setRepoSearch}
+      />
+    );
   }
 
   if (page === 'add-repository') {
     return <AddRepository setPage={setPage} />;
   }
   if (page === 'map') {
-    return <InteractiveMap setPage={setPage} />;
+    return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
   }
 
   if (page === 'progress') {
@@ -69,7 +91,13 @@ function App() {
     return <ComponentDetails setPage={setPage} />;
   }
   if (page === 'repository-details') {
-    return <RepositoryDetails setPage={setPage} selectedRepo={selectedRepo} />;
+    return (
+      <RepositoryDetails
+        setPage={setPage}
+        selectedRepo={selectedRepo}
+        repoBack={repoBack}
+      />
+    );
   }
 
   if (page === 'analysis-results') {
