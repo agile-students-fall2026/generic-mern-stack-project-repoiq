@@ -1,22 +1,17 @@
-const sample = {
-  name: "func1",
-  type: "function",
-  path: "src/example",
-  usedIn: ["examplepath1", "examplepath2", "examplepath3"],
-};
-function SearchResultDetails({setPage}) {
+import { searchResDetailsSample } from "../data/mockData.js";
+function SearchResultDetails({ setPage }) {
   return (
     <div>
-      <h1>{sample.name}</h1>
-      <p>{sample.type}</p>
+      <h1>{searchResDetailsSample.name}</h1>
+      <p>{searchResDetailsSample.type}</p>
       <hr />
 
       <h2>Defined in</h2>
-      <p>{sample.path}</p>
+      <p>{searchResDetailsSample.path}</p>
 
       <h2>Used in</h2>
       <ul>
-        {sample.usedIn.map((path) => (
+        {searchResDetailsSample.usedIn.map((path) => (
           <li key={path}>{path}</li>
         ))}
       </ul>

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
-function DependencyDetails({setPage}) {
+function DependencyDetails({ setPage }) {
   const [tab, setTab] = useState("depends"); // remembers what tab selected
 
   // replace when we have actual data/links
