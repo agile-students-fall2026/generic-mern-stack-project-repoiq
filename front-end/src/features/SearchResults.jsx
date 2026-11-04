@@ -1,20 +1,20 @@
-import { useState } from "react";
-import "./SearchResults.css";
-import { sampleRes } from "../data/mockData.js";
-import NavBar from "./NavBar.jsx";
+import { useState } from 'react';
 
-function SearchResults({ setPage }) {
-  const [searchText, setSearchText] = useState(""); // store input text
-  const [selectedType, setSelectedType] = useState("All"); // store selected category
+import NavBar from './NavBar.jsx';
+import { nodes } from '../data/mockData';
+
+function SearchResults({ setPage, setSelectedResult }) {
+  const [searchText, setSearchText] = useState(''); // store input text
+  const [selectedType, setSelectedType] = useState('All'); // store selected category
 
   // create array that stores res matching search
   const filteredRes = [];
 
-  for (const result of sampleRes) {
+  for (const result of nodes) {
     const matchesText =
       result.name.includes(searchText) || result.path.includes(searchText);
 
-    const matchesType = selectedType === "All" || result.type === selectedType;
+    const matchesType = selectedType === 'All' || result.type === selectedType;
 
     if (matchesText && matchesType) {
       filteredRes.push(result);
@@ -30,54 +30,59 @@ function SearchResults({ setPage }) {
         <input
           id="search-input"
           type="search"
+          placeholder="Search files and functions"
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
         />
 
-        <button onClick={() => setSearchText("")}>Clear</button>
+        <button onClick={() => setSearchText('')}>Clear</button>
       </div>
 
       <div>
         <button
-          onClick={() => setSelectedType("All")}
-          disabled={selectedType === "All"}
+          onClick={() => setSelectedType('All')}
+          disabled={selectedType === 'All'}
         >
           All
         </button>
 
         <button
-          onClick={() => setSelectedType("File")}
-          disabled={selectedType === "File"}
+          onClick={() => setSelectedType('File')}
+          disabled={selectedType === 'File'}
         >
           Files
         </button>
 
         <button
-          onClick={() => setSelectedType("Function")}
-          disabled={selectedType === "Function"}
+          onClick={() => setSelectedType('Function')}
+          disabled={selectedType === 'Function'}
         >
           Functions
         </button>
 
         <button
-          onClick={() => setSelectedType("Class")}
-          disabled={selectedType === "Class"}
+          onClick={() => setSelectedType('Class')}
+          disabled={selectedType === 'Class'}
         >
           Classes
         </button>
       </div>
-
-      <h2>Results</h2>
 
       {filteredRes.length === 0 ? (
         <p>No results found.</p>
       ) : (
         <ul>
           {filteredRes.map((result) => (
-            <li key={result.id}>
-              <h3>{result.name}</h3>
-              <p>{result.path}</p>
-              <p>Type: {result.type}</p>
+            <li key={result.id} className="row">
+              <button
+                onClick={() => {
+                  setSelectedResult(result);
+                  setPage('searchresultdetails');
+                }}
+              >
+                {result.name}
+              </button>
+              <p className="small">{result.path}</p>
             </li>
           ))}
         </ul>

@@ -1,26 +1,42 @@
-import { searchResDetailsSample } from "../data/mockData.js";
-function SearchResultDetails({ setPage }) {
+import BackButton from './BackButton.jsx';
+import NavBar from './NavBar.jsx';
+
+function SearchResultDetails({ result, setPage }) {
+  if (!result) {
+    return <p>No result selected.</p>;
+  }
+
   return (
     <div>
-      <h1>{searchResDetailsSample.name}</h1>
-      <p>{searchResDetailsSample.type}</p>
+      <BackButton setPage={setPage} to="searchresult" />
+
+      <h1>{result.name}</h1>
+      <p>{result.type}</p>
       <hr />
 
+      <h2>Repository</h2>
+      <p>{result.repo}</p>
+
       <h2>Defined in</h2>
-      <p>{searchResDetailsSample.path}</p>
+      <p>{result.path}</p>
+
+      <h2>Last edited</h2>
+      <p>{result.lastEdited}</p>
 
       <h2>Used in</h2>
       <ul>
-        {searchResDetailsSample.usedIn.map((path) => (
+        {result.usedIn.map((path) => (
           <li key={path}>{path}</li>
         ))}
       </ul>
 
       {/* link to interactice map later */}
-      <button>Highlight on Map</button>
+      <button onClick={() => setPage('map')}>Highlight on Map</button>
 
       {/* link to source later */}
       <button>View source on GitHub</button>
+
+      <NavBar setPage={setPage} />
     </div>
   );
 }

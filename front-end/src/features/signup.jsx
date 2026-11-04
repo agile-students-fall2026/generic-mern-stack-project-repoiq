@@ -1,50 +1,47 @@
-import "./signup.css";
-import { UserRound, Mail, Lock, Eye } from "lucide-react";
-
+import { EyeOff, Lock, Mail, User } from 'lucide-react';
+import BackButton from './BackButton.jsx';
 function Signup({ setPage }) {
   return (
     <div className="signup">
-      <button className="signup-back" onClick={() => setPage("welcome")}>
-        &lt;
-      </button>
+      <BackButton setPage={setPage} to="welcome" />
 
       <h1>Create an account</h1>
-      <p>Join RepoiQ and start exploring any codebase.</p>
+      <p className="intro">Join RepoiQ and start exploring any codebase.</p>
 
       <div className="signup-input-box">
-        <span><UserRound /></span>
+        <User size={18} />
         <input type="text" placeholder="Full name" />
       </div>
 
       <div className="signup-input-box">
-        <span><Mail /></span>
+        <Mail size={18} />
         <input type="email" placeholder="Email address" />
       </div>
 
       <div className="signup-input-box">
-        <span><Lock /></span>
+        <Lock size={18} />
         <input type="password" placeholder="Password" />
-        <span><Eye /></span>
       </div>
-      <p className="signup-hint">At least 8 characters with a number and a letter</p>
+      <p className="small">At least 8 characters with a number and a letter</p>
 
       <div className="signup-input-box">
-        <span><Lock /></span>
+        <Lock size={18} />
         <input type="password" placeholder="Confirm Password" />
-        <span><Eye /></span>
       </div>
 
-      <button className="signup-btn signup-btn-gray" onClick={() => setPage("home")}>
+      <button className="primary" onClick={() => setPage('home')}>
         Sign Up
       </button>
 
-      <p className="signup-center">——— or continue with ———</p>
+      <p className="center">——— or continue with ———</p>
 
-      <button className="signup-btn signup-btn-outline" onClick={()=>setPage("github")}>Continue with GitHub</button>
+      <button className="outline">Continue with GitHub</button>
 
-      <p className="signup-center">
-        Already have an account?{" "}
-        <span onClick={() => setPage("login")}>Log in</span>
+      <p className="center">
+        Already have an account?{' '}
+        <span className="link" onClick={() => setPage('login')}>
+          Log in
+        </span>
       </p>
     </div>
   );

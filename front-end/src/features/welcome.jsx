@@ -1,5 +1,3 @@
-import "./welcome.css";
-
 function Welcome({ setPage }) {
   return (
     <div className="welcome">
@@ -9,11 +7,11 @@ function Welcome({ setPage }) {
 
       <div className="placeholder-img"></div>
 
-      <button className="btn btn-outline" onClick={() => setPage("signup")}>
+      <button className="outline" onClick={() => setPage('signup')}>
         Get Started
       </button>
 
-      <button className="btn btn-gray" onClick={() => setPage("login")}>
+      <button className="primary" onClick={() => setPage('login')}>
         Log In
       </button>
     </div>

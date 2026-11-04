@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import './AnalysisProgress.css';
-import NavBar from "./NavBar.jsx";
+import NavBar from './NavBar.jsx';
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(0);
@@ -32,6 +31,7 @@ function AnalysisProgress({ setPage }) {
         <p>We cannot analyze this repository. Please try again.</p>
 
         <button
+          className="primary"
           onClick={() => {
             setStep(0);
             setError(false);
@@ -39,8 +39,8 @@ function AnalysisProgress({ setPage }) {
         >
           Retry Analysis
         </button>
-        {/* repositories still not implemented */}
-        <button onClick={() => setPage('repositories')}>
+
+        <button className="outline" onClick={() => setPage('repositories')}>
           Back to Repositories
         </button>
       </div>

@@ -1,72 +1,293 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=JetBrains+Mono&display=swap");
-
 :root {
-  --primary: #647ac2;
-  --primary-hover: #0c1328;
-  --accent: #38BDF8;
-  --secondary: #E0F2FE;
-
-  --text: #0F172A;
-  --text-muted: #64748B;
-  --border: #E2E8F0;
-  --background: #FFFFFF;
-  --surface: #F8FAFC;
-
-  --success: #16A34A;
-  --error: #DC2626;
-
-  --radius: 8px;
-  --radius-card: 12px;
-
-  --font: "Poppins", Arial, sans-serif;
-  --font-code: "JetBrains Mono", monospace;
+  --primary: #3f5fb5;
+  --text: #222;
+  --muted: #666;
+  --border: #ddd;
 }
 
 body {
-  margin: 0;
-  font-family: var(--font);
-  font-size: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  line-height: 1.4;
   color: var(--text);
-  background-color: var(--background);
 }
 
 h1 {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0;
-}
-
-h2 {
   font-size: 22px;
-  font-weight: 600;
-  margin: 0;
+
+  margin: 0 0 16px;
 }
 
-h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
+h2,
+h3,
+h4 {
+  font-size: 15px;
+  margin: 20px 0 10px;
 }
 
 p {
   margin: 0;
 }
 
-.text-small {
-  font-size: 14px;
-}
-
-.text-tiny {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.code {
-  font-family: var(--font-code);
-  font-size: 14px;
-}
-
-button,
 input {
-  font-family: var(--font);
+  display: block;
+  width: 95%;
+  box-sizing: border-box;
+  padding: 7px 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font: inherit;
+}
+
+button {
+  padding: 0;
+  margin: 0 10px 8px 0;
+  border: none;
+  background: none;
+  color: #3f5fb5;
+  font: inherit;
+}
+
+button:disabled {
+  color: #222;
+  font-weight: bold;
+}
+
+button.primary {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin: 8px 0;
+  border-radius: 4px;
+  background: #3f5fb5;
+  color: white;
+}
+
+button.primary:disabled {
+  font-weight: normal;
+  opacity: 0.6;
+}
+
+.link {
+  color: #3f5fb5;
+}
+
+.nav {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.nav .link {
+  margin: 0 8px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li,
+.row,
+.repository,
+.file,
+.step {
+  margin-bottom: 12px;
+}
+
+.row h3,
+.repository h3,
+.repository h4 {
+  margin: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin: 16px 0;
+}
+
+.add-error {
+  color: red;
+}
+
+.welcome {
+  padding-top: 120px;
+  text-align: center;
+}
+
+button.outline {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin: 8px 0;
+  border: 1px solid #3f5fb5;
+  border-radius: 4px;
+}
+
+.placeholder-img {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 24px;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.home-header h1,
+.home-header h2 {
+  margin: 0;
+}
+
+.logo-placeholder,
+.user-placeholder,
+.repo-placeholder {
+  flex: none;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.logo-placeholder {
+  width: 44px;
+  height: 44px;
+}
+
+.user-placeholder {
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+}
+
+.repository {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.repo-placeholder {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar-space {
+  height: 70px;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  max-width: 436px;
+  margin: 0 auto;
+  padding: 14px;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  border-top: 1px solid #ddd;
+}
+
+.add-repository-page {
+  text-align: center;
+}
+
+.add-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.add-header h1,
+.add-header button {
+  margin: 0;
+}
+
+.steps {
+  margin: 24px 0;
+}
+
+.step {
+  position: relative;
+  margin-bottom: 0;
+  padding: 0 0 24px 34px;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 22px;
+  bottom: 0;
+  width: 2px;
+  background: #999;
+}
+
+.step:last-child::before {
+  display: none;
+}
+
+.dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  border: 2px solid #999;
+  border-radius: 50%;
+  background: white;
+}
+
+.dot.filled {
+  background: #999;
+}
+
+.dot.half {
+  border-width: 6px;
+}
+
+.step p {
+  font-size: 12px;
+  color: #666;
+}
+
+.popup {
+  margin-top: 80px;
+  padding: 18px;
+  text-align: center;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.popup p {
+  margin-bottom: 14px;
+}
+
+.back-button {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.center {
+  margin: 14px 0;
+  text-align: center;
 }
