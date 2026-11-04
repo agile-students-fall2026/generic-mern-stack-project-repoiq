@@ -107,3 +107,10 @@ li,
 .repository h4 {
   margin: 0;
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
