@@ -8,7 +8,7 @@ function NavBar({ setPage }) {
         <span className="link" onClick={() => setPage('home')}>
           <House size={22} />
         </span>
-        <span className="link" onClick={() => setPage('searchresult')}>
+        <span className="link" onClick={() => setPage('repositories')}>
           <Search size={22} />
         </span>
         <span className="link" onClick={() => setPage('map')}>
