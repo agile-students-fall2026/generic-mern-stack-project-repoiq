@@ -78,3 +78,12 @@ button.primary:disabled {
 .link {
   color: #3f5fb5;
 }
+
+.nav {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.nav .link {
+  margin: 0 8px;
+}
