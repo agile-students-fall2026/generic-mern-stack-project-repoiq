@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
 
 function Home({ setPage, setSelectedRepo, search, setSearch }) {
-  const [search, setSearch] = useState('');
   return (
     <div className="home">
       <div className="home-header">

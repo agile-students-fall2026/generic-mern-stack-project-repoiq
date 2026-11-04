@@ -19,6 +19,7 @@ function App() {
   const [page, setPage] = useState('welcome');
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
+  const [repoSearch, setRepoSearch] = useState('');
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
