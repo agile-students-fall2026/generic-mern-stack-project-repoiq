@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { nodes, connections, repository } from '../data/mockData';
+import { nodes, connections } from '../data/mockData';
+import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
+import { Minus, Plus, RotateCcw } from 'lucide-react';
 import './InteractiveMap.css';
 
 function InteractiveMap({ setPage }) {
@@ -111,11 +113,15 @@ function InteractiveMap({ setPage }) {
           </g>
         </svg>
 
-        <div className="controls">
-          <button onClick={() => setZoom(zoom + 0.2)}>+</button>
-          <button onClick={() => setZoom(Math.max(0.2, zoom - 0.2))}>−</button>
-          <button onClick={() => setZoom(1)}>Reset</button>
-        </div>
+        <button onClick={() => setZoom(zoom + 0.2)}>
+          <Plus size={18} />
+        </button>
+        <button onClick={() => setZoom(Math.max(0.2, zoom - 0.2))}>
+          <Minus size={18} />
+        </button>
+        <button onClick={() => setZoom(1)}>
+          <RotateCcw size={18} />
+        </button>
       </div>
 
       {details}

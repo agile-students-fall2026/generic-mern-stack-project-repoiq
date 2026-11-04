@@ -1,7 +1,10 @@
+import { Check } from 'lucide-react';
 function AnalysisComplete({ setPage }) {
   return (
     <div className="complete">
-      <h1>✓</h1>
+      <h1>
+        <Check size={48} />
+      </h1>
       <h1>Analysis Complete</h1>
       <p className="small">We successfully analysed your repository</p>
 

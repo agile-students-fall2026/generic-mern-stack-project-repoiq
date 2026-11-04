@@ -31,7 +31,7 @@ function SearchResultDetails({ result, setPage }) {
       </ul>
 
       {/* link to interactice map later */}
-      <button>Highlight on Map</button>
+      <button onClick={() => setPage('map')}>Highlight on Map</button>
 
       {/* link to source later */}
       <button>View source on GitHub</button>
