@@ -182,3 +182,26 @@ button.outline {
   width: 32px;
   height: 32px;
 }
+
+.navbar-space {
+  height: 70px;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  max-width: 436px;
+  margin: 0 auto;
+  padding: 14px;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  border-top: 1px solid #ddd;
+}
+
+.navbar span {
+  cursor: pointer;
+}
