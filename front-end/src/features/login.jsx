@@ -1,4 +1,5 @@
 import "./login.css";
+import {  Mail, Lock } from "lucide-react";
 
 function Login({ setPage }) {
   return (
@@ -18,12 +19,12 @@ function Login({ setPage }) {
       </div>
 
       <div className="login-input-box">
-        <span>👤</span>
+        <span><Mail /></span>
         <input type="email" placeholder="Email address" />
       </div>
 
       <div className="login-input-box">
-        <span>🔒</span>
+        <span><Lock /></span>
         <input type="password" placeholder="Password" />
       </div>
 
