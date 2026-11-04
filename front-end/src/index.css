@@ -140,3 +140,45 @@ button.outline {
   background: #f4f4f4;
   border: 1px solid #ddd;
 }
+
+.home-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.home-header h1,
+.home-header h2 {
+  margin: 0;
+}
+
+.logo-placeholder,
+.user-placeholder,
+.repo-placeholder {
+  flex: none;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.logo-placeholder {
+  width: 44px;
+  height: 44px;
+}
+
+.user-placeholder {
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+}
+
+.repository {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.repo-placeholder {
+  width: 32px;
+  height: 32px;
+}
