@@ -1,11 +1,10 @@
 import './RepositoryDetails.css';
 import BackButton from './BackButton.jsx';
 
-function RepositoryDetails({ setPage, selectedRepo }) {
+function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
   return (
     <div className="repository-details">
-      <BackButton setPage={setPage} to="repositories" />
-
+      <BackButton setPage={setPage} to={repoBack} />
       <h2>Repository Details</h2>
       <h3>{selectedRepo?.name || 'No repository selected'}</h3>
       <div className="repository-info">

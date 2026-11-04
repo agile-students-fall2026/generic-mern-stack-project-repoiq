@@ -2,7 +2,7 @@ import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
 
-function Home({ setPage, setSelectedRepo, search, setSearch }) {
+function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
   return (
     <div className="home">
       <div className="home-header">
@@ -40,6 +40,7 @@ function Home({ setPage, setSelectedRepo, search, setSearch }) {
               key={repo.id}
               onClick={() => {
                 setSelectedRepo(repo);
+                setRepoBack('home');
                 setPage('repository-details');
               }}
             >

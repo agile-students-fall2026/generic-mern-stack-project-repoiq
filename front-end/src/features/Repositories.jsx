@@ -2,7 +2,13 @@ import NavBar from './NavBar.jsx';
 import BackButton from './BackButton.jsx';
 import { sampleRepositories } from '../data/mockData.js';
 
-function Repositories({ setPage, setSelectedRepo, search, setSearch }) {
+function Repositories({
+  setPage,
+  setSelectedRepo,
+  setRepoBack,
+  search,
+  setSearch,
+}) {
   const repositories = sampleRepositories.filter((repo) =>
     repo.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -31,6 +37,7 @@ function Repositories({ setPage, setSelectedRepo, search, setSearch }) {
               className="row"
               onClick={() => {
                 setSelectedRepo(repo);
+                setRepoBack('repositories');
                 setPage('repository-details');
               }}
             >

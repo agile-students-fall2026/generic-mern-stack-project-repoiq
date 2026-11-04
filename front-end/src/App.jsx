@@ -20,6 +20,7 @@ function App() {
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [repoSearch, setRepoSearch] = useState('');
+  const [repoBack, setRepoBack] = useState('home');
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
@@ -40,6 +41,7 @@ function App() {
         setSelectedRepo={setSelectedRepo}
         search={repoSearch}
         setSearch={setRepoSearch}
+        setRepoBack={setRepoBack}
       />
     );
   }
@@ -88,7 +90,13 @@ function App() {
     return <ComponentDetails setPage={setPage} />;
   }
   if (page === 'repository-details') {
-    return <RepositoryDetails setPage={setPage} selectedRepo={selectedRepo} />;
+    return (
+      <RepositoryDetails
+        setPage={setPage}
+        selectedRepo={selectedRepo}
+        repoBack={repoBack}
+      />
+    );
   }
 
   if (page === 'analysis-results') {
