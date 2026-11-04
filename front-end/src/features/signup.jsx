@@ -1,5 +1,4 @@
 import "./signup.css";
-import { UserRound, Mail, Lock, Eye } from "lucide-react";
 
 function Signup({ setPage }) {
   return (
@@ -12,26 +11,26 @@ function Signup({ setPage }) {
       <p>Join RepoiQ and start exploring any codebase.</p>
 
       <div className="signup-input-box">
-        <span><UserRound /></span>
+        <span>👤</span>
         <input type="text" placeholder="Full name" />
       </div>
 
       <div className="signup-input-box">
-        <span><Mail /></span>
+        <span>✉️</span>
         <input type="email" placeholder="Email address" />
       </div>
 
       <div className="signup-input-box">
-        <span><Lock /></span>
+        <span>🔒</span>
         <input type="password" placeholder="Password" />
-        <span><Eye /></span>
+        <span>👁️</span>
       </div>
       <p className="signup-hint">At least 8 characters with a number and a letter</p>
 
       <div className="signup-input-box">
-        <span><Lock /></span>
+        <span>🔒</span>
         <input type="password" placeholder="Confirm Password" />
-        <span><Eye /></span>
+        <span>👁️</span>
       </div>
 
       <button className="signup-btn signup-btn-gray" onClick={() => setPage("home")}>
