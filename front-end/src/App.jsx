@@ -34,7 +34,25 @@ function App() {
     return <Signup setPage={setPage} />;
   }
   if (page === 'home') {
-    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} />;
+    return (
+      <Home
+        setPage={setPage}
+        setSelectedRepo={setSelectedRepo}
+        search={repoSearch}
+        setSearch={setRepoSearch}
+      />
+    );
+  }
+
+  if (page === 'repositories') {
+    return (
+      <Repositories
+        setPage={setPage}
+        setSelectedRepo={setSelectedRepo}
+        search={repoSearch}
+        setSearch={setRepoSearch}
+      />
+    );
   }
 
   if (page === 'add-repository') {
