@@ -35,7 +35,6 @@ function ComponentDetails() {
             {componentDetailSample.functions.map((name) => (
               <li key={name}>{name}</li>
             ))}
-            c
           </ul>
 
           <h2>Classes</h2>
