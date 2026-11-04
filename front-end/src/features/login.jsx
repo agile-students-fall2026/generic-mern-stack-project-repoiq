@@ -1,6 +1,8 @@
+import BackButton from './BackButton.jsx';
 function Login({ setPage }) {
   return (
     <div className="login">
+      <BackButton setPage={setPage} to="welcome" />
       <h1>Log in</h1>
       <input type="email" placeholder="Email" />
       <input type="password" placeholder="Password" />
