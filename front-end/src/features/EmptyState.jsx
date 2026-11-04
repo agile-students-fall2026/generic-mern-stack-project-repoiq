@@ -4,7 +4,6 @@ function EmptyState({ setPage }) {
   return (
     <div className="empty-state">
       <h2>No Repositories Yet</h2>
-      <p>You haven't added any repositories yet.</p>
       <p>Add your first repository to get started.</p>
 
       <button

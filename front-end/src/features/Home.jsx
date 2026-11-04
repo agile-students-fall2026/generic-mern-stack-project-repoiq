@@ -1,9 +1,11 @@
 import './Home.css';
 import NavBar from "./NavBar.jsx";
 import { useState } from "react";
+import EmptyState from "./EmptyState.jsx";
 
 function Home({ setPage, setSelectedRepo }) {
   const [search, setSearch] = useState("");
+  const repositoryCount = 0;
   return (
     <div className="home">
       <div className="home-header">
@@ -32,7 +34,11 @@ function Home({ setPage, setSelectedRepo }) {
           View all
         </button>
       </div>
-
+    
+      {repositoryCount === 0 ? (
+        <EmptyState setPage={setPage} />
+      ) : (
+      
       <div className="repository-list">
         <div
           className="repository"
@@ -82,6 +88,7 @@ function Home({ setPage, setSelectedRepo }) {
           <p>GitHub Repository</p>
         </div>
       </div>
+      )}
 
       <button
         className="add-repository"
