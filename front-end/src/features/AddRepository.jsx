@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import NavBar from './NavBar.jsx';
+import BackButton from './BackButton.jsx';
 
 function AddRepository({ setPage }) {
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
 
   function handleAnalyze() {
-    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(url.trim())) {
+    if (!/^github\.com\/[^/]+\/[^/]+\/?$/.test(url.trim())) {
       setError('Please enter a valid GitHub repository URL.');
       return;
     }

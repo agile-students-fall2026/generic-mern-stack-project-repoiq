@@ -112,16 +112,17 @@ function InteractiveMap({ setPage }) {
             ))}
           </g>
         </svg>
-
-        <button onClick={() => setZoom(zoom + 0.2)}>
-          <Plus size={18} />
-        </button>
-        <button onClick={() => setZoom(Math.max(0.2, zoom - 0.2))}>
-          <Minus size={18} />
-        </button>
-        <button onClick={() => setZoom(1)}>
-          <RotateCcw size={18} />
-        </button>
+        <div className="controls">
+          <button onClick={() => setZoom(zoom + 0.2)}>
+            <Plus size={18} />
+          </button>
+          <button onClick={() => setZoom(Math.max(0.2, zoom - 0.2))}>
+            <Minus size={18} />
+          </button>
+          <button onClick={() => setZoom(1)}>
+            <RotateCcw size={18} />
+          </button>
+        </div>
       </div>
 
       {details}
