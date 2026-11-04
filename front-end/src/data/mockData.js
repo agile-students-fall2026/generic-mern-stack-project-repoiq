@@ -46,3 +46,18 @@ export const searchResDetailsSample = {
   path: "src/example",
   usedIn: ["examplepath1", "examplepath2", "examplepath3"],
 };
+
+export const sampleRes = [
+  {
+    id: 1,
+    name: "App.jsx",
+    path: "src/App.jsx",
+    type: "File",
+  },
+  {
+    id: 2,
+    name: "searchRepository",
+    path: "src/search.js",
+    type: "Function",
+  },
+];
