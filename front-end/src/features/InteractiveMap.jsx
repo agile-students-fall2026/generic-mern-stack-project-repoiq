@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { nodes, connections, repository } from '../data/mockData';
 import NavBar from './NavBar.jsx';
+import './InteractiveMap.css';
 
 function InteractiveMap({ setPage }) {
   const [zoom, setZoom] = useState(1);

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import './AnalysisProgress.css';
-import NavBar from "./NavBar.jsx";
+import NavBar from './NavBar.jsx';
 
 function AnalysisProgress({ setPage }) {
   const [step, setStep] = useState(0);

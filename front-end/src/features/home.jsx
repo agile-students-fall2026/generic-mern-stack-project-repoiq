@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import NavBar from './NavBar.jsx';
 
 function Home({ setPage }) {
   const [search, setSearch] = useState('');
