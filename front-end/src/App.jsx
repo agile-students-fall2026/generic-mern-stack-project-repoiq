@@ -51,6 +51,7 @@ function App() {
       <Repositories
         setPage={setPage}
         setSelectedRepo={setSelectedRepo}
+        setRepoBack={setRepoBack}
         search={repoSearch}
         setSearch={setRepoSearch}
       />
