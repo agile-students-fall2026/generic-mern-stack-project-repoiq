@@ -1,5 +1,3 @@
-import './AnalysisComplete.css';
-
 function AnalysisComplete({ setPage }) {
   return (
     <div className="complete">

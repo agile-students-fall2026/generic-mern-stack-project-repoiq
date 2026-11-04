@@ -1,27 +1,26 @@
-import { useState } from "react";
-import "./SearchResults.css";
-import NavBar from "./NavBar.jsx";
+import { useState } from 'react';
 
+import NavBar from './NavBar.jsx';
 
 // replace later when we have real data
 const sampleRes = [
   {
     id: 1,
-    name: "App.jsx",
-    path: "src/App.jsx",
-    type: "File",
+    name: 'App.jsx',
+    path: 'src/App.jsx',
+    type: 'File',
   },
   {
     id: 2,
-    name: "searchRepository",
-    path: "src/search.js",
-    type: "Function",
+    name: 'searchRepository',
+    path: 'src/search.js',
+    type: 'Function',
   },
 ];
 
-function SearchResults({setPage}) {
-  const [searchText, setSearchText] = useState(""); // store input text
-  const [selectedType, setSelectedType] = useState("All"); // store selected category
+function SearchResults({ setPage }) {
+  const [searchText, setSearchText] = useState(''); // store input text
+  const [selectedType, setSelectedType] = useState('All'); // store selected category
 
   // create array that stores res matching search
   const filteredRes = [];
@@ -30,7 +29,7 @@ function SearchResults({setPage}) {
     const matchesText =
       result.name.includes(searchText) || result.path.includes(searchText);
 
-    const matchesType = selectedType === "All" || result.type === selectedType;
+    const matchesType = selectedType === 'All' || result.type === selectedType;
 
     if (matchesText && matchesType) {
       filteredRes.push(result);
@@ -50,34 +49,34 @@ function SearchResults({setPage}) {
           onChange={(event) => setSearchText(event.target.value)}
         />
 
-        <button onClick={() => setSearchText("")}>Clear</button>
+        <button onClick={() => setSearchText('')}>Clear</button>
       </div>
 
       <div>
         <button
-          onClick={() => setSelectedType("All")}
-          disabled={selectedType === "All"}
+          onClick={() => setSelectedType('All')}
+          disabled={selectedType === 'All'}
         >
           All
         </button>
 
         <button
-          onClick={() => setSelectedType("File")}
-          disabled={selectedType === "File"}
+          onClick={() => setSelectedType('File')}
+          disabled={selectedType === 'File'}
         >
           Files
         </button>
 
         <button
-          onClick={() => setSelectedType("Function")}
-          disabled={selectedType === "Function"}
+          onClick={() => setSelectedType('Function')}
+          disabled={selectedType === 'Function'}
         >
           Functions
         </button>
 
         <button
-          onClick={() => setSelectedType("Class")}
-          disabled={selectedType === "Class"}
+          onClick={() => setSelectedType('Class')}
+          disabled={selectedType === 'Class'}
         >
           Classes
         </button>

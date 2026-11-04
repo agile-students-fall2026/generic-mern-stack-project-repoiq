@@ -1,17 +1,16 @@
-import { useState } from "react";
-import "./ComponentDetails.css";
+import { useState } from 'react';
 
 const sample = {
-  name: "example.js",
-  path: "src/example.js",
-  functions: ["func1", "func2"],
-  classes: ["class1", "class2"],
-  imports: ["src/helper.js"],
-  usedBy: ["src/App.jsx"],
+  name: 'example.js',
+  path: 'src/example.js',
+  functions: ['func1', 'func2'],
+  classes: ['class1', 'class2'],
+  imports: ['src/helper.js'],
+  usedBy: ['src/App.jsx'],
 };
 
 function ComponentDetails() {
-  const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
+  const [activeTab, setActiveTab] = useState('contents'); // save chosen tab: content/dependencies
 
   return (
     <div className="component-details">
@@ -22,21 +21,21 @@ function ComponentDetails() {
 
       <div>
         <button
-          onClick={() => setActiveTab("contents")}
-          disabled={activeTab === "contents"}
+          onClick={() => setActiveTab('contents')}
+          disabled={activeTab === 'contents'}
         >
           Contents
         </button>
 
         <button
-          onClick={() => setActiveTab("dependencies")}
-          disabled={activeTab === "dependencies"}
+          onClick={() => setActiveTab('dependencies')}
+          disabled={activeTab === 'dependencies'}
         >
           Dependencies
         </button>
       </div>
 
-      {activeTab === "contents" ? (
+      {activeTab === 'contents' ? (
         <section>
           <h2>Functions</h2>
           <ul>

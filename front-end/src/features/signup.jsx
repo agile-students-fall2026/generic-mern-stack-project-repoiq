@@ -1,9 +1,7 @@
-import "./signup.css";
-
 function Signup({ setPage }) {
   return (
     <div className="signup">
-      <button className="signup-back" onClick={() => setPage("welcome")}>
+      <button className="signup-back" onClick={() => setPage('welcome')}>
         &lt;
       </button>
 
@@ -25,7 +23,9 @@ function Signup({ setPage }) {
         <input type="password" placeholder="Password" />
         <span>👁️</span>
       </div>
-      <p className="signup-hint">At least 8 characters with a number and a letter</p>
+      <p className="signup-hint">
+        At least 8 characters with a number and a letter
+      </p>
 
       <div className="signup-input-box">
         <span>🔒</span>
@@ -33,17 +33,25 @@ function Signup({ setPage }) {
         <span>👁️</span>
       </div>
 
-      <button className="signup-btn signup-btn-gray" onClick={() => setPage("home")}>
+      <button
+        className="signup-btn signup-btn-gray"
+        onClick={() => setPage('home')}
+      >
         Sign Up
       </button>
 
       <p className="signup-center">——— or continue with ———</p>
 
-      <button className="signup-btn signup-btn-outline" onClick={()=>setPage("github")}>Continue with GitHub</button>
+      <button
+        className="signup-btn signup-btn-outline"
+        onClick={() => setPage('github')}
+      >
+        Continue with GitHub
+      </button>
 
       <p className="signup-center">
-        Already have an account?{" "}
-        <span onClick={() => setPage("login")}>Log in</span>
+        Already have an account?{' '}
+        <span onClick={() => setPage('login')}>Log in</span>
       </p>
     </div>
   );

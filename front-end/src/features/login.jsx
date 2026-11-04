@@ -1,9 +1,7 @@
-import "./login.css";
-
 function Login({ setPage }) {
   return (
     <div className="login">
-      <button className="login-back" onClick={() => setPage("welcome")}>
+      <button className="login-back" onClick={() => setPage('welcome')}>
         &lt;
       </button>
 
@@ -12,7 +10,7 @@ function Login({ setPage }) {
 
       <div className="login-tabs">
         <button className="login-tab">Log In</button>
-        <button className="login-tab" onClick={() => setPage("signup")}>
+        <button className="login-tab" onClick={() => setPage('signup')}>
           Sign Up
         </button>
       </div>
@@ -29,17 +27,22 @@ function Login({ setPage }) {
 
       <p className="login-right">Forgot password?</p>
 
-      <button className="login-btn login-btn-gray" onClick={() => setPage("home")}>
+      <button
+        className="login-btn login-btn-gray"
+        onClick={() => setPage('home')}
+      >
         Log In
       </button>
 
       <p className="login-center">——— or continue with ———</p>
 
-      <button className="login-btn login-btn-outline">continue with Github</button>
+      <button className="login-btn login-btn-outline">
+        continue with Github
+      </button>
 
       <p className="login-center">
-        Don't have an account?{" "}
-        <span onClick={() => setPage("signup")}>Sign up</span>
+        Don't have an account?{' '}
+        <span onClick={() => setPage('signup')}>Sign up</span>
       </p>
     </div>
   );
