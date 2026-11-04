@@ -18,11 +18,11 @@ function DependencyDetails({ setPage }) {
       <BackButton setPage={setPage} to="componentdetails" />
       <h1>Dependencies</h1>
 
-      <button onClick={() => setTab("depends")}>
+      <button onClick={() => setTab("depends")} disabled={tab === "depends"}>
         Depends on ({sampleDependsOn.length})
       </button>
 
-      <button onClick={() => setTab("used")}>
+      <button onClick={() => setTab("used")} disabled={tab === "used"}>
         Used by ({sampleUsedBy.length})
       </button>
 
