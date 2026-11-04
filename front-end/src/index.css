@@ -1,25 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=JetBrains+Mono&display=swap');
-
 :root {
-  --primary: #647ac2;
-  --primary-hover: #0c1328;
-  --accent: #38bdf8;
-  --secondary: #e0f2fe;
-
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --background: #ffffff;
-  --surface: #f8fafc;
-
-  --success: #16a34a;
-  --error: #dc2626;
-
-  --radius: 8px;
-  --radius-card: 12px;
-
-  --font: 'Poppins', Arial, sans-serif;
-  --font-code: 'JetBrains Mono', monospace;
+  --primary: #3f5fb5;
+  --text: #222;
+  --muted: #666;
+  --border: #ddd;
 }
 
 body {
@@ -28,78 +11,24 @@ body {
   padding: 18px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
-  color: #222;
+
+  line-height: 1.4;
+  color: var(--text);
 }
 
 h1 {
   font-size: 22px;
-  margin: 0 0 4px;
+
+  margin: 0 0 14px;
 }
-h2 {
-  font-size: 15px;
-  margin: 18px 0 4px;
+
+h2,
+h3,
+h4 {
+  font-size: 14px;
+  margin: 20px 0 10px;
 }
+
 p {
   margin: 0;
-}
-
-input {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 7px 8px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  padding: 5px 9px;
-  margin: 0 4px 4px 0;
-  border: none;
-  border-radius: 4px;
-  background: #eee;
-  color: #222;
-  cursor: pointer;
-}
-
-button.primary {
-  background: #3f5fb5;
-  color: white;
-}
-
-button:disabled {
-  background: #3f5fb5;
-  color: white;
-}
-
-button.primary {
-  display: block;
-  width: 100%;
-  padding: 9px;
-  margin-top: 14px;
-}
-
-.link {
-  color: #3f5fb5;
-  cursor: pointer;
-}
-
-.small {
-  font-size: 12px;
-  color: #666;
-}
-
-.row {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.nav {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.add-error {
-  color: red;
 }
