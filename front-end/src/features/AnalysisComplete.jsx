@@ -3,7 +3,7 @@ function AnalysisComplete({ setPage }) {
     <div className="complete">
       <h1>✓</h1>
       <h1>Analysis Complete</h1>
-      <p>We successfully analysed your repository</p>
+      <p className="small">We successfully analysed your repository</p>
 
       <div className="stats">
         <div>342 Files</div>
@@ -17,9 +17,13 @@ function AnalysisComplete({ setPage }) {
         <p>https://github.com/username/repo</p>
       </div>
 
-      <button onClick={() => setPage('map')}>Explore Codebase</button>
+      <button className="primary" onClick={() => setPage('map')}>
+        Explore Codebase
+      </button>
 
-      <button onClick={() => setPage('progress')}>Remove Repository</button>
+      <button className="outline" onClick={() => setPage('home')}>
+        Remove Repository
+      </button>
     </div>
   );
 }

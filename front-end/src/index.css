@@ -270,3 +270,20 @@ button.outline {
   font-size: 12px;
   color: #666;
 }
+
+.popup {
+  margin-top: 80px;
+  padding: 18px;
+  text-align: center;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.popup p {
+  margin-bottom: 14px;
+}
