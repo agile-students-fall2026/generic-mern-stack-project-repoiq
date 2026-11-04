@@ -39,3 +39,10 @@ export const sampleDependsOn = [
     { name: "example2.jsx", path: "src/data/sample.jsx" },
   ];
 export const sampleUsedBy = [{ name: "example3.jsx", path: "src/sample2.jsx" }];
+
+export const searchResDetailsSample = {
+  name: "func1",
+  type: "function",
+  path: "src/example",
+  usedIn: ["examplepath1", "examplepath2", "examplepath3"],
+};
