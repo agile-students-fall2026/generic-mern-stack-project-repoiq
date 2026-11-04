@@ -1,25 +1,9 @@
 import { useState } from "react";
 import "./SearchResults.css";
+import { sampleRes } from "../data/mockData.js";
 import NavBar from "./NavBar.jsx";
 
-
-// replace later when we have real data
-const sampleRes = [
-  {
-    id: 1,
-    name: "App.jsx",
-    path: "src/App.jsx",
-    type: "File",
-  },
-  {
-    id: 2,
-    name: "searchRepository",
-    path: "src/search.js",
-    type: "Function",
-  },
-];
-
-function SearchResults({setPage}) {
+function SearchResults({ setPage }) {
   const [searchText, setSearchText] = useState(""); // store input text
   const [selectedType, setSelectedType] = useState("All"); // store selected category
 
