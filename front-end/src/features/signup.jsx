@@ -1,3 +1,4 @@
+import { EyeOff, Lock, Mail, User } from 'lucide-react';
 function Signup({ setPage }) {
   return (
     <div className="signup">
@@ -9,26 +10,24 @@ function Signup({ setPage }) {
       <p className="intro">Join RepoiQ and start exploring any codebase.</p>
 
       <div className="signup-input-box">
-        <span>👤</span>
+        <User size={18} />
         <input type="text" placeholder="Full name" />
       </div>
 
       <div className="signup-input-box">
-        <span>✉️</span>
+        <Mail size={18} />
         <input type="email" placeholder="Email address" />
       </div>
 
       <div className="signup-input-box">
-        <span>🔒</span>
+        <Lock size={18} />
         <input type="password" placeholder="Password" />
-        <span>👁️</span>
       </div>
       <p className="small">At least 8 characters with a number and a letter</p>
 
       <div className="signup-input-box">
-        <span>🔒</span>
+        <Lock size={18} />
         <input type="password" placeholder="Confirm Password" />
-        <span>👁️</span>
       </div>
 
       <button className="primary" onClick={() => setPage('home')}>
