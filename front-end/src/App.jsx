@@ -14,9 +14,13 @@ import Login from './features/login.jsx';
 import Signup from './features/signup.jsx';
 import Home from './features/Home.jsx';
 import AddRepository from './features/AddRepository.jsx';
+import Repositories from './features/Repositories.jsx';
 
 function App() {
   const [page, setPage] = useState('welcome');
+  function addRepository(url) {
+    setRepositories([...repositories, url]);
+  }
   if (page === 'welcome') {
     return <Welcome setPage={setPage} />;
   }
