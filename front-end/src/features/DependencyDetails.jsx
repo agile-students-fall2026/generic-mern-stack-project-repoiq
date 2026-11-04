@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BackButton from "./BackButton.jsx";
 import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
 function DependencyDetails({ setPage }) {
@@ -21,6 +22,7 @@ function DependencyDetails({ setPage }) {
 
   return (
     <div className="dependencies">
+      <BackButton setPage={setPage} to="componentdetails" />
       <h1>Dependencies</h1>
 
       <button onClick={() => setTab("depends")}>
