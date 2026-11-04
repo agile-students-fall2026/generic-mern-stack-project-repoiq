@@ -292,3 +292,8 @@ button.outline {
   display: block;
   margin-bottom: 8px;
 }
+
+.center {
+  margin: 14px 0;
+  text-align: center;
+}
