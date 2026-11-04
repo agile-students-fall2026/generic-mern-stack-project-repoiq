@@ -114,3 +114,7 @@ li,
   gap: 13px;
   margin: 16px 0;
 }
+
+.add-error {
+  color: red;
+}
