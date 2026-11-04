@@ -9,12 +9,18 @@ const sampleRes = [
     name: 'App.jsx',
     path: 'src/App.jsx',
     type: 'File',
+    repo: 'repo-iq',
+    lastEdited: '2 days ago',
+    usedIn: ['src/main.jsx'],
   },
   {
     id: 2,
     name: 'searchRepository',
     path: 'src/search.js',
     type: 'Function',
+    repo: 'repo-iq',
+    lastEdited: '5 days ago',
+    usedIn: ['src/App.jsx', 'src/features/Home.jsx'],
   },
 ];
 

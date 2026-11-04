@@ -18,6 +18,7 @@ import Repositories from './features/Repositories.jsx';
 
 function App() {
   const [page, setPage] = useState('welcome');
+  const [selectedResult, setSelectedResult] = useState(null);
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
@@ -51,11 +52,13 @@ function App() {
   }
 
   if (page === 'searchresult') {
-    return <SearchResults setPage={setPage} />;
+    return (
+      <SearchResults setPage={setPage} setSelectedResult={setSelectedResult} />
+    );
   }
 
   if (page === 'searchresultdetails') {
-    return <SearchResultsDetails setPage={setPage} />;
+    return <SearchResultsDetails setPage={setPage} result={selectedResult} />;
   }
 
   if (page === 'dependencydetails') {
