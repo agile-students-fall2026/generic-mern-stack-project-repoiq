@@ -32,3 +32,45 @@ h4 {
 p {
   margin: 0;
 }
+
+input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font: inherit;
+}
+
+button {
+  padding: 0;
+  margin: 0 10px 8px 0;
+  border: none;
+  background: none;
+  color: #3f5fb5;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #222;
+  font-weight: bold;
+  cursor: default;
+}
+
+button.primary {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin: 8px 0;
+  border-radius: 4px;
+  background: #3f5fb5;
+  color: white;
+}
+
+button.primary:disabled {
+  font-weight: normal;
+  opacity: 0.5;
+}
