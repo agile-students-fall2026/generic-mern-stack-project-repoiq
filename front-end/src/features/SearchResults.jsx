@@ -45,6 +45,7 @@ function SearchResults({ setPage }) {
         <input
           id="search-input"
           type="search"
+          placeholder="Search files and functions"
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
         />
@@ -82,17 +83,14 @@ function SearchResults({ setPage }) {
         </button>
       </div>
 
-      <h2>Results</h2>
-
       {filteredRes.length === 0 ? (
         <p>No results found.</p>
       ) : (
         <ul>
           {filteredRes.map((result) => (
-            <li key={result.id}>
-              <h3>{result.name}</h3>
-              <p>{result.path}</p>
-              <p>Type: {result.type}</p>
+            <li key={result.id} className="row">
+              <p>{result.name}</p>
+              <p className="small">{result.path}</p>
             </li>
           ))}
         </ul>
