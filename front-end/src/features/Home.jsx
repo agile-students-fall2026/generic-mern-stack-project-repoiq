@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
@@ -7,7 +8,6 @@ function Home({ setPage, setSelectedRepo, removedRepos = [] }) {
   const repositories = sampleRepositories.filter(
     (repo) => !removedRepos.includes(repo.name)
   );
-function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
   return (
     <div className="home">
       <div className="home-header">
@@ -25,13 +25,13 @@ function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' && search.trim()) {
-            setPage('repositories');
+            setPage('searchresult');
           }
         }}
       />
       <div className="recent-header">
         <h3>Recent Repositories</h3>
-        <button type="button" onClick={() => setPage('repositories')}>
+        <button type="button" onClick={() => setPage('searchresult')}>
           View all
         </button>
       </div>
@@ -45,7 +45,6 @@ function Home({ setPage, setSelectedRepo, setRepoBack, search, setSearch }) {
               key={repo.id}
               onClick={() => {
                 setSelectedRepo(repo);
-                setRepoBack('home');
                 setPage('repository-details');
               }}
             >

@@ -5,7 +5,7 @@ import NavBar from './NavBar.jsx';
 import { Minus, Plus, RotateCcw } from 'lucide-react';
 import './InteractiveMap.css';
 
-function InteractiveMap({ setPage, selectedRepo }) {
+function InteractiveMap({ setPage }) {
   const [zoom, setZoom] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -30,19 +30,13 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
           return null;
         })}
-        <button type="button" onClick={() => setPage('componentdetails')}>
-          View component details
-        </button>
       </div>
     );
   }
 
   return (
     <div className="phone">
-      <BackButton
-        setPage={setPage}
-        to={selectedRepo ? 'repository-details' : 'home'}
-      />
+      <BackButton setPage={setPage} to="complete" />
       <h2>repository-name</h2>
 
       <input
