@@ -4,9 +4,15 @@ function NavBar({ setPage }) {
       <div className="navbar-space"></div>
 
       <div className="navbar">
-        <span onClick={() => setPage('home')}>🏠</span>
-        <span onClick={() => setPage('searchresult')}>🔍</span>
-        <span onClick={() => setPage('map')}>🔗</span>
+        <span className="link" onClick={() => setPage('home')}>
+          🏠
+        </span>
+        <span className="link" onClick={() => setPage('searchresult')}>
+          🔍
+        </span>
+        <span className="link" onClick={() => setPage('map')}>
+          🔗
+        </span>
       </div>
     </div>
   );
