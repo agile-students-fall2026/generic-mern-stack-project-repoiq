@@ -19,6 +19,11 @@ function App() {
   const [page, setPage] = useState('welcome');
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
+  const [removedRepos, setRemovedRepos] = useState([]);
+
+  function removeRepository(name) {
+    setRemovedRepos((prev) => [...prev, name]);
+  }
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
@@ -33,7 +38,7 @@ function App() {
     return <Signup setPage={setPage} />;
   }
   if (page === 'home') {
-    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} />;
+    return <Home setPage={setPage} setSelectedRepo={setSelectedRepo} removedRepos={removedRepos} />;
   }
 
   if (page === 'add-repository') {
@@ -73,7 +78,7 @@ function App() {
   }
 
   if (page === 'analysis-results') {
-    return <AnalysisResults setPage={setPage} selectedRepo={selectedRepo} />;
+    return <AnalysisResults setPage={setPage} selectedRepo={selectedRepo} removeRepository={removeRepository} />;
   }
 }
 export default App;
