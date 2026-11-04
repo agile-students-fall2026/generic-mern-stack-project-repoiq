@@ -1,28 +1,7 @@
 import { useState } from 'react';
 
 import NavBar from './NavBar.jsx';
-
-// replace later when we have real data
-const sampleRes = [
-  {
-    id: 1,
-    name: 'App.jsx',
-    path: 'src/App.jsx',
-    type: 'File',
-    repo: 'repo-iq',
-    lastEdited: '2 days ago',
-    usedIn: ['src/main.jsx'],
-  },
-  {
-    id: 2,
-    name: 'searchRepository',
-    path: 'src/search.js',
-    type: 'Function',
-    repo: 'repo-iq',
-    lastEdited: '5 days ago',
-    usedIn: ['src/App.jsx', 'src/features/Home.jsx'],
-  },
-];
+import { nodes } from '../data/mockData';
 
 function SearchResults({ setPage, setSelectedResult }) {
   const [searchText, setSearchText] = useState(''); // store input text
@@ -31,7 +10,7 @@ function SearchResults({ setPage, setSelectedResult }) {
   // create array that stores res matching search
   const filteredRes = [];
 
-  for (const result of sampleRes) {
+  for (const result of nodes) {
     const matchesText =
       result.name.includes(searchText) || result.path.includes(searchText);
 
