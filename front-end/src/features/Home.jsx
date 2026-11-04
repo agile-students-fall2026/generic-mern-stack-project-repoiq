@@ -5,7 +5,7 @@ import EmptyState from "./EmptyState.jsx";
 
 function Home({ setPage, setSelectedRepo }) {
   const [search, setSearch] = useState("");
-  const repositoryCount = 0;
+  const repositoryCount = 3;
   return (
     <div className="home">
       <div className="home-header">

@@ -5,12 +5,8 @@ function EmptyState({ setPage }) {
     <div className="empty-state">
       <h2>No Repositories Yet</h2>
       <p>Add your first repository to get started.</p>
-
-      <button
-        type="button"
-        onClick={() => setPage("add-repository")}
-      >
-        + Add Repository
+      <button onClick={() => setPage("add-repository")}>
+        Add Repository
       </button>
     </div>
   );

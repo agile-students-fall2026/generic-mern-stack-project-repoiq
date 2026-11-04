@@ -1,23 +1,25 @@
-
 .empty-state {
-  padding: 30px 20px;
+  padding: 20px;
+}
+
+.empty-card {
+  padding: 20px 10px;
+  border: 1px solid #888;
   text-align: center;
 }
 
-.empty-state h2 {
-  margin-bottom: 15px;
-  font-size: 22px;
+.empty-card h2 {
+  font-size: 16px;
+  font-weight: normal;
 }
 
-.empty-state p {
-  color: #aaa;
-  margin: 10px 0;
+.empty-card p {
+  font-size: 12px;
+  margin: 20px 0;
 }
 
-.empty-state button {
-  margin-top: 25px;
-  padding: 12px 25px;
-  border: 1px solid #888;
-  border-radius: 5px;
+.empty-card button {
+  width: 100%;
+  padding: 8px;
   cursor: pointer;
 }
