@@ -30,6 +30,9 @@ function InteractiveMap({ setPage }) {
 
           return null;
         })}
+        <button type="button" onClick={() => setPage('componentdetails')}>
+          View component details
+        </button>
       </div>
     );
   }
