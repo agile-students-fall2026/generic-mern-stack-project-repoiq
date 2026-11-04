@@ -21,14 +21,16 @@ function AddRepository({ setPage }) {
         <button type="button" onClick={() => setPage('home')}>
           ←
         </button>
-        <h2>Add Repository</h2>
+        <h1>Add Repository</h1>
       </div>
 
-      <div className="add-image"></div>
+      <div className="placeholder-img"></div>
 
       <h3>Add a Github Repository</h3>
 
-      <p>Paste the repository URL or link your Github account</p>
+      <p className="intro">
+        Paste the repository URL or link your Github account
+      </p>
 
       <input
         type="text"
@@ -42,18 +44,21 @@ function AddRepository({ setPage }) {
 
       {error && <p className="add-error">{error}</p>}
 
-      <button type="button" onClick={handleAnalyze} disabled={!url.trim()}>
-        Analyse Repository
+      <button
+        className="primary"
+        type="button"
+        onClick={handleAnalyze}
+        disabled={!url.trim()}
+      >
+        {' '}
+        Add Repository
       </button>
 
-      <div className="add-divider">
-        <hr />
-        <span>OR</span>
-        <hr />
-      </div>
-
+      <p className="center">OR</p>
+      <button className="outline" type="button">
+        Connect to GitHub
+      </button>
       <NavBar setPage={setPage} />
-      <button type="button">Connect to GitHub</button>
     </div>
   );
 }

@@ -205,3 +205,19 @@ button.outline {
 .navbar span {
   cursor: pointer;
 }
+
+.add-repository-page {
+  text-align: center;
+}
+
+.add-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.add-header h1,
+.add-header button {
+  margin: 0;
+}
