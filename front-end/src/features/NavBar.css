@@ -3,7 +3,7 @@
   justify-content: space-around;
   padding: 16px;
   font-size: 24px;
-  background-color: var(--secondary);
+  background-color: var(--primary);
   border-top: 1px solid var(--border);
   position: fixed;
   bottom: 0;
