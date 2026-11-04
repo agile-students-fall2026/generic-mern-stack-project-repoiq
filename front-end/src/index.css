@@ -74,3 +74,7 @@ button.primary:disabled {
   font-weight: normal;
   opacity: 0.5;
 }
+
+.link {
+  color: #3f5fb5;
+}
