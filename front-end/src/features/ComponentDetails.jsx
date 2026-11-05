@@ -11,8 +11,10 @@ function ComponentDetails({ setPage }) {
       <BackButton setPage={setPage} to="map" />
       <h1>Component Details</h1>
 
-      <h2>{componentDetailSample.name}</h2>
-      <p>{componentDetailSample.path}</p>
+      <div className="list-item">
+        <h2>{componentDetailSample.name}</h2>
+        <p>{componentDetailSample.path}</p>
+      </div>
 
       <div className="tabs">
         <button
@@ -35,7 +37,7 @@ function ComponentDetails({ setPage }) {
           <h2>Functions</h2>
           <ul>
             {componentDetailSample.functions.map((name) => (
-              <li key={name}>{name}</li>
+              <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
 
@@ -43,7 +45,7 @@ function ComponentDetails({ setPage }) {
 
           <ul>
             {componentDetailSample.classes.map((name) => (
-              <li key={name}>{name}</li>
+              <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
         </section>

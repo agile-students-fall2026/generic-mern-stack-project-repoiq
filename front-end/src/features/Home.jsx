@@ -46,7 +46,7 @@ function Home({
         <div className="repository-list">
           {repositories.map((repo) => (
             <div
-              className="repository"
+              className="repository list-item"
               key={repo.id}
               onClick={() => {
                 setSelectedRepo(repo);

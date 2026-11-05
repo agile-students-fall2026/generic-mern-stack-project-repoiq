@@ -37,7 +37,7 @@ function Repositories({
           {repositories.map((repo) => (
             <li
               key={repo.id}
-              className="row"
+              className="list-item"
               onClick={() => {
                 setSelectedRepo(repo);
                 setRepoBack('repositories');
