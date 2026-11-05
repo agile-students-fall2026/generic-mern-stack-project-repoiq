@@ -71,7 +71,7 @@ function ComponentDetails({ setPage }) {
       )}
 
       {/*add later*/}
-      <button>View source on GitHub</button>
+      <button className="outline" type="button">View source on GitHub</button>
 
       <NavBar setPage={setPage}/>
     </div>
