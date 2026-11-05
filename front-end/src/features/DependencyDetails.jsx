@@ -28,7 +28,7 @@ function DependencyDetails({ setPage }) {
       </button>
 
       {files.map((file) => (
-        <div className="file" key={file.path}>
+        <div className="list-item" key={file.path}>
           <p>{file.name}</p>
           <p className="path">{file.path}</p>
         </div>
