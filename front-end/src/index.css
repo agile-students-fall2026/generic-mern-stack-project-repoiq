@@ -291,3 +291,8 @@ button.outline {
   margin: 14px 0;
   text-align: center;
 }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
