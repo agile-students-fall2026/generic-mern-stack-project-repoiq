@@ -74,7 +74,7 @@ function SearchResults({ setPage, setSelectedResult }) {
       ) : (
         <ul>
           {filteredRes.map((result) => (
-            <li key={result.id} className="row">
+            <li key={result.id} className="list-item">
               <button
                 onClick={() => {
                   setSelectedResult(result);
