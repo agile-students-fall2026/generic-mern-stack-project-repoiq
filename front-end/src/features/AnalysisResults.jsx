@@ -56,10 +56,11 @@ function AnalysisResults({ setPage, selectedRepo, removeRepository }) {
       </div>
 
       <div className="analysis-actions">
-        <button type="button" onClick={() => setPage('progress')}>
+        <button className="primary" type="button" onClick={() => setPage('progress')}>
           Re-Analyze
         </button>
         <button
+        className="outline"
         type="button"
         onClick={() => {
           if (selectedRepo && window.confirm("Are you sure you want to remove this repository?")) {
