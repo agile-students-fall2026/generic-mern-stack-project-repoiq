@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BackButton from "./BackButton.jsx";
+import NavBar from './NavBar.jsx';
 import { componentDetailSample } from "../data/mockData.js";
 
 function ComponentDetails({ setPage }) {
@@ -69,6 +70,8 @@ function ComponentDetails({ setPage }) {
 
       {/*add later*/}
       <button>View source on GitHub</button>
+
+      <NavBar setPage={setPage}/>
     </div>
   );
 }
