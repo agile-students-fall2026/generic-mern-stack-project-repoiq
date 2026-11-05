@@ -146,6 +146,17 @@ button.outline {
   margin-bottom: 16px;
 }
 
+.home-logo {
+  width: 48px;
+  height: 48px;
+}
+
+.home-user {
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+}
+
 .home-header h1,
 .home-header h2 {
   margin: 0;
@@ -317,4 +328,10 @@ button.outline {
   padding: 12px;
   margin-bottom: 12px;
   border-radius: 4px;
+}
+
+.repo-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
 }

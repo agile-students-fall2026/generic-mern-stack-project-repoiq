@@ -1,6 +1,9 @@
 import NavBar from './NavBar.jsx';
 import EmptyState from './EmptyState.jsx';
 import { sampleRepositories } from '../data/mockData.js';
+import repoLogo from '../assets/repo-logo.png';
+import userIcon from '../assets/user-icon.png';
+import { CodeXml } from 'lucide-react';
 
 function Home({
   setPage,
@@ -16,9 +19,9 @@ function Home({
   return (
     <div className="home">
       <div className="home-header">
-        <div className="logo-placeholder"></div>
+        <img src={repoLogo} alt="RepoIQ Logo" className="home-logo" />
         <h1>RepoIQ</h1>
-        <div className="user-placeholder"></div>
+        <img src={userIcon} alt="User Profile" className="home-user" />
       </div>
       <h2>Good morning, User</h2>{' '}
       {/* User's name should be dynamically inserted here */}
@@ -54,7 +57,7 @@ function Home({
                 setPage('repository-details');
               }}
             >
-              <div className="repo-placeholder"></div>
+              <CodeXml size={28} className="repo-icon" />
               <div>
                 <h4>{repo.name}</h4>
                 <p className="small">
