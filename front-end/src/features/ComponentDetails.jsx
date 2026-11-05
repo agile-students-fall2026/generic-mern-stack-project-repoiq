@@ -66,7 +66,7 @@ function ComponentDetails({ setPage }) {
             ))}
           </ul>
 
-          <button onClick={() => setPage('dependencydetails')}>View all dependencies</button>
+          <button className="primary" onClick={() => setPage('dependencydetails')}>View all dependencies</button>
         </section>
       )}
 
