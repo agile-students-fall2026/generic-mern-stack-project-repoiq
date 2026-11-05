@@ -1,5 +1,6 @@
 import './RepositoryDetails.css';
 import BackButton from './BackButton.jsx';
+import NavBar from './NavBar.jsx';
 
 function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
   return (
@@ -29,6 +30,7 @@ function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
         </button>
       </div>
       <p>Repository description goes here.</p>
+      <NavBar setPage={setPage}/>
     </div>
   );
 }

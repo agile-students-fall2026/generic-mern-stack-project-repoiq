@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BackButton from "./BackButton.jsx";
+import NavBar from './NavBar.jsx';
 import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
 function DependencyDetails({ setPage }) {
@@ -32,6 +33,7 @@ function DependencyDetails({ setPage }) {
           <p className="path">{file.path}</p>
         </div>
       ))}
+      <NavBar setPage={setPage}/>
     </div>
   );
 }
