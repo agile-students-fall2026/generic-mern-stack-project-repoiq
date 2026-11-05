@@ -10,8 +10,6 @@ function AnalysisResults({ setPage, selectedRepo, removeRepository }) {
         <h2>Repository Analysis Details</h2>
       </div>
 
-      <h2>Repository Analysis Details</h2>
-
       <div className="analysis-summary">
         <div className="analysis-repo-header">
           <div className="analysis-repo-icon"></div>
