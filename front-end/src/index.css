@@ -35,7 +35,7 @@ p {
 
 input {
   display: block;
-  width: 95%;
+  width: 100%;
   box-sizing: border-box;
   padding: 7px 8px;
   margin-bottom: 8px;
@@ -305,6 +305,7 @@ button.outline {
   border: 1px solid #ddd;
   background: white;
   color: #222;
+  border-radius: 4px;
 }
 
 .tabs button:disabled {
@@ -315,4 +316,5 @@ button.outline {
   border: 1px solid #ddd;
   padding: 12px;
   margin-bottom: 12px;
+  border-radius: 4px;
 }

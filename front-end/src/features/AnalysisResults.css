@@ -106,19 +106,3 @@
   color: inherit;
   cursor: pointer;
 }
-
-.analysis-actions button {
-  width: 100%;
-  border: 1px solid #888;
-  border-radius: 0;
-}
-
-.analysis-actions button:first-child {
-  background: #555;
-  color: white;
-}
-
-.analysis-actions button:last-child {
-  background: transparent;
-  color: inherit;
-}

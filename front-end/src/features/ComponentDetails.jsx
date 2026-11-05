@@ -66,12 +66,12 @@ function ComponentDetails({ setPage }) {
             ))}
           </ul>
 
-          <button onClick={() => setPage('dependencydetails')}>View all dependencies</button>
+          <button className="primary" onClick={() => setPage('dependencydetails')}>View all dependencies</button>
         </section>
       )}
 
       {/*add later*/}
-      <button>View source on GitHub</button>
+      <button className="outline" type="button">View source on GitHub</button>
 
       <NavBar setPage={setPage}/>
     </div>
