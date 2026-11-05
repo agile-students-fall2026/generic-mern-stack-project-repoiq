@@ -296,3 +296,8 @@ button.outline {
   display: flex;
   gap: 8px;
 }
+
+.tabs button{
+  flex: 1;
+  margin: 0;
+}
