@@ -305,3 +305,7 @@ button.outline {
   background: white;
   color: #222;
 }
+
+.tabs button:disabled {
+  background: #ddd
+}
