@@ -11,8 +11,10 @@ function ComponentDetails({ setPage }) {
       <BackButton setPage={setPage} to="map" />
       <h1>Component Details</h1>
 
-      <h2>{componentDetailSample.name}</h2>
-      <p>{componentDetailSample.path}</p>
+      <div className="list-item">
+        <h2>{componentDetailSample.name}</h2>
+        <p>{componentDetailSample.path}</p>
+      </div>
 
       <div className="tabs">
         <button
