@@ -35,7 +35,7 @@ function ComponentDetails({ setPage }) {
           <h2>Functions</h2>
           <ul>
             {componentDetailSample.functions.map((name) => (
-              <li key={name}>{name}</li>
+              <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
 
@@ -43,7 +43,7 @@ function ComponentDetails({ setPage }) {
 
           <ul>
             {componentDetailSample.classes.map((name) => (
-              <li key={name}>{name}</li>
+              <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
         </section>
