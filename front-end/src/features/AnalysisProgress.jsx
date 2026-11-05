@@ -99,7 +99,7 @@ function AnalysisProgress({ setPage }) {
         </div>
       </div>
 
-      <button onClick={() => setError(true)}>Cancel Analysis</button>
+      <button className="outline" onClick={() => setError(true)}>Cancel Analysis</button>
       <NavBar setPage={setPage} />
     </div>
   );

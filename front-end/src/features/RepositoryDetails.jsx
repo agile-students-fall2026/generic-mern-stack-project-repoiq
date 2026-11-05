@@ -14,18 +14,18 @@ function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
         <p>Analysis status: {selectedRepo?.status || 'Unknown'}</p>
       </div>
       <div className="repository-actions">
-        <button type="button" onClick={() => setPage('map')}>
+        <button className="outline" type="button" onClick={() => setPage('map')}>
           View Code Map
         </button>
 
-        <button type="button" onClick={() => setPage('analysis-results')}>
+        <button className="outline" type="button" onClick={() => setPage('analysis-results')}>
           View Analysis Results
         </button>
 
-        <button type="button" onClick={() => setPage('progress')}>
+        <button className="outline" type="button" onClick={() => setPage('progress')}>
           Re-Analyse
         </button>
-        <button type="button" onClick={() => setPage('searchresult')}>
+        <button className="outline" type="button" onClick={() => setPage('searchresult')}>
           Search Repository
         </button>
       </div>

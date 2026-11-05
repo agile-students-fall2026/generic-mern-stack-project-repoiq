@@ -30,7 +30,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
           return null;
         })}
-        <button type="button" onClick={() => setPage('componentdetails')}>
+        <button className="outline" type="button" onClick={() => setPage('componentdetails')}>
           View component details
         </button>
       </div>
