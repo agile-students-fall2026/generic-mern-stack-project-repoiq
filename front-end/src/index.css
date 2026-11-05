@@ -300,4 +300,8 @@ button.outline {
 .tabs button{
   flex: 1;
   margin: 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  color: #222;
 }
