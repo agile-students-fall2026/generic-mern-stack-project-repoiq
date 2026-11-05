@@ -291,3 +291,21 @@ button.outline {
   margin: 14px 0;
   text-align: center;
 }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tabs button{
+  flex: 1;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  color: #222;
+}
+
+.tabs button:disabled {
+  background: #ddd
+}

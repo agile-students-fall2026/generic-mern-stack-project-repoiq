@@ -13,7 +13,7 @@ function ComponentDetails({ setPage }) {
       <h2>{componentDetailSample.name}</h2>
       <p>{componentDetailSample.path}</p>
 
-      <div>
+      <div className="tabs">
         <button
           onClick={() => setActiveTab("contents")}
           disabled={activeTab === "contents"}

@@ -39,7 +39,7 @@ function SearchResults({ setPage, setSelectedResult }) {
         <button onClick={() => setSearchText('')}>Clear</button>
       </div>
 
-      <div>
+      <div className="tabs">
         <button
           onClick={() => setSelectedType('All')}
           disabled={selectedType === 'All'}
