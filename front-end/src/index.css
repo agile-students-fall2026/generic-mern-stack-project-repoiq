@@ -309,3 +309,9 @@ button.outline {
 .tabs button:disabled {
   background: #ddd
 }
+
+.list-item {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 12px;
+}
