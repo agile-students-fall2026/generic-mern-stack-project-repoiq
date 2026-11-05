@@ -327,3 +327,9 @@ button.outline {
   padding: 12px;
   margin-bottom: 12px;
 }
+
+.repo-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
