@@ -18,8 +18,10 @@ function InteractiveMap({ setPage, selectedRepo }) {
   const [search, setSearch] = useState("");
   const [selectedRepository, setSelectedRepository] = useState(repository.name);
   const repoNodes = nodes.filter((node) => node.repo === selectedRepository);
-  const repoConnections = connections.filter((connection) =>
-    repoNodes.find((node) => node.id === connection.from),
+  const repoConnections = connections.filter(
+    (connection) =>
+      repoNodes.find((node) => node.id === connection.from) &&
+      repoNodes.find((node) => node.id === connection.to),
   );
   function handleRepositoryChange(e) {
     setSelectedRepository(e.target.value);
