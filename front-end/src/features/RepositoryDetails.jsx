@@ -5,8 +5,10 @@ import NavBar from './NavBar.jsx';
 function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
   return (
     <div className="repository-details">
-      <BackButton setPage={setPage} to={repoBack} />
-      <h2>Repository Details</h2>
+      <header className="add-header">
+        <BackButton setPage={setPage} to={repoBack} />
+        <h1>Repository Details</h1>
+      </header>
       <h3>{selectedRepo?.name || 'No repository selected'}</h3>
       <div className="repository-info">
         <p>Language: {selectedRepo?.language || 'Not specified'}</p>
