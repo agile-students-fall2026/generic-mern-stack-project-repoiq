@@ -3,9 +3,11 @@ import BackButton from './BackButton.jsx';
 function Signup({ setPage }) {
   return (
     <div className="signup">
-      <BackButton setPage={setPage} to="welcome" />
-
-      <h1>Create an account</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="welcome" />
+        <h1>Create an account</h1>
+      </header>
+      
       <p className="intro">Join RepoiQ and start exploring any codebase.</p>
 
       <div className="signup-input-box">
