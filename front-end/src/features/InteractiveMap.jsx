@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { nodes, connections } from "../data/mockData";
+import {
+  nodes,
+  connections,
+  repository,
+  sampleRepositories,
+} from "../data/mockData";
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
@@ -11,7 +16,18 @@ function InteractiveMap({ setPage, selectedRepo }) {
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
-
+  const [selectedRepository, setSelectedRepository] = useState(repository.name);
+  const repoNodes = nodes.filter((node) => node.repo === selectedRepository);
+  const repoConnections = connections.filter(
+    (connection) =>
+      repoNodes.find((node) => node.id === connection.from) &&
+      repoNodes.find((node) => node.id === connection.to),
+  );
+  function handleRepositoryChange(e) {
+    setSelectedRepository(e.target.value);
+    setSelected(null);
+    setSearch("");
+  }
   let details = null;
 
   if (selected) {
@@ -19,14 +35,14 @@ function InteractiveMap({ setPage, selectedRepo }) {
       <div className="details">
         <h3>{selected.name}</h3>
         <p>{selected.info}</p>
-        <p>Connections:</p>
+        <p className="connections">Connections:</p>
 
-        {connections.map((c, i) => {
+        {repoConnections.map((c, i) => {
           if (c.from === selected.id)
-            return <p key={i}>{nodes[c.to - 1].name}</p>;
+            return <p key={i}>{repoNodes[c.to - 1].name}</p>;
 
           if (c.to === selected.id)
-            return <p key={i}>{nodes[c.from - 1].name}</p>;
+            return <p key={i}>{repoNodes[c.from - 1].name}</p>;
 
           return null;
         })}
@@ -48,9 +64,16 @@ function InteractiveMap({ setPage, selectedRepo }) {
           setPage={setPage}
           to={selectedRepo ? "repository-details" : "home"}
         />
-        <h1>repository-name</h1>
+        <h1>{selectedRepository}</h1>
       </header>
-
+      <select value={selectedRepository} onChange={handleRepositoryChange}>
+        <option value={repository.name}>{repository.name}</option>
+        {sampleRepositories.map((repo) => (
+          <option key={repo.id} value={repo.name}>
+            {repo.name}
+          </option>
+        ))}
+      </select>
       <input
         placeholder="Search in codebase..."
         value={search}
@@ -58,9 +81,9 @@ function InteractiveMap({ setPage, selectedRepo }) {
       />
 
       <div className="legend">
-        <p className="import">— Imports</p>
-        <p className="call">— Calls</p>
-        <p className="dependency">— Dependencies</p>
+        <p className="import">– Imports</p>
+        <p className="call">– Calls</p>
+        <p className="dependency">– Dependencies</p>
       </div>
 
       <div className="map">
@@ -77,9 +100,11 @@ function InteractiveMap({ setPage, selectedRepo }) {
           <g
             transform={`translate(${x} ${y}) translate(175 225) scale(${zoom}) translate(-175 -225)`}
           >
-            {connections.map((connection, i) => {
-              const from = nodes.find((node) => node.id === connection.from);
-              const to = nodes.find((node) => node.id === connection.to);
+            {repoConnections.map((connection, i) => {
+              const from = repoNodes.find(
+                (node) => node.id === connection.from,
+              );
+              const to = repoNodes.find((node) => node.id === connection.to);
 
               let color = "#d6a66a";
               if (connection.type === "import") color = "#aab1c2";
@@ -98,7 +123,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
               );
             })}
 
-            {nodes.map((node) => (
+            {repoNodes.map((node) => (
               <g key={node.id} onClick={() => setSelected(node)}>
                 <circle
                   cx={node.x}
@@ -112,13 +137,13 @@ function InteractiveMap({ setPage, selectedRepo }) {
                   fill={
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
-                      ? "#e5eaff"
+                      ? "#d8d6d6"
                       : "#ffffff"
                   }
                   stroke={
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
-                      ? "#7188d6"
+                      ? "#828282"
                       : "#cbd1df"
                   }
                   strokeWidth="1.5"
