@@ -39,10 +39,10 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
         {repoConnections.map((c, i) => {
           if (c.from === selected.id)
-            return <p key={i}>{repoNodes[c.to - 1].name}</p>;
+            return <p key={i}>{repoNodes.find((n) => n.id === c.to).name}</p>;
 
           if (c.to === selected.id)
-            return <p key={i}>{repoNodes[c.from - 1].name}</p>;
+            return <p key={i}>{repoNodes.find((n) => n.id === c.from).name}</p>;
 
           return null;
         })}

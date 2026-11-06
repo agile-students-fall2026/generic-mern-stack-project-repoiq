@@ -1,22 +1,23 @@
-import { useState } from 'react';
-import AnalysisProgress from './features/AnalysisProgress.jsx';
-import AnalysisComplete from './features/AnalysisComplete.jsx';
-import InteractiveMap from './features/InteractiveMap.jsx';
-import SearchResults from './features/SearchResults.jsx';
-import SearchResultsDetails from './features/SearchResultDetails.jsx';
-import ComponentDetails from './features/ComponentDetails.jsx';
-import DependencyDetails from './features/DependencyDetails.jsx';
-import Welcome from './features/welcome.jsx';
-import Login from './features/login.jsx';
-import Signup from './features/signup.jsx';
-import Home from './features/Home.jsx';
-import AddRepository from './features/AddRepository.jsx';
-import Repositories from './features/Repositories.jsx';
-import RepositoryDetails from './features/RepositoryDetails.jsx';
-import AnalysisResults from './features/AnalysisResults.jsx';
+import { useState } from "react";
+import AnalysisProgress from "./features/AnalysisProgress.jsx";
+import AnalysisComplete from "./features/AnalysisComplete.jsx";
+import InteractiveMap from "./features/InteractiveMap.jsx";
+import SearchResults from "./features/SearchResults.jsx";
+import SearchResultsDetails from "./features/SearchResultDetails.jsx";
+import ComponentDetails from "./features/ComponentDetails.jsx";
+import DependencyDetails from "./features/DependencyDetails.jsx";
+import Welcome from "./features/welcome.jsx";
+import Login from "./features/login.jsx";
+import Signup from "./features/signup.jsx";
+import Home from "./features/Home.jsx";
+import AddRepository from "./features/AddRepository.jsx";
+import Repositories from "./features/Repositories.jsx";
+import RepositoryDetails from "./features/RepositoryDetails.jsx";
+import AnalysisResults from "./features/AnalysisResults.jsx";
+import Profile from "./features/Profile.jsx";
 
 function App() {
-  const [page, setPage] = useState('welcome');
+  const [page, setPage] = useState("welcome");
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
@@ -24,22 +25,22 @@ function App() {
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
   }
-  const [repoSearch, setRepoSearch] = useState('');
-  const [repoBack, setRepoBack] = useState('home');
+  const [repoSearch, setRepoSearch] = useState("");
+  const [repoBack, setRepoBack] = useState("home");
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
-  if (page === 'welcome') {
+  if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
 
-  if (page === 'login') {
+  if (page === "login") {
     return <Login setPage={setPage} />;
   }
-  if (page === 'signup') {
+  if (page === "signup") {
     return <Signup setPage={setPage} />;
   }
-  if (page === 'home') {
+  if (page === "home") {
     return (
       <Home
         setPage={setPage}
@@ -52,7 +53,7 @@ function App() {
     );
   }
 
-  if (page === 'repositories') {
+  if (page === "repositories") {
     return (
       <Repositories
         setPage={setPage}
@@ -65,39 +66,39 @@ function App() {
     );
   }
 
-  if (page === 'add-repository') {
+  if (page === "add-repository") {
     return <AddRepository setPage={setPage} />;
   }
-  if (page === 'map') {
+  if (page === "map") {
     return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
   }
 
-  if (page === 'progress') {
+  if (page === "progress") {
     return <AnalysisProgress setPage={setPage} />;
   }
 
-  if (page === 'complete') {
+  if (page === "complete") {
     return <AnalysisComplete setPage={setPage} />;
   }
 
-  if (page === 'searchresult') {
+  if (page === "searchresult") {
     return (
       <SearchResults setPage={setPage} setSelectedResult={setSelectedResult} />
     );
   }
 
-  if (page === 'searchresultdetails') {
+  if (page === "searchresultdetails") {
     return <SearchResultsDetails setPage={setPage} result={selectedResult} />;
   }
 
-  if (page === 'dependencydetails') {
+  if (page === "dependencydetails") {
     return <DependencyDetails setPage={setPage} />;
   }
 
-  if (page === 'componentdetails') {
+  if (page === "componentdetails") {
     return <ComponentDetails setPage={setPage} />;
   }
-  if (page === 'repository-details') {
+  if (page === "repository-details") {
     return (
       <RepositoryDetails
         setPage={setPage}
@@ -107,7 +108,7 @@ function App() {
     );
   }
 
-  if (page === 'analysis-results') {
+  if (page === "analysis-results") {
     return (
       <AnalysisResults
         setPage={setPage}
@@ -115,6 +116,10 @@ function App() {
         removeRepository={removeRepository}
       />
     );
+  }
+
+  if (page === "profile") {
+    return <Profile setPage={setPage} />;
   }
 }
 export default App;
