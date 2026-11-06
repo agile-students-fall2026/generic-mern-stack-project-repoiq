@@ -5,9 +5,9 @@ import BackButton from './BackButton.jsx';
 function AnalysisResults({ setPage, selectedRepo, removeRepository }) {
   return (
     <div className="analysis-results">
-      <div className="analysis-header">
+      <div className="add-header">
         <BackButton setPage={setPage} to="repository-details" />
-        <h2>Repository Analysis Details</h2>
+        <h1>Repository Analysis Details</h1>
       </div>
 
       <div className="analysis-summary">
