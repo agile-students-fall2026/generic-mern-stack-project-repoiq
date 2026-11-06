@@ -8,8 +8,10 @@ function ComponentDetails({ setPage }) {
 
   return (
     <div className="component-details">
-      <BackButton setPage={setPage} to="map" />
-      <h1>Component Details</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="map" />
+        <h1>Component Details</h1>
+      </header>
 
       <div className="list-item">
         <h2>{componentDetailSample.name}</h2>

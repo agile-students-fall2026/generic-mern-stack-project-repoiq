@@ -39,11 +39,13 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
   return (
     <div className="phone">
-      <BackButton
-        setPage={setPage}
-        to={selectedRepo ? 'repository-details' : 'home'}
-      />
-      <h2>repository-name</h2>
+      <header className="add-header">
+        <BackButton
+          setPage={setPage}
+          to={selectedRepo ? 'repository-details' : 'home'}
+        />
+        <h1>repository-name</h1>
+      </header>
 
       <input
         placeholder="Search in codebase..."

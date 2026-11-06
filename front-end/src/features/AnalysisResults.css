@@ -87,22 +87,3 @@
   font-size: 22px;
   font-weight: normal;
 }
-
-.analysis-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.analysis-header h2 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.analysis-header button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-}

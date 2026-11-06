@@ -148,7 +148,7 @@ button.outline {
 
 .home-logo {
   width: 48px;
-  height: 48px;
+  height: auto;
 }
 
 .home-user {
@@ -296,6 +296,10 @@ button.outline {
 .back-button {
   display: block;
   margin-bottom: 8px;
+}
+
+.back-button svg {
+  display: block;
 }
 
 .center {

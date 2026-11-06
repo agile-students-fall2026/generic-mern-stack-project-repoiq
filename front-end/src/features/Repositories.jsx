@@ -17,9 +17,11 @@ function Repositories({
   );
   return (
     <div className="repositories">
-      <BackButton setPage={setPage} to="home" />
-
-      <h1>Repositories</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="home" />
+        <h1>Repositories</h1>
+      </header>
+      
       <input
         type="text"
         placeholder="Search repositories..."

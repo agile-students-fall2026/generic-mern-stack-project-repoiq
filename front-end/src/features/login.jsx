@@ -2,8 +2,10 @@ import BackButton from './BackButton.jsx';
 function Login({ setPage }) {
   return (
     <div className="login">
-      <BackButton setPage={setPage} to="welcome" />
-      <h1>Log in</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="welcome" />
+        <h1>Log in</h1>
+      </header>
       <input type="email" placeholder="Email" />
       <input type="password" placeholder="Password" />
       <button className="primary" onClick={() => setPage('home')}>
