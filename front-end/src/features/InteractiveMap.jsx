@@ -81,9 +81,9 @@ function InteractiveMap({ setPage, selectedRepo }) {
       />
 
       <div className="legend">
-        <p className="import">— Imports</p>
-        <p className="call">— Calls</p>
-        <p className="dependency">— Dependencies</p>
+        <p className="import">– Imports</p>
+        <p className="call">– Calls</p>
+        <p className="dependency">– Dependencies</p>
       </div>
 
       <div className="map">
