@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { nodes, connections } from '../data/mockData';
-import BackButton from './BackButton.jsx';
-import NavBar from './NavBar.jsx';
-import { Minus, Plus, RotateCcw } from 'lucide-react';
-import './InteractiveMap.css';
+import { useState } from "react";
+import { nodes, connections } from "../data/mockData";
+import BackButton from "./BackButton.jsx";
+import NavBar from "./NavBar.jsx";
+import { Minus, Plus, RotateCcw } from "lucide-react";
+import "./InteractiveMap.css";
 
 function InteractiveMap({ setPage, selectedRepo }) {
   const [zoom, setZoom] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   let details = null;
 
@@ -30,7 +30,11 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
           return null;
         })}
-        <button className="outline" type="button" onClick={() => setPage('componentdetails')}>
+        <button
+          className="outline"
+          type="button"
+          onClick={() => setPage("componentdetails")}
+        >
           View component details
         </button>
       </div>
@@ -42,7 +46,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
       <header className="add-header">
         <BackButton
           setPage={setPage}
-          to={selectedRepo ? 'repository-details' : 'home'}
+          to={selectedRepo ? "repository-details" : "home"}
         />
         <h1>repository-name</h1>
       </header>
@@ -77,9 +81,9 @@ function InteractiveMap({ setPage, selectedRepo }) {
               const from = nodes.find((node) => node.id === connection.from);
               const to = nodes.find((node) => node.id === connection.to);
 
-              let color = 'orange';
-              if (connection.type === 'import') color = 'gray';
-              if (connection.type === 'call') color = 'blue';
+              let color = "#d6a66a";
+              if (connection.type === "import") color = "#aab1c2";
+              if (connection.type === "call") color = "#7188d6";
 
               return (
                 <line
@@ -89,6 +93,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
                   x2={to.x}
                   y2={to.y}
                   stroke={color}
+                  strokeWidth="1.5"
                 />
               );
             })}
@@ -107,13 +112,26 @@ function InteractiveMap({ setPage, selectedRepo }) {
                   fill={
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
-                      ? 'gray'
-                      : 'lightgray'
+                      ? "#e5eaff"
+                      : "#ffffff"
                   }
-                  stroke="gray"
+                  stroke={
+                    search &&
+                    node.name.toLowerCase().includes(search.toLowerCase())
+                      ? "#7188d6"
+                      : "#cbd1df"
+                  }
+                  strokeWidth="1.5"
                 />
 
-                <text x={node.x} y={node.y} textAnchor="middle" fontSize="8">
+                <text
+                  x={node.x}
+                  y={node.y}
+                  textAnchor="middle"
+                  fontSize="8 "
+                  fill="#343947"
+                  fontWeight="500"
+                >
                   {node.name}
                 </text>
               </g>
