@@ -1,9 +1,10 @@
-import NavBar from './NavBar.jsx';
-import EmptyState from './EmptyState.jsx';
-import { sampleRepositories } from '../data/mockData.js';
-import repoLogo from '../assets/repo-logo.png';
-import userIcon from '../assets/user-icon.png';
-import { CodeXml } from 'lucide-react';
+import NavBar from "./NavBar.jsx";
+import EmptyState from "./EmptyState.jsx";
+import { sampleRepositories } from "../data/mockData.js";
+import repoLogo from "../assets/repo-logo.png";
+import userIcon from "../assets/user-icon.png";
+import { CodeXml } from "lucide-react";
+import { profile } from "../data/mockData";
 
 function Home({
   setPage,
@@ -14,17 +15,18 @@ function Home({
   setSearch,
 }) {
   const repositories = sampleRepositories.filter(
-    (repo) => !removedRepos.includes(repo.name)
+    (repo) => !removedRepos.includes(repo.name),
   );
   return (
     <div className="home">
       <div className="home-header">
-        <img src={repoLogo} alt="RepoIQ Logo" className="home-logo" />
+        <img src={repoLogo} className="home-logo" />
         <h1>RepoIQ</h1>
-        <img src={userIcon} alt="User Profile" className="home-user" />
+        <span className="link home-user" onClick={() => setPage("profile")}>
+          <User size={22} />
+        </span>
       </div>
-      <h2>Good morning, User</h2>{' '}
-      {/* User's name should be dynamically inserted here */}
+      <h2>Good morning, {profile.name}</h2>{" "}
       <p>Explore your repositories and discover your codebase.</p>
       <input
         type="text"
@@ -32,14 +34,14 @@ function Home({
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' && search.trim()) {
-            setPage('repositories');
+          if (e.key === "Enter" && search.trim()) {
+            setPage("repositories");
           }
         }}
       />
       <div className="recent-header">
         <h3>Recent Repositories</h3>
-        <button type="button" onClick={() => setPage('repositories')}>
+        <button type="button" onClick={() => setPage("repositories")}>
           View all
         </button>
       </div>
@@ -53,8 +55,8 @@ function Home({
               key={repo.id}
               onClick={() => {
                 setSelectedRepo(repo);
-                setRepoBack('home');
-                setPage('repository-details');
+                setRepoBack("home");
+                setPage("repository-details");
               }}
             >
               <CodeXml size={28} className="repo-icon" />
@@ -70,7 +72,7 @@ function Home({
       )}
       <button
         className="add-repository"
-        onClick={() => setPage('add-repository')}
+        onClick={() => setPage("add-repository")}
       >
         + Add Repository
       </button>

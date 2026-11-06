@@ -1,3 +1,5 @@
+import profile from "../assets/profile.png";
+
 export const repository = {
   name: 'repo-iq',
   url: 'https://github.com/agilef26/repoiq',
@@ -70,3 +72,10 @@ export const sampleRepositories = [
   { id: 2, name: 'Repository 2', language: 'Python', updated: '5 days ago', status: 'Completed' },
   { id: 3, name: 'Repository 3', language: 'Python', updated: '1 week ago', status: 'Completed' },
 ];
+export const profile = {
+  name: "RepoIQ User",
+  email: "iloverepoiq@mail.com",
+  username: "repoiqlover1",
+  image: profile,
+  bio: "Repo IQ user!"
+};
