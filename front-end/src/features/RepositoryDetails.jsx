@@ -15,7 +15,7 @@ function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
         <p>Last updated: {selectedRepo?.updated || 'Not specified'}</p>
         <p>Analysis status: {selectedRepo?.status || 'Unknown'}</p>
       </div>
-      <div className="repository-actions">
+      <div>
         <button className="outline" type="button" onClick={() => setPage('map')}>
           View Code Map
         </button>
