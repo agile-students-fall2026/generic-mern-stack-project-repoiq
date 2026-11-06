@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavBar from "./NavBar.jsx";
 import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
+import "./AddRepository.css";
 
 function AddRepository({ setPage }) {
   const [url, setUrl] = useState("");
