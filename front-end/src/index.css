@@ -298,6 +298,10 @@ button.outline {
   margin-bottom: 8px;
 }
 
+.back-button svg {
+  display: block;
+}
+
 .center {
   margin: 14px 0;
   text-align: center;
