@@ -1,6 +1,7 @@
 import './AnalysisResults.css';
 import NavBar from './NavBar.jsx';
 import BackButton from './BackButton.jsx';
+import { CodeXml } from 'lucide-react';
 
 function AnalysisResults({ setPage, selectedRepo, removeRepository }) {
   return (
@@ -12,7 +13,7 @@ function AnalysisResults({ setPage, selectedRepo, removeRepository }) {
 
       <div className="analysis-summary">
         <div className="analysis-repo-header">
-          <div className="analysis-repo-icon"></div>
+          <CodeXml size={32} strokeWidth={2.5} className="analysis-repo-icon" />
           <div>
             <h3>{selectedRepo?.name || 'Repository'}</h3>
             <p>https://github.com/username/repo</p>
