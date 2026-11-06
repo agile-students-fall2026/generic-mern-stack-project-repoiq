@@ -14,6 +14,7 @@ import AddRepository from "./features/AddRepository.jsx";
 import Repositories from "./features/Repositories.jsx";
 import RepositoryDetails from "./features/RepositoryDetails.jsx";
 import AnalysisResults from "./features/AnalysisResults.jsx";
+import Profile from "./features/Profile.jsx";
 
 function App() {
   const [page, setPage] = useState("welcome");

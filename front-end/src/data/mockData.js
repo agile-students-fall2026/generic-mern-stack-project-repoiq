@@ -1,4 +1,4 @@
-import profile from "../assets/profile.png";
+import profilePic from "../assets/profile.png";
 
 export const repository = {
   name: 'repo-iq',
@@ -76,6 +76,6 @@ export const profile = {
   name: "RepoIQ User",
   email: "iloverepoiq@mail.com",
   username: "repoiqlover1",
-  image: profile,
+  image: profilePic,
   bio: "Repo IQ user!"
 };

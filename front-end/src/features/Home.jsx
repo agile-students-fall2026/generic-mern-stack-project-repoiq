@@ -5,6 +5,7 @@ import repoLogo from "../assets/repo-logo.png";
 import userIcon from "../assets/user-icon.png";
 import { CodeXml } from "lucide-react";
 import { profile } from "../data/mockData";
+import { User } from "lucide-react";
 
 function Home({
   setPage,
