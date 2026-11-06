@@ -37,7 +37,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
         <p>{selected.info}</p>
         <p>Connections:</p>
 
-        {connections.map((c, i) => {
+        {repoConnections.map((c, i) => {
           if (c.from === selected.id)
             return <p key={i}>{nodes[c.to - 1].name}</p>;
 
@@ -72,7 +72,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
           setPage={setPage}
           to={selectedRepo ? "repository-details" : "home"}
         />
-        <h1>repository-name</h1>
+        <h1>{selectedRepository}</h1>
       </header>
 
       <input
@@ -101,9 +101,11 @@ function InteractiveMap({ setPage, selectedRepo }) {
           <g
             transform={`translate(${x} ${y}) translate(175 225) scale(${zoom}) translate(-175 -225)`}
           >
-            {connections.map((connection, i) => {
-              const from = nodes.find((node) => node.id === connection.from);
-              const to = nodes.find((node) => node.id === connection.to);
+            {repoConnections.map((connection, i) => {
+              const from = repoNodes.find(
+                (node) => node.id === connection.from,
+              );
+              const to = repoNodes.find((node) => node.id === connection.to);
 
               let color = "#d6a66a";
               if (connection.type === "import") color = "#aab1c2";
@@ -122,7 +124,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
               );
             })}
 
-            {nodes.map((node) => (
+            {repoNodes.map((node) => (
               <g key={node.id} onClick={() => setSelected(node)}>
                 <circle
                   cx={node.x}
