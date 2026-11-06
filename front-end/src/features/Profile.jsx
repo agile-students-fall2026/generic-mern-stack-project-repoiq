@@ -5,8 +5,10 @@ import BackButton from "./BackButton.jsx";
 function Profile({ setPage }) {
   return (
     <div className="phone">
-      <BackButton setPage={setPage} to="home" />
-      <h1>My Profile</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="home" />
+        <h1>My Profile</h1>
+      </header>
 
       <div className="profile">
         <img src={profile.image} />
