@@ -23,6 +23,8 @@ function InteractiveMap({ setPage, selectedRepo }) {
   );
   function handleRepositoryChange(e) {
     setSelectedRepository(e.target.value);
+    setSelected(null);
+    setSearch("");
   }
   let details = null;
 
