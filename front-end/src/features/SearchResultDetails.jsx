@@ -33,10 +33,10 @@ function SearchResultDetails({ result, setPage }) {
       </ul>
 
       {/* link to interactice map later */}
-      <button onClick={() => setPage("map")}>Highlight on Map</button>
+      <button className="primary" onClick={() => setPage("map")}>Highlight on Map</button>
 
       {/* link to source later */}
-      <button>View source on GitHub</button>
+      <button className="outline">View source on GitHub</button>
 
       <NavBar setPage={setPage} />
     </div>
