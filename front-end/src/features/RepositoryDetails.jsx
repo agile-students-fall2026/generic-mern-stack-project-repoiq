@@ -10,7 +10,7 @@ function RepositoryDetails({ setPage, selectedRepo, repoBack }) {
         <h1>Repository Details</h1>
       </header>
       <h3>{selectedRepo?.name || 'No repository selected'}</h3>
-      <div className="repository-info">
+      <div className="list-item">
         <p>Language: {selectedRepo?.language || 'Not specified'}</p>
         <p>Last updated: {selectedRepo?.updated || 'Not specified'}</p>
         <p>Analysis status: {selectedRepo?.status || 'Unknown'}</p>
