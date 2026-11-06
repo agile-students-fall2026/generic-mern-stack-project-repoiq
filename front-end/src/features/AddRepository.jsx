@@ -1,19 +1,20 @@
-import { useState } from 'react';
-import NavBar from './NavBar.jsx';
-import BackButton from './BackButton.jsx';
+import { useState } from "react";
+import NavBar from "./NavBar.jsx";
+import BackButton from "./BackButton.jsx";
+import connection from "../assets/connection.png";
 
 function AddRepository({ setPage }) {
-  const [url, setUrl] = useState('');
-  const [error, setError] = useState('');
+  const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
 
   function handleAnalyze() {
     if (!/^github\.com\/[^/]+\/[^/]+\/?$/.test(url.trim())) {
-      setError('Please enter a valid GitHub repository URL.');
+      setError("Please enter a valid GitHub repository URL.");
       return;
     }
 
-    setError('');
-    setPage('progress');
+    setError("");
+    setPage("progress");
   }
 
   return (
@@ -23,7 +24,11 @@ function AddRepository({ setPage }) {
         <h1>Add Repository</h1>
       </div>
 
-      <div className="placeholder-img"></div>
+      <img
+        src={connection}
+        alt="GitHub repository illustration"
+        className="repository-image"
+      />
 
       <h3>Add a Github Repository</h3>
 
@@ -37,7 +42,7 @@ function AddRepository({ setPage }) {
         value={url}
         onChange={(e) => {
           setUrl(e.target.value);
-          setError('');
+          setError("");
         }}
       />
 
@@ -49,7 +54,7 @@ function AddRepository({ setPage }) {
         onClick={handleAnalyze}
         disabled={!url.trim()}
       >
-        {' '}
+        {" "}
         Add Repository
       </button>
 
