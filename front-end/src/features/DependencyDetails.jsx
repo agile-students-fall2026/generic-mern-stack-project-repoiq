@@ -16,8 +16,10 @@ function DependencyDetails({ setPage }) {
 
   return (
     <div className="dependencies">
-      <BackButton setPage={setPage} to="componentdetails" />
-      <h1>Dependencies</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="componentdetails" />
+        <h1>Dependencies</h1>
+      </header>
 
       <button onClick={() => setTab("depends")} disabled={tab === "depends"}>
         Depends on ({sampleDependsOn.length})
