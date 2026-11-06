@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { nodes, connections } from "../data/mockData";
+import {
+  nodes,
+  connections,
+  repository,
+  sampleRepositories,
+} from "../data/mockData";
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
@@ -11,6 +16,11 @@ function InteractiveMap({ setPage, selectedRepo }) {
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
+  const [selectedRepository, setSelectedRepository] = useState(repository.name);
+  const repoNodes = nodes.filter((node) => node.repo === selectedRepository);
+  const repoConnections = connections.filter((connection) =>
+    repoNodes.find((node) => node.id === connection.from),
+  );
 
   let details = null;
 
