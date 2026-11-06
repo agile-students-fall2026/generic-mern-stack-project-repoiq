@@ -47,6 +47,7 @@ function App() {
         search={repoSearch}
         setSearch={setRepoSearch}
         setRepoBack={setRepoBack}
+        removedRepos={removedRepos}
       />
     );
   }
