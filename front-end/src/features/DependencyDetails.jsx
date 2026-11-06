@@ -21,13 +21,15 @@ function DependencyDetails({ setPage }) {
         <h1>Dependencies</h1>
       </header>
 
-      <button onClick={() => setTab("depends")} disabled={tab === "depends"}>
-        Depends on ({sampleDependsOn.length})
-      </button>
+      <div className="tabs">
+        <button onClick={() => setTab("depends")} disabled={tab === "depends"}>
+          Depends on ({sampleDependsOn.length})
+        </button>
 
-      <button onClick={() => setTab("used")} disabled={tab === "used"}>
-        Used by ({sampleUsedBy.length})
-      </button>
+        <button onClick={() => setTab("used")} disabled={tab === "used"}>
+          Used by ({sampleUsedBy.length})
+        </button>
+      </div>
 
       {files.map((file) => (
         <div className="list-item" key={file.path}>
