@@ -35,7 +35,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
       <div className="details">
         <h3>{selected.name}</h3>
         <p>{selected.info}</p>
-        <p>Connections:</p>
+        <p className="connections">Connections:</p>
 
         {repoConnections.map((c, i) => {
           if (c.from === selected.id)
@@ -59,6 +59,13 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
   return (
     <div className="phone">
+      <header className="add-header">
+        <BackButton
+          setPage={setPage}
+          to={selectedRepo ? "repository-details" : "home"}
+        />
+        <h1>{selectedRepository}</h1>
+      </header>
       <select value={selectedRepository} onChange={handleRepositoryChange}>
         <option value={repository.name}>{repository.name}</option>
         {sampleRepositories.map((repo) => (
@@ -67,14 +74,6 @@ function InteractiveMap({ setPage, selectedRepo }) {
           </option>
         ))}
       </select>
-      <header className="add-header">
-        <BackButton
-          setPage={setPage}
-          to={selectedRepo ? "repository-details" : "home"}
-        />
-        <h1>{selectedRepository}</h1>
-      </header>
-
       <input
         placeholder="Search in codebase..."
         value={search}
@@ -138,13 +137,13 @@ function InteractiveMap({ setPage, selectedRepo }) {
                   fill={
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
-                      ? "#e5eaff"
+                      ? "#d8d6d6"
                       : "#ffffff"
                   }
                   stroke={
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
-                      ? "#7188d6"
+                      ? "#828282"
                       : "#cbd1df"
                   }
                   strokeWidth="1.5"

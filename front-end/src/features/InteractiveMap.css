@@ -62,7 +62,6 @@
   margin-top: 14px;
   padding: 12px;
   font-size: 13px;
-  background: #fafbfe;
   border: 1px solid #e5e8f0;
 }
 
@@ -94,4 +93,9 @@ select {
   margin: 12px 0;
   border: 1px solid #dfe3ed;
   border-radius: 6px;
+}
+
+.connections {
+  font-weight: bold;
+  margin-top: 5px;
 }
