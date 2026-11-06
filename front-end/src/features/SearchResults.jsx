@@ -23,8 +23,10 @@ function SearchResults({ setPage, setSelectedResult }) {
 
   return (
     <div className="search-results">
-      <BackButton setPage={setPage} to="repository-details" />
-      <h1>Search</h1>
+      <header className="add-header">
+        <BackButton setPage={setPage} to="repository-details" />
+        <h1>Search</h1>
+      </header>
 
       <div>
         <label htmlFor="search-input">Search text: </label>
