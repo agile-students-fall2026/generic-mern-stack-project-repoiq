@@ -21,7 +21,9 @@ function InteractiveMap({ setPage, selectedRepo }) {
   const repoConnections = connections.filter((connection) =>
     repoNodes.find((node) => node.id === connection.from),
   );
-
+  function handleRepositoryChange(e) {
+    setSelectedRepository(e.target.value);
+  }
   let details = null;
 
   if (selected) {
@@ -53,6 +55,14 @@ function InteractiveMap({ setPage, selectedRepo }) {
 
   return (
     <div className="phone">
+      <select value={selectedRepository} onChange={handleRepositoryChange}>
+        <option value={repository.name}>{repository.name}</option>
+        {sampleRepositories.map((repo) => (
+          <option key={repo.id} value={repo.name}>
+            {repo.name}
+          </option>
+        ))}
+      </select>
       <header className="add-header">
         <BackButton
           setPage={setPage}
