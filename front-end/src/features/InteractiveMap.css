@@ -2,53 +2,109 @@
   position: relative;
   width: 100%;
   height: 360px;
+  margin: 12px auto;
+  background: #fafbfe;
+  border: 1px solid #e5e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.map svg {
+  width: 100%;
+  height: 100%;
+  display: block;
   margin: auto;
 }
 
+.map circle {
+  cursor: pointer;
+}
+
+.map text {
+  pointer-events: none;
+}
+
 .legend {
-  text-align: left;
-  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  margin: 12px 0;
+}
+
+.legend p {
+  margin: 0;
 }
 
 .import {
-  color: gray;
+  color: #929bad;
 }
-
 .call {
-  color: blue;
+  color: #7188d6;
 }
-
 .dependency {
-  color: orange;
+  color: #d6a66a;
 }
 
 .controls {
   position: absolute;
   top: 10px;
-  right: 0px;
-  display: grid;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.controls button {
+  padding: 6px;
+  background: white;
+  border: 1px solid #e0e3ec;
+  border-radius: 5px;
+  color: #5269b7;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background: #f0f2fa;
 }
 
 .details {
-  font-size: 12px;
+  margin-top: 14px;
+  padding: 12px;
+  font-size: 13px;
+  background: #fafbfe;
+  border: 1px solid #e5e8f0;
+  border-radius: 8px;
 }
 
 .details h3 {
+  margin-top: 0;
   font-size: 16px;
 }
 
-.back {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+.details p {
+  margin: 8px 0;
 }
 
-.map svg {
-  display: block;
-  height: 100%;
-  margin: 0 auto
+.details .outline {
+  margin-top: 8px;
 }
 
-.details {
-  margin-top: 12px;
+.repo-select {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border: 1px solid #dfe3ed;
+  border-radius: 6px;
+  background: white;
+  color: #343947;
+  font-size: 14px;
+}
+
+.empty-map {
+  padding: 100px 15px;
+  text-align: center;
+  color: #888;
+  font-size: 13px;
 }

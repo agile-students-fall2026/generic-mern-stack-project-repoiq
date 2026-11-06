@@ -1,0 +1,7 @@
+.repository-image {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  display: block;
+  margin: 15px auto;
+}
