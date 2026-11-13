@@ -36,10 +36,3 @@ app.post("/api/signup", (req, res) => {
 })
 
 module.exports = app
-
-app.use(express.json())
-
-app.use(express.static(path.join(__dirname, "public")))
-app.use(express.static(path.join(__dirname, "../front-end/dist")))
-
-module.exports = app
