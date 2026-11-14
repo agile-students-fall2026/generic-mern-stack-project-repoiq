@@ -7,29 +7,26 @@ function SearchResults({ setPage, setSelectedResult }) {
   const [selectedType, setSelectedType] = useState('All'); // store selected category
 
   // create array that stores res matching search
-  const filteredRes = [];
-  const [nodes, setNodes] = useState([]);
+  const [filteredRes, setFilteredRes] = useState([]);
   const [searchError, setSearchError] = useState('');
+
   useEffect(() => {
-    fetch('/api/search')
-    .then((response) => {
-      if (!response.ok) throw new Error('Search failed');
-      return response.json()
-    })
-    .then(setNodes)
-    .catch(() => setSearchError('Cannot load search results'))
-  }, []);
-
-  for (const result of nodes) {
-    const matchesText =
-      result.name.includes(searchText) || result.path.includes(searchText);
-
-    const matchesType = selectedType === 'All' || result.type === selectedType;
-
-    if (matchesText && matchesType) {
-      filteredRes.push(result);
-    }
-  }
+    let ignore = false;
+    const params = new URLSearchParams({ q: searchText, type: selectedType });
+    setSearchError('');
+    fetch(`/api.search?${params}`)
+      .then((response) => {
+        if (!response.ok) throw new Error('Search failed');
+        return response.json();
+      })
+      .then((results) => { if (!ignore) setFilteredRes(results); })
+      .catch(() => {
+        if (ignore) return;
+        setFilteredRes([]);
+        setSearchError('Cannot load search results');
+      });
+    return () => { ignore = true; };
+    }, [searchText, selectedType]);
 
   return (
     <div className="search-results">
