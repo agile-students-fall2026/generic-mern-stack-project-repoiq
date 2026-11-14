@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
-import { nodes } from '../data/mockData';
 
 function SearchResults({ setPage, setSelectedResult }) {
   const [searchText, setSearchText] = useState(''); // store input text
@@ -9,6 +8,17 @@ function SearchResults({ setPage, setSelectedResult }) {
 
   // create array that stores res matching search
   const filteredRes = [];
+  const [nodes, setNodes] = useState([]);
+  const [searchError, setSearchError] = useState('');
+  useEffect(() => {
+    fetch('/api/search')
+    .then((response) => {
+      if (!response.ok) throw new Error('Search failed');
+      return response.json()
+    })
+    .then(setNodes)
+    .catch(() => setSearchError('Cannot load search results'))
+  }, []);
 
   for (const result of nodes) {
     const matchesText =
