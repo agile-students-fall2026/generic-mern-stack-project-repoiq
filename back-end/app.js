@@ -198,8 +198,17 @@ app.post("/api/repositories/analyze", async (req, res) => {
 });
 
 app.get("/api/search", async (req, res) => {
-    const { nodes } = await import("../front-end/src/data/mockData.js");
-    res.json([]);
+  const { nodes } = await import("../front-end/src/data/mockData.js");
+  const q = req.query.q ?? "";
+  const type = req.query.type ?? "All";
+
+  const results = nodes.filter((node) => {
+    const matchesText = node.name.includes(q) || node.path.includes(q);
+    const matchesType = type === "All" || node.type === type;
+
+    return matchesText && matchesType;
+  });
+  res.json(results);
 });
 
 module.exports = app;
