@@ -69,11 +69,12 @@ app.post("/api/repositories/analyze", async (req, res) => {
     }
   }
 
-  const file = filesData.tree.find(
-    (item) => item.type === "blob" && item.path.endsWith(".js"),
+  const sourceFiles = filesData.tree.filter(
+    (item) =>
+      item.type === "blob" &&
+      (item.path.endsWith(".js") || item.path.endsWith(".jsx")),
   );
-
-  if (file) {
+  for (const file of sourceFiles) {
     const response = await fetch(file.url);
     const data = await response.json();
 
@@ -85,6 +86,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
     const node = nodes.find((node) => node.path === file.path);
 
     node.functions = [];
+    node.imports = [];
 
     try {
       const tree = parser.parse(code, {
@@ -97,6 +99,10 @@ app.post("/api/repositories/analyze", async (req, res) => {
           if (path.node.id) {
             node.functions.push(path.node.id.name);
           }
+        },
+
+        ImportDeclaration(path) {
+          node.imports.push(path.node.source.value);
         },
       });
     } catch {
