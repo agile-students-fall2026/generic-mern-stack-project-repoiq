@@ -198,7 +198,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
 });
 
 app.get("/api/search", async (req, res) => {
-  const { nodes } = await import("../front-end/src/data/mockData.js");
+  const { nodes } = await import("../front-end/src/data/mockNodes.js");
   const q = req.query.q ?? "";
   const type = req.query.type ?? "All";
 
