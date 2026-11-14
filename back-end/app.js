@@ -41,18 +41,43 @@ app.post("/api/repositories/analyze", async (req, res) => {
     });
   }
 
-  const files = [];
+  const nodes = [];
+  let fileCount = 0;
 
   for (const item of filesData.tree) {
-    if (item.type === "blob") {
-      files.push(item.path);
+    if (item.type === "blob" || item.type === "tree") {
+      const parts = item.path.split("/");
+      const name = parts.pop();
+      const parent = parts.join("/");
+
+      nodes.push({
+        id: item.path,
+        name: name,
+        path: item.path,
+        parent: parent,
+        type: item.type === "tree" ? "Folder" : "File",
+        repo: data.name,
+        info: item.path,
+        usedIn: [],
+      });
+
+      if (item.type === "blob") {
+        fileCount++;
+      }
     }
   }
 
   res.json({
-    name: data.name,
-    url: data.html_url,
-    files: files,
+    repository: {
+      name: data.name,
+      url: data.html_url,
+      files: fileCount,
+      functions: 0,
+      classes: 0,
+      relationships: 0,
+    },
+    nodes: nodes,
+    connections: [],
   });
 });
 
