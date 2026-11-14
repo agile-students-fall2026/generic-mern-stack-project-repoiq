@@ -14,7 +14,7 @@ function SearchResults({ setPage, setSelectedResult }) {
     let ignore = false;
     const params = new URLSearchParams({ q: searchText, type: selectedType });
     setSearchError('');
-    fetch(`/api.search?${params}`)
+    fetch(`/api/search?${params}`)
       .then((response) => {
         if (!response.ok) throw new Error('Search failed');
         return response.json();
