@@ -1,4 +1,6 @@
 const express = require("express");
+const parser = require("@babel/parser");
+const traverse = require("@babel/traverse").default;
 const app = express();
 app.use(express.json());
 
@@ -64,6 +66,41 @@ app.post("/api/repositories/analyze", async (req, res) => {
       if (item.type === "blob") {
         fileCount++;
       }
+    }
+  }
+
+  const file = filesData.tree.find(
+    (item) => item.type === "blob" && item.path.endsWith(".js"),
+  );
+
+  if (file) {
+    const response = await fetch(file.url);
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: data.message });
+    }
+
+    const code = Buffer.from(data.content, "base64").toString("utf8");
+    const node = nodes.find((node) => node.path === file.path);
+
+    node.functions = [];
+
+    try {
+      const tree = parser.parse(code, {
+        sourceType: "unambiguous",
+        plugins: ["jsx"],
+      });
+
+      traverse(tree, {
+        FunctionDeclaration(path) {
+          if (path.node.id) {
+            node.functions.push(path.node.id.name);
+          }
+        },
+      });
+    } catch {
+      node.parseError = "Could not read functions in this file";
     }
   }
 

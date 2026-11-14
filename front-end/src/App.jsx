@@ -21,6 +21,7 @@ function App() {
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
+  const [analysis, setAnalysis] = useState(null);
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -67,10 +68,16 @@ function App() {
   }
 
   if (page === "add-repository") {
-    return <AddRepository setPage={setPage} />;
+    return <AddRepository setPage={setPage} setAnalysis={setAnalysis} />;
   }
   if (page === "map") {
-    return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
+    return (
+      <InteractiveMap
+        setPage={setPage}
+        selectedRepo={selectedRepo}
+        analysis={analysis}
+      />
+    );
   }
 
   if (page === "progress") {

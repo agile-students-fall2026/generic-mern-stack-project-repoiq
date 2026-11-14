@@ -4,7 +4,7 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage }) {
+function AddRepository({ setPage, setAnalysis }) {
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
 
@@ -27,7 +27,8 @@ function AddRepository({ setPage }) {
         return;
       }
 
-      console.log(data);
+      setAnalysis(data);
+      setPage("map");
     } catch {
       setError("api error");
     }
