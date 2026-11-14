@@ -9,29 +9,6 @@ export const repository = {
   relationships: 19
 }
 
-export const nodes = [
-  { id: 1, name: 'App.jsx', x: 175, y: 200, info: 'Main application', type: 'File', path: 'src/App.jsx', repo: 'repo-iq', lastEdited: '2 days ago', usedIn: ['src/main.jsx'] },
-  { id: 2, name: 'Navbar.jsx', x: 100, y: 100, info: 'Navigation bar', type: 'File', path: 'src/Navbar.jsx', repo: 'repo-iq', lastEdited: '3 days ago', usedIn: ['src/App.jsx'] },
-  { id: 3, name: 'Login.jsx', x: 250, y: 100, info: 'Login page', type: 'File', path: 'src/Login.jsx', repo: 'repo-iq', lastEdited: '1 week ago', usedIn: ['src/App.jsx'] },
-  { id: 4, name: 'Dashboard.jsx', x: 80, y: 300, info: 'Dashboard page', type: 'File', path: 'src/Dashboard.jsx', repo: 'repo-iq', lastEdited: '4 days ago', usedIn: ['src/App.jsx'] },
-  { id: 5, name: 'Profile.jsx', x: 260, y: 300, info: 'User profile', type: 'File', path: 'src/Profile.jsx', repo: 'repo-iq', lastEdited: '2 weeks ago', usedIn: ['src/App.jsx'] },
-  { id: 6, name: 'api.js', x: 290, y: 200, info: 'API requests', type: 'File', path: 'src/api.js', repo: 'repo-iq', lastEdited: '5 days ago', usedIn: ['src/Login.jsx', 'src/Dashboard.jsx'] },
-  { id: 7, name: 'searchRepository', x: 60, y: 200, info: 'Searches a repository', type: 'Function', path: 'src/search.js', repo: 'repo-iq', lastEdited: '5 days ago', usedIn: ['src/App.jsx'] },
-  { id: 8, name: 'SearchIndex', x: 175, y: 320, info: 'Stores search data', type: 'Class', path: 'src/search.js', repo: 'repo-iq', lastEdited: '1 week ago', usedIn: ['src/App.jsx'] },
-  { id: 9, name: "Home.jsx", x: 175, y: 200, info: "Home page", type: "File", path: "src/Home.jsx", repo: "Repository 1" },
-  { id: 10, name: "Header.jsx", x: 90, y: 100, info: "Page header", type: "File", path: "src/Header.jsx", repo: "Repository 1" },
-  { id: 11, name: "Footer.jsx", x: 260, y: 100, info: "Page footer", type: "File", path: "src/Footer.jsx", repo: "Repository 1" },
-  { id: 12, name: "styles.css", x: 175, y: 320, info: "Page styling", type: "File", path: "src/styles.css", repo: "Repository 1" },
-  { id: 13, name: "server.js", x: 175, y: 200, info: "Main server", type: "File", path: "server.js", repo: "Repository 2" },
-  { id: 14, name: "routes.js", x: 90, y: 100, info: "API routes", type: "File", path: "routes.js", repo: "Repository 2" },
-  { id: 15, name: "database.js", x: 260, y: 100, info: "Database connection", type: "File", path: "database.js", repo: "Repository 2" },
-  { id: 16, name: "auth.js", x: 175, y: 320, info: "Authentication", type: "File", path: "auth.js", repo: "Repository 2" },
-  { id: 17, name: "App.py", x: 175, y: 200, info: "Main application", type: "File", path: "App.py", repo: "Repository 3" },
-  { id: 18, name: "utils.py", x: 90, y: 100, info: "Helper functions", type: "File", path: "utils.py", repo: "Repository 3" },
-  { id: 19, name: "models.py", x: 260, y: 100, info: "Data models", type: "File", path: "models.py", repo: "Repository 3" },
-  { id: 20, name: "config.py", x: 175, y: 320, info: "Configuration", type: "File", path: "config.py", repo: "Repository 3" },
-]
-
 export const connections = [
   { from: 1, to: 2, type: 'import' },
   { from: 1, to: 3, type: 'import' },
@@ -79,3 +56,4 @@ export const profile = {
   image: profilePic,
   bio: "Repo IQ user!"
 };
+export { nodes } from "./mockNodes.js";

@@ -1,25 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
-import { nodes } from '../data/mockData';
 
-function SearchResults({ setPage, setSelectedResult }) {
+function SearchResults({ setPage, setSelectedResult, selectedRepo }) {
   const [searchText, setSearchText] = useState(''); // store input text
   const [selectedType, setSelectedType] = useState('All'); // store selected category
 
-  // create array that stores res matching search
-  const filteredRes = [];
+  const [filteredRes, setFilteredRes] = useState([]);
+  const [searchError, setSearchError] = useState('');
 
-  for (const result of nodes) {
-    const matchesText =
-      result.name.includes(searchText) || result.path.includes(searchText);
+  const repoName = typeof selectedRepo === 'string' ? selectedRepo: selectedRepo?.name;
 
-    const matchesType = selectedType === 'All' || result.type === selectedType;
-
-    if (matchesText && matchesType) {
-      filteredRes.push(result);
-    }
-  }
+  useEffect(() => {
+    let ignore = false;
+    const params = new URLSearchParams({ q: searchText, type: selectedType });
+    if (repoName) params.set('repo', repoName)
+    setSearchError('');
+    fetch(`/api/search?${params}`)
+      .then((response) => {
+        if (!response.ok) throw new Error('Search failed');
+        return response.json();
+      })
+      .then((results) => { if (!ignore) setFilteredRes(results); })
+      .catch(() => {
+        if (ignore) return;
+        setFilteredRes([]);
+        setSearchError('Cannot load search results');
+      });
+    return () => { ignore = true; };
+    }, [searchText, selectedType, repoName]);
 
   return (
     <div className="search-results">
@@ -72,7 +81,7 @@ function SearchResults({ setPage, setSelectedResult }) {
       </div>
 
       {filteredRes.length === 0 ? (
-        <p>No results found.</p>
+        <p>{searchError || 'No results found'}</p>
       ) : (
         <ul>
           {filteredRes.map((result) => (

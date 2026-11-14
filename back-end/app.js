@@ -197,4 +197,20 @@ app.post("/api/repositories/analyze", async (req, res) => {
   });
 });
 
+app.get("/api/search", async (req, res) => {
+  const { nodes } = await import("../front-end/src/data/mockNodes.js");
+  const q = req.query.q ?? "";
+  const type = req.query.type ?? "All";
+  const repo = req.query.repo;
+
+  const results = nodes.filter((node) => {
+    const matchesText = node.name.includes(q) || node.path.includes(q);
+    const matchesType = type === "All" || node.type === type;
+    const matchesRepo = !repo || node.repo === repo;
+
+    return matchesText && matchesType && matchesRepo;
+  });
+  res.json(results);
+});
+
 module.exports = app;
