@@ -198,7 +198,8 @@ app.post("/api/repositories/analyze", async (req, res) => {
 });
 
 app.get("/api/search", async (req, res) => {
-  res.json([]);
+    const { nodes } = await import("../front-end/src/data/mockData.js");
+    res.json([]);
 });
 
 module.exports = app;
