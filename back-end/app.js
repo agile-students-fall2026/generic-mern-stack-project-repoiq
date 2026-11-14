@@ -205,8 +205,9 @@ app.get("/api/search", async (req, res) => {
   const results = nodes.filter((node) => {
     const matchesText = node.name.includes(q) || node.path.includes(q);
     const matchesType = type === "All" || node.type === type;
+    const matchesRepo = !repo || node.repo === repo;
 
-    return matchesText && matchesType;
+    return matchesText && matchesType && matchesRepo;
   });
   res.json(results);
 });
