@@ -82,7 +82,7 @@ function SearchResults({ setPage, setSelectedResult }) {
       </div>
 
       {filteredRes.length === 0 ? (
-        <p>No results found.</p>
+        <p>{searchError || 'No results found'}</p>
       ) : (
         <ul>
           {filteredRes.map((result) => (
