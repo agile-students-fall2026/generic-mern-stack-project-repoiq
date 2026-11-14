@@ -197,4 +197,8 @@ app.post("/api/repositories/analyze", async (req, res) => {
   });
 });
 
+app.get("/api/search", async (req, res) => {
+  res.json([]);
+});
+
 module.exports = app;
