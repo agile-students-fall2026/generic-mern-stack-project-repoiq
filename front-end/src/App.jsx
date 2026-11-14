@@ -90,7 +90,7 @@ function App() {
 
   if (page === "searchresult") {
     return (
-      <SearchResults setPage={setPage} setSelectedResult={setSelectedResult} />
+      <SearchResults setPage={setPage} setSelectedResult={setSelectedResult} selectedRepo={selectedRepo}/>
     );
   }
 
