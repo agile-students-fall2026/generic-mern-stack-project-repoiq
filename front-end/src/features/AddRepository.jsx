@@ -8,14 +8,29 @@ function AddRepository({ setPage }) {
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
 
-  function handleAnalyze() {
-    if (!/^github\.com\/[^/]+\/[^/]+\/?$/.test(url.trim())) {
-      setError("Please enter a valid GitHub repository URL.");
-      return;
-    }
-
+  async function handleAnalyze() {
     setError("");
-    setPage("progress");
+
+    try {
+      const response = await fetch("/api/repositories/analyse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: url.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error);
+        return;
+      }
+
+      console.log(data);
+    } catch {
+      setError("api error");
+    }
   }
 
   return (
