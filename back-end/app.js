@@ -1,6 +1,7 @@
 const express = require("express");
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
+const path = require("node:path").posix;
 const app = express();
 app.use(express.json());
 
@@ -8,6 +9,40 @@ app.post("/api/repositories/analyze", async (req, res) => {
   const url = req.body.url;
 
   if (!url) {
+    const connections = [];
+
+    for (const node of nodes) {
+      for (const imported of node.imports || []) {
+        // Only connect relative imports, like "./Header".
+        if (!imported.startsWith(".")) {
+          continue;
+        }
+
+        const location = path.join(node.parent, imported);
+
+        const possiblePaths = [
+          location,
+          location + ".js",
+          location + ".jsx",
+          location + "/index.js",
+          location + "/index.jsx",
+        ];
+
+        const dependency = nodes.find(
+          (item) => item.type === "File" && possiblePaths.includes(item.path),
+        );
+
+        if (dependency && !dependency.usedIn.includes(node.path)) {
+          connections.push({
+            from: node.id,
+            to: dependency.id,
+            type: "import",
+          });
+
+          dependency.usedIn.push(node.path);
+        }
+      }
+    }
     return res.status(400).json({ error: "Enter a GitHub URL" });
   }
 
@@ -109,18 +144,56 @@ app.post("/api/repositories/analyze", async (req, res) => {
       node.parseError = "Could not read functions in this file";
     }
   }
+  const connections = [];
+
+  for (const node of nodes) {
+    for (const imported of node.imports || []) {
+      if (!imported.startsWith(".")) {
+        continue;
+      }
+
+      const location = path.join(node.parent, imported);
+
+      const possiblePaths = [
+        location,
+        location + ".js",
+        location + ".jsx",
+        location + "/index.js",
+        location + "/index.jsx",
+      ];
+
+      const dependency = nodes.find(
+        (item) => item.type === "File" && possiblePaths.includes(item.path),
+      );
+
+      if (dependency && !dependency.usedIn.includes(node.path)) {
+        connections.push({
+          from: node.id,
+          to: dependency.id,
+          type: "import",
+        });
+
+        dependency.usedIn.push(node.path);
+      }
+    }
+  }
+  let functionCount = 0;
+
+  for (const node of nodes) {
+    functionCount += (node.functions || []).length;
+  }
 
   res.json({
     repository: {
       name: data.name,
       url: data.html_url,
       files: fileCount,
-      functions: 0,
+      functions: functionCount,
       classes: 0,
-      relationships: 0,
+      relationships: connections.length,
     },
     nodes: nodes,
-    connections: [],
+    connections: connections,
   });
 });
 
