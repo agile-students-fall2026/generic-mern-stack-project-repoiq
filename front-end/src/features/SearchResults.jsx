@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react';
 import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
 
-function SearchResults({ setPage, setSelectedResult }) {
+function SearchResults({ setPage, setSelectedResult, selectedRepo }) {
   const [searchText, setSearchText] = useState(''); // store input text
   const [selectedType, setSelectedType] = useState('All'); // store selected category
 
-  // create array that stores res matching search
   const [filteredRes, setFilteredRes] = useState([]);
   const [searchError, setSearchError] = useState('');
+
+  const repoName = typeof selectedRepo === 'string' ? selectedRepo: selectedRepo?.name;
 
   useEffect(() => {
     let ignore = false;
     const params = new URLSearchParams({ q: searchText, type: selectedType });
+    if (repoName) params.set('repo', repoName)
     setSearchError('');
     fetch(`/api/search?${params}`)
       .then((response) => {
@@ -26,7 +28,7 @@ function SearchResults({ setPage, setSelectedResult }) {
         setSearchError('Cannot load search results');
       });
     return () => { ignore = true; };
-    }, [searchText, selectedType]);
+    }, [searchText, selectedType, repoName]);
 
   return (
     <div className="search-results">
