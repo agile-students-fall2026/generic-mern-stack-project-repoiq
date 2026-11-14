@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
 import { nodes } from '../data/mockData';
