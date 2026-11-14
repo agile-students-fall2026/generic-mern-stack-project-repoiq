@@ -12,7 +12,7 @@ function AddRepository({ setPage }) {
     setError("");
 
     try {
-      const response = await fetch("/api/repositories/analyse", {
+      const response = await fetch("/api/repositories/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
