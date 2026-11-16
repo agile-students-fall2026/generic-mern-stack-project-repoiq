@@ -214,6 +214,9 @@ app.get("/api/search", async (req, res) => {
 });
 
 app.get("/api/components/:id", async (req, res) => {
+  const { nodes } = await import("../front-end/src/data/mockNodes.js");
+  const id = req.params.id;
+  const component = nodes.find((node) => String(node.id) === id);
 
 });
 
