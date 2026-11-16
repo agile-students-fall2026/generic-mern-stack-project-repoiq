@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnalysisProgress from "./features/AnalysisProgress.jsx";
 import AnalysisComplete from "./features/AnalysisComplete.jsx";
 import InteractiveMap from "./features/InteractiveMap.jsx";
@@ -18,6 +18,7 @@ import Profile from "./features/Profile.jsx";
 
 function App() {
   const [page, setPage] = useState("welcome");
+  const [repositories, setRepositories] = useState([]);
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
@@ -30,6 +31,12 @@ function App() {
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
+  useEffect(() => {
+    fetch("http://localhost:3000/api/repositories")
+      .then((res) => res.json())
+      .then((data) => setRepositories(data))
+      .catch((err) => console.error(err));
+  }, []);
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -49,6 +56,7 @@ function App() {
         setSearch={setRepoSearch}
         setRepoBack={setRepoBack}
         removedRepos={removedRepos}
+        repositories={repositories}
       />
     );
   }
@@ -62,13 +70,22 @@ function App() {
         search={repoSearch}
         setSearch={setRepoSearch}
         removedRepos={removedRepos}
+        repositories={repositories}
       />
     );
   }
 
   if (page === "add-repository") {
-    return <AddRepository setPage={setPage} />;
+    return (
+      <AddRepository
+        setPage={setPage}
+        onRepositoryAdded={(repo) =>
+          setRepositories((prev) => [...prev, repo])
+        }
+      />
+    );
   }
+  
   if (page === "map") {
     return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
   }
