@@ -1,12 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackButton from "./BackButton.jsx";
 import NavBar from './NavBar.jsx';
 import { componentDetailSample } from "../data/mockData.js";
 
 function ComponentDetails({ setPage, componentId }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
-  const component = componentDetailSample;
+  const [component, setComponent] = useState(null);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    let ignore = false;
+    fetch(`/api/components/${encodeURIComponent(componentId)}`)
+      .then((response) => {
+        if (!response.ok) throw new Error("component request failed");
+        return response.json();
+      })
+      .then((data) => {
+        if (!ignore) setComponent(data);
+      })
+      .catch (() => {
+        if (!ignore) setError("Cannot load component details");
+      });
+    return () => {
+      ignore = true;
+    };
+  }, [componentId]);
 
   return (
     <div className="component-details">
