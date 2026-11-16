@@ -76,8 +76,16 @@ function App() {
   }
 
   if (page === "add-repository") {
-    return <AddRepository setPage={setPage} />;
+    return (
+      <AddRepository
+        setPage={setPage}
+        onRepositoryAdded={(repo) =>
+          setRepositories((prev) => [...prev, repo])
+        }
+      />
+    );
   }
+  
   if (page === "map") {
     return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
   }
