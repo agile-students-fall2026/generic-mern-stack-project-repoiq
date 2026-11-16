@@ -214,7 +214,7 @@ app.get("/api/search", async (req, res) => {
 });
 
 app.get("/api/components/:id", async (req, res) => {
-  const { nodes } = await import("../front-end/src/data/mockNodes.js");
+  const { nodes, connections } = await import("../front-end/src/data/mockNodes.js");
   const id = req.params.id;
   const component = nodes.find((node) => String(node.id) === id);
 
@@ -222,7 +222,21 @@ app.get("/api/components/:id", async (req, res) => {
     return res.status(404).json({ error: "Component not found" });
   }
   
-  res.json(component)
+  // follow outgoing import connections to find files this component imports
+  const imports = connections
+    .filter((connection) => connection.from === component.id && connection.type === "import")
+    .map((connection) => nodes.find((node) => node.id === connection.to)?.path)
+    .filter(Boolean);
+
+
+  // follow incoming connections to find which files use this component
+  const usedBy = connections
+    .filter((connection) => connection.to === component.id)
+    .map((connection) => nodes.find((node) => node.id == connection.from)?.path)
+    .filter(Boolean);
+
+  // return component's existing fields and the lists
+  res.json({ ...component, imports, usedBy });
 });
 
 module.exports = app;
