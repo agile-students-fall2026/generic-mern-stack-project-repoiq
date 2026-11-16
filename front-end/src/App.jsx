@@ -77,6 +77,7 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         analysis={analysis}
+        setSelectedComponentId={setSelectedComponentId}
       />
     );
   }
@@ -104,7 +105,7 @@ function App() {
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} />;
+    return <ComponentDetails setPage={setPage} componentId={selectedComponentId}/>;
   }
   if (page === "repository-details") {
     return (
