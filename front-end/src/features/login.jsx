@@ -29,7 +29,7 @@ return (
     </header>
     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    {error && <p className="error">{error}</p>}
+    {error && <p className="add-error">{error}</p>}
     <button className="primary" onClick={handleLogin}>
       Log in
     </button>

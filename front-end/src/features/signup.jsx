@@ -6,8 +6,10 @@ function Signup({ setPage }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
-  async function handleSignup() {                              
+  async function handleSignup() {   
+    if (password !== confirmPassword) {                           
       setError("Passwords don't match.");
       return;
     }
@@ -54,7 +56,7 @@ function Signup({ setPage }) {
 
       <div className="signup-input-box">
         <Lock size={18} />
-        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
       </div>
 
       {error && <p className="add-error">{error}</p>}
