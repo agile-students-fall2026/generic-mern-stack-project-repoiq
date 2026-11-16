@@ -218,6 +218,11 @@ app.get("/api/components/:id", async (req, res) => {
   const id = req.params.id;
   const component = nodes.find((node) => String(node.id) === id);
 
+  if (!component) {
+    return res.status(404).json({ error: "Component not found" });
+  }
+  
+  res.json(component)
 });
 
 module.exports = app;
