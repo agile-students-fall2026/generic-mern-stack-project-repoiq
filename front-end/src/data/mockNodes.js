@@ -20,3 +20,23 @@ export const nodes = [
   { id: 19, name: "models.py", x: 260, y: 100, info: "Data models", type: "File", path: "models.py", repo: "Repository 3" },
   { id: 20, name: "config.py", x: 175, y: 320, info: "Configuration", type: "File", path: "config.py", repo: "Repository 3" },
 ]
+
+export const connections = [
+  { from: 1, to: 2, type: 'import' },
+  { from: 1, to: 3, type: 'import' },
+  { from: 1, to: 4, type: 'import' },
+  { from: 1, to: 5, type: 'import' },
+  { from: 3, to: 6, type: 'call' },
+  { from: 4, to: 6, type: 'dependency' },
+  { from: 1, to: 7, type: 'call' },
+  { from: 1, to: 8, type: 'import' },
+  { from: 9, to: 10, type: "import" },
+  { from: 9, to: 11, type: "import" },
+  { from: 9, to: 12, type: "dependency" },
+  { from: 13, to: 14, type: "import" },
+  { from: 13, to: 15, type: "dependency" },
+  { from: 13, to: 16, type: "call" },
+  { from: 17, to: 18, type: "import" },
+  { from: 17, to: 19, type: "import" },
+  { from: 17, to: 20, type: "dependency" },
+]
