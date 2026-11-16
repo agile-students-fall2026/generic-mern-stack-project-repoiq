@@ -213,4 +213,8 @@ app.get("/api/search", async (req, res) => {
   res.json(results);
 });
 
+app.get("/api/components/:id", async (req, res) => {
+
+});
+
 module.exports = app;
