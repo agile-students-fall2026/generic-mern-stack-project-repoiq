@@ -5,10 +5,8 @@ import { componentDetailSample } from "../data/mockData.js";
 
 function ComponentDetails({ setPage, componentId }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
-  const [component, setComponent] = useState(null);
+  const component = componentDetailSample;
   const [error, setError] = useState('');
-
-  
 
   return (
     <div className="component-details">
@@ -18,8 +16,8 @@ function ComponentDetails({ setPage, componentId }) {
       </header>
 
       <div className="list-item">
-        <h2>{componentDetailSample.name}</h2>
-        <p>{componentDetailSample.path}</p>
+        <h2>{component.name}</h2>
+        <p>{component.path}</p>
       </div>
 
       <div className="tabs">
@@ -42,7 +40,7 @@ function ComponentDetails({ setPage, componentId }) {
         <section>
           <h2>Functions</h2>
           <ul>
-            {componentDetailSample.functions.map((name) => (
+            {(component.functions ?? []).map((name) => (
               <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
@@ -50,7 +48,7 @@ function ComponentDetails({ setPage, componentId }) {
           <h2>Classes</h2>
 
           <ul>
-            {componentDetailSample.classes.map((name) => (
+            {(component.classes ?? []).map((name) => (
               <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
@@ -60,14 +58,14 @@ function ComponentDetails({ setPage, componentId }) {
           <h2>Imports</h2>
 
           <ul>
-            {componentDetailSample.imports.map((path) => (
+            {(component.imports ?? []).map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
-            {componentDetailSample.usedBy.map((path) => (
+            {(component.usedBy ?? []).map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>
