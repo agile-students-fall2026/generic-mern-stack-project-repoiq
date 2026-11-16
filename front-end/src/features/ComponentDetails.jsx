@@ -5,6 +5,10 @@ import { componentDetailSample } from "../data/mockData.js";
 
 function ComponentDetails({ setPage, componentId }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
+  const [component, setComponent] = useState(null);
+  const [error, setError] = useState('');
+
+  
 
   return (
     <div className="component-details">
