@@ -22,6 +22,7 @@ function App() {
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
   const [analysis, setAnalysis] = useState(null);
+  const [selectedComponentId, setSelectedComponentId] = useState(null);
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
