@@ -3,7 +3,7 @@ import BackButton from "./BackButton.jsx";
 import NavBar from './NavBar.jsx';
 import { componentDetailSample } from "../data/mockData.js";
 
-function ComponentDetails({ setPage }) {
+function ComponentDetails({ setPage, componentId }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
 
   return (

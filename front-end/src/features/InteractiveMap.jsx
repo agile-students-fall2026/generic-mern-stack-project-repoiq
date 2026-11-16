@@ -10,7 +10,7 @@ import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import "./InteractiveMap.css";
 
-function InteractiveMap({ setPage, selectedRepo, analysis }) {
+function InteractiveMap({ setPage, selectedRepo, analysis, setSelectedComponentId }) {
   const [zoom, setZoom] = useState(1);
   const [currentFolder, setCurrentFolder] = useState("");
   const [x, setX] = useState(0);
@@ -50,7 +50,10 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
         <button
           className="outline"
           type="button"
-          onClick={() => setPage("componentdetails")}
+          onClick={() => {
+            setSelectedComponentId(selected.id);
+            setPage("componentdetails");
+          }}
         >
           View component details
         </button>
