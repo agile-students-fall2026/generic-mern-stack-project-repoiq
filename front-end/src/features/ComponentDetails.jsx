@@ -1,11 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackButton from "./BackButton.jsx";
 import NavBar from './NavBar.jsx';
 import { componentDetailSample } from "../data/mockData.js";
 
-function ComponentDetails({ setPage }) {
+function ComponentDetails({ setPage, componentId }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
+  const [component, setComponent] = useState(null);
+  const [error, setError] = useState('');
 
+  useEffect(() => {
+    let ignore = false;
+    fetch(`/api/components/${encodeURIComponent(componentId)}`)
+      .then((response) => {
+        if (!response.ok) throw new Error("component request failed");
+        return response.json();
+      })
+      .then((data) => {
+        if (!ignore) setComponent(data);
+      })
+      .catch (() => {
+        if (!ignore) setError("Cannot load component details");
+      });
+    return () => {
+      ignore = true;
+    };
+  }, [componentId]);
+
+  if (!component) {
+    return (
+      <div className="component-details">
+        <BackButton setPage={setPage} to="map" />
+        <p>{error || "Loading component details..."}</p>
+      </div>
+    );
+  }
   return (
     <div className="component-details">
       <header className="add-header">
@@ -14,8 +42,8 @@ function ComponentDetails({ setPage }) {
       </header>
 
       <div className="list-item">
-        <h2>{componentDetailSample.name}</h2>
-        <p>{componentDetailSample.path}</p>
+        <h2>{component.name}</h2>
+        <p>{component.path}</p>
       </div>
 
       <div className="tabs">
@@ -38,7 +66,7 @@ function ComponentDetails({ setPage }) {
         <section>
           <h2>Functions</h2>
           <ul>
-            {componentDetailSample.functions.map((name) => (
+            {(component.functions ?? []).map((name) => (
               <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
@@ -46,7 +74,7 @@ function ComponentDetails({ setPage }) {
           <h2>Classes</h2>
 
           <ul>
-            {componentDetailSample.classes.map((name) => (
+            {(component.classes ?? []).map((name) => (
               <li className="list-item" key={name}>{name}</li>
             ))}
           </ul>
@@ -56,14 +84,14 @@ function ComponentDetails({ setPage }) {
           <h2>Imports</h2>
 
           <ul>
-            {componentDetailSample.imports.map((path) => (
+            {(component.imports ?? []).map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
-            {componentDetailSample.usedBy.map((path) => (
+            {(component.usedBy ?? []).map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>

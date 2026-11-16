@@ -22,6 +22,8 @@ function App() {
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
   const [analysis, setAnalysis] = useState(null);
+  const [selectedComponentId, setSelectedComponentId] = useState(null);
+  const [mapRepoName, setMapRepoName] = useState(null);
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -76,6 +78,9 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         analysis={analysis}
+        setSelectedComponentId={setSelectedComponentId}
+        mapRepoName={mapRepoName}
+        setMapRepoName={setMapRepoName}
       />
     );
   }
@@ -103,7 +108,7 @@ function App() {
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} />;
+    return <ComponentDetails setPage={setPage} componentId={selectedComponentId}/>;
   }
   if (page === "repository-details") {
     return (
