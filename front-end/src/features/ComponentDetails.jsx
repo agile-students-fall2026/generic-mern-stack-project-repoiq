@@ -26,6 +26,14 @@ function ComponentDetails({ setPage, componentId }) {
     };
   }, [componentId]);
 
+  if (!component) {
+    return (
+      <div className="component-details">
+        <BackButton setPage={setPage} to="map" />
+        <p>{error || "Loading component details..."}</p>
+      </div>
+    );
+  }
   return (
     <div className="component-details">
       <header className="add-header">
