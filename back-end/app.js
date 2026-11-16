@@ -25,4 +25,25 @@ app.get("/api/repositories/:id", (req, res) => {
     res.json(repo)
 })
 
+app.post("/api/repositories", (req, res) => {
+    const { url } = req.body
+
+    if (!url || !/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(url)) {
+        return res.status(400).json({ error: "Invalid GitHub URL" })
+    }
+
+    const name = url.replace(/\/$/, "").split("/").pop()
+
+    const repo = {
+        id: Date.now(),
+        name: name,
+        url: url,
+        language: "Unknown",
+        updated: "Just now",
+        status: "Pending"
+    }
+
+    repositories.push(repo)
+    res.status(201).json(repo)
+})
 module.exports = app
