@@ -1,6 +1,5 @@
 import NavBar from "./NavBar.jsx";
 import EmptyState from "./EmptyState.jsx";
-import { sampleRepositories } from "../data/mockData.js";
 import repoLogo from "../assets/repo-logo.png";
 import userIcon from "../assets/user-icon.png";
 import { CodeXml } from "lucide-react";
@@ -14,8 +13,9 @@ function Home({
   removedRepos = [],
   search,
   setSearch,
+  repositories = [],
 }) {
-  const repositories = sampleRepositories.filter(
+  const visibleRepositories = repositories.filter(
     (repo) => !removedRepos.includes(repo.name),
   );
   return (
@@ -46,11 +46,11 @@ function Home({
           View all
         </button>
       </div>
-      {repositories.length === 0 ? (
+      {visibleRepositories.length === 0 ? (
         <EmptyState setPage={setPage} />
       ) : (
         <div className="repository-list">
-          {repositories.map((repo) => (
+          {visibleRepositories.map((repo) => (
             <div
               className="repository list-item"
               key={repo.id}
