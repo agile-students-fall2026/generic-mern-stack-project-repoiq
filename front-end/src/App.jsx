@@ -23,6 +23,7 @@ function App() {
   const [removedRepos, setRemovedRepos] = useState([]);
   const [analysis, setAnalysis] = useState(null);
   const [selectedComponentId, setSelectedComponentId] = useState(null);
+  const [mapRepoName, setMapRepoName] = useState(null);
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -78,6 +79,8 @@ function App() {
         selectedRepo={selectedRepo}
         analysis={analysis}
         setSelectedComponentId={setSelectedComponentId}
+        mapRepoName={mapRepoName}
+        setMapRepoName={setMapRepoName}
       />
     );
   }

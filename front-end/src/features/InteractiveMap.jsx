@@ -10,14 +10,14 @@ import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import "./InteractiveMap.css";
 
-function InteractiveMap({ setPage, selectedRepo, analysis, setSelectedComponentId }) {
+function InteractiveMap({ setPage, selectedRepo, analysis, setSelectedComponentId, mapRepoName, setMapRepoName }) {
   const [zoom, setZoom] = useState(1);
   const [currentFolder, setCurrentFolder] = useState("");
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
-  const [selectedRepository, setSelectedRepository] = useState(repository.name);
+  const selectedRepository = mapRepoName ?? repository.name;
   const repoNodes = nodes.filter((node) => node.repo === selectedRepository);
   const repoConnections = connections.filter(
     (connection) =>
@@ -25,7 +25,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, setSelectedComponentI
       repoNodes.find((node) => node.id === connection.to),
   );
   function handleRepositoryChange(e) {
-    setSelectedRepository(e.target.value);
+    setMapRepoName(e.target.value);
     setSelected(null);
     setSearch("");
   }
