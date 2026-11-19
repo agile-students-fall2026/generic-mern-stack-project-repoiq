@@ -177,8 +177,30 @@ app.post("/api/repositories/analyze", async (req, res) => {
       });
     }
   }
+  const repositoryId = "repo:" + owner + "/" + name;
+
+  nodes.push({
+    id: repositoryId,
+    name: data.name,
+    type: "Repository",
+    path: "",
+    parent: null,
+    repo: data.name,
+    info: data.name,
+    usedIn: [],
+  });
 
   const connections = [];
+
+  for (const node of nodes) {
+    if (node.type !== "Repository") {
+      connections.push({
+        from: node.parent || repositoryId,
+        to: node.id,
+        type: "contains",
+      });
+    }
+  }
 
   for (const node of nodes) {
     for (const imported of node.imports || []) {
