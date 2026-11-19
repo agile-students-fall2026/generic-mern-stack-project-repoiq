@@ -100,7 +100,15 @@ app.post("/api/repositories/analyze", async (req, res) => {
       traverse(tree, {
         FunctionDeclaration(path) {
           if (path.node.id) {
-            node.functions.push(path.node.id.name);
+            node.functions.push({
+              name: path.node.id.name,
+              parameters: path.node.params.map((param) =>
+                code.slice(param.start, param.end),
+              ),
+              startLine: path.node.loc.start.line,
+              endLine: path.node.loc.end.line,
+              code: code.slice(path.node.start, path.node.end),
+            });
           }
         },
 
