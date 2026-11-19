@@ -50,6 +50,16 @@ app.get("/api/repositories/:id", (req, res) => {
   res.json(repo);
 });
 
+app.delete("/api/repositories/:id", (req, res) => {
+  const index = repositories.findIndex(
+    (repo) => String(repo.id) === req.params.id,
+  );
+  if (index === -1)
+    return res.status(404).json({ error: "Repository not found." });
+  repositories.splice(index, 1);
+  res.json({ success: true });
+});
+
 app.post("/api/repositories", (req, res) => {
   const { url } = req.body;
 

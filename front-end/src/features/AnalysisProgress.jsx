@@ -1,6 +1,13 @@
 import NavBar from "./NavBar.jsx";
 
-function AnalysisProgress({ setPage, url, error, startAnalysis, step }) {
+function AnalysisProgress({
+  setPage,
+  url,
+  error,
+  startAnalysis,
+  step,
+  cancelAnalysis,
+}) {
   if (error) {
     return (
       <div className="popup">
@@ -70,7 +77,9 @@ function AnalysisProgress({ setPage, url, error, startAnalysis, step }) {
           </p>
         </div>
       </div>
-
+      <button type="button" onClick={cancelAnalysis}>
+        Cancel Analysis
+      </button>
       <NavBar setPage={setPage} />
     </div>
   );

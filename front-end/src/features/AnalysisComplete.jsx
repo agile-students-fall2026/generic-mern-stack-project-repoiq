@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-function AnalysisComplete({ setPage, analysis }) {
+function AnalysisComplete({ setPage, analysis, removeCompletedRepository }) {
   if (!analysis) return <p>No analysis available.</p>;
   return (
     <div className="complete">
@@ -28,7 +28,10 @@ function AnalysisComplete({ setPage, analysis }) {
         Explore Codebase
       </button>
 
-      <button className="outline" onClick={() => setPage("home")}>
+      <button
+        className="outline"
+        onClick={() => removeCompletedRepository(analysis.repository.id)}
+      >
         Remove Repository
       </button>
     </div>
