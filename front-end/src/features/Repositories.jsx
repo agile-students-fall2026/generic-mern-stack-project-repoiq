@@ -36,7 +36,7 @@ function Repositories({
         </>
       ) : (
         <ul>
-          {repositories.map((repo) => (
+          {visibleRepositories.map((repo) => (
             <li
               key={repo.id}
               className="list-item"
