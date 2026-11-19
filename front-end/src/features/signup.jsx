@@ -1,6 +1,34 @@
-import { EyeOff, Lock, Mail, User } from 'lucide-react';
+import { useState } from 'react';
+import { Lock, Mail, User } from 'lucide-react';
 import BackButton from './BackButton.jsx';
 function Signup({ setPage }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+
+  async function handleSignup() {   
+    if (password !== confirmPassword) {                           
+      setError("Passwords don't match.");
+      return;
+    }
+
+  
+  const response = await fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email, password: password }),
+  });
+  const data = await response.json();
+
+  if (data.success) {
+    setPage('home');
+  } else {
+    setError(data.message);
+  }
+}       
+
   return (
     <div className="signup">
       <header className="add-header">
@@ -12,26 +40,28 @@ function Signup({ setPage }) {
 
       <div className="signup-input-box">
         <User size={18} />
-        <input type="text" placeholder="Full name" />
+        <input type="text" placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
 
       <div className="signup-input-box">
         <Mail size={18} />
-        <input type="email" placeholder="Email address" />
+        <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
 
       <div className="signup-input-box">
         <Lock size={18} />
-        <input type="password" placeholder="Password" />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
       <p className="small">At least 8 characters with a number and a letter</p>
 
       <div className="signup-input-box">
         <Lock size={18} />
-        <input type="password" placeholder="Confirm Password" />
+        <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
       </div>
 
-      <button className="primary" onClick={() => setPage('home')}>
+      {error && <p className="add-error">{error}</p>}
+
+      <button className="primary" onClick={handleSignup}>
         Sign Up
       </button>
 

@@ -1,9 +1,13 @@
 const cors = require("cors")
 const express = require("express")
+const path = require("path")
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "../front-end/dist")))
 
 const repositories = [
     { id: 1, name: "repoiq", language: "JavaScript", updated: "2 days ago", status: "Completed" },
@@ -46,4 +50,33 @@ app.post("/api/repositories", (req, res) => {
     repositories.push(repo)
     res.status(201).json(repo)
 })
+
+app.post("/api/login", (req, res) => {
+  const { email, password } = req.body
+
+  if (!email || !password) {
+    return res.status(400).json({ success: false, message: "Please enter your email and password." })
+  }
+
+  res.json({
+    success: true,
+    message: "Logged in.",
+    user: { name: "Demo User", email: email },
+  })
+})
+
+app.post("/api/signup", (req, res) => {
+  const { name, email, password } = req.body
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, message: "Please fill in all fields." })
+  }
+
+  res.status(201).json({
+    success: true,
+    message: "Account created.",
+    user: { name: name, email: email },
+  })
+})
+
 module.exports = app
