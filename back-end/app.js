@@ -6,44 +6,12 @@ const app = express();
 app.use(express.json());
 
 app.post("/api/repositories/analyze", async (req, res) => {
-  const url = req.body.url;
+  const url = req.body?.url;
 
-  if (!url) {
-    const connections = [];
-
-    for (const node of nodes) {
-      for (const imported of node.imports || []) {
-        // Only connect relative imports, like "./Header".
-        if (!imported.startsWith(".")) {
-          continue;
-        }
-
-        const location = path.join(node.parent, imported);
-
-        const possiblePaths = [
-          location,
-          location + ".js",
-          location + ".jsx",
-          location + "/index.js",
-          location + "/index.jsx",
-        ];
-
-        const dependency = nodes.find(
-          (item) => item.type === "File" && possiblePaths.includes(item.path),
-        );
-
-        if (dependency && !dependency.usedIn.includes(node.path)) {
-          connections.push({
-            from: node.id,
-            to: dependency.id,
-            type: "import",
-          });
-
-          dependency.usedIn.push(node.path);
-        }
-      }
-    }
-    return res.status(400).json({ error: "Enter a GitHub URL" });
+  if (typeof url !== "string" || !url.trim()) {
+    return res.status(400).json({
+      error: "Enter a GitHub URL",
+    });
   }
 
   const parts = url.split("/");
