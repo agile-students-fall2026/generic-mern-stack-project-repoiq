@@ -356,11 +356,22 @@ app.post("/api/repositories/analyze", async (req, res) => {
     functionCount += (node.functions || []).length;
   }
 
+  let repo = repositories.find((item) => item.url === data.html_url);
+
+  if (!repo) {
+    repo = { id: Date.now() };
+    repositories.push(repo);
+  }
+
+  repo.name = data.name;
+  repo.url = data.html_url;
+  repo.language = data.language || "Unknown";
+  repo.updated = "Just now";
+  repo.status = "Completed";
   progress.step = 4;
   res.json({
     repository: {
-      name: data.name,
-      url: data.html_url,
+      ...repo,
       files: fileCount,
       functions: functionCount,
       classes: classCount,

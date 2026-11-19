@@ -72,16 +72,16 @@ function App() {
       if (!response.ok) {
         throw new Error(data.error || "Analysis failed");
       }
+      setRepositories((previous) => [
+        ...previous.filter((repo) => repo.id !== data.repository.id),
+        data.repository,
+      ]);
 
       setAnalysis({
         ...data,
         analyzedAt: new Date().toLocaleString(),
       });
-      setSelectedRepo((previous) => ({
-        ...previous,
-        ...data.repository,
-        status: "Completed",
-      }));
+      setSelectedRepo(data.repository);
       setPage("complete");
     } catch (error) {
       setAnalysisError(error.message);
