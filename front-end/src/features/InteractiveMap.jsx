@@ -17,6 +17,15 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
   const [selectedRepository, setSelectedRepository] = useState(repository.name);
+  const [nodeType, setNodeType] = useState("All");
+
+  const colors = {
+    Repository: "#d7e5ff",
+    Folder: "#faf4dc",
+    File: "#f2def9",
+    Function: "#ffeaef",
+    Class: "#defbfb",
+  };
   let repoNodes = nodes.filter((node) => node.repo === selectedRepository);
   let repoConnections = connections.filter(
     (connection) =>
@@ -58,6 +67,20 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
       repoConnections = analysis.connections;
     }
   }
+
+  repoNodes = repoNodes.filter(
+    (node) =>
+      nodeType === "All" ||
+      node.type === nodeType ||
+      node.type === "Repository",
+  );
+
+  repoConnections = repoConnections.filter(
+    (connection) =>
+      repoNodes.some((node) => node.id === connection.from) &&
+      repoNodes.some((node) => node.id === connection.to),
+  );
+
   function handleRepositoryChange(e) {
     setSelectedRepository(e.target.value);
     setSelected(null);
@@ -102,6 +125,21 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+
+      <select
+        label="Filter"
+        value={nodeType}
+        onChange={(e) => {
+          setNodeType(e.target.value);
+          setSelected(null);
+        }}
+      >
+        <option value="All">All</option>
+        <option value="Folder">Folders</option>
+        <option value="File">Files</option>
+        <option value="Function">Functions</option>
+        <option value="Class">Classes</option>
+      </select>
 
       <div className="legend">
         <p className="import">– Imports</p>
@@ -167,7 +205,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
                       ? "#d8d6d6"
-                      : "#ffffff"
+                      : colors[node.type]
                   }
                   stroke={
                     search &&
@@ -186,7 +224,9 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
                   fill="#343947"
                   fontWeight="500"
                 >
-                  {node.name}
+                  {node.name.length > 9
+                    ? node.name.slice(0, 8) + "…"
+                    : node.name}
                 </text>
               </g>
             ))}
