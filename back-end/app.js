@@ -76,7 +76,10 @@ app.post("/api/repositories/analyze", async (req, res) => {
   const sourceFiles = filesData.tree.filter(
     (item) =>
       item.type === "blob" &&
-      (item.path.endsWith(".js") || item.path.endsWith(".jsx")),
+      (item.path.endsWith(".js") ||
+        item.path.endsWith(".jsx") ||
+        item.path.endsWith(".mjs") ||
+        item.path.endsWith(".cjs")),
   );
   for (const file of sourceFiles) {
     const response = await fetch(file.url);
@@ -236,6 +239,10 @@ app.post("/api/repositories/analyze", async (req, res) => {
         location + ".jsx",
         location + "/index.js",
         location + "/index.jsx",
+        location + ".mjs",
+        location + ".cjs",
+        location + "/index.mjs",
+        location + "/index.cjs",
       ];
 
       const dependency = nodes.find(
