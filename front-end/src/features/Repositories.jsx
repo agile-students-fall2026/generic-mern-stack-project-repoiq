@@ -1,6 +1,5 @@
 import NavBar from './NavBar.jsx';
 import BackButton from './BackButton.jsx';
-import { sampleRepositories } from '../data/mockData.js';
 
 function Repositories({
   setPage,
@@ -9,8 +8,9 @@ function Repositories({
   removedRepos = [],
   search,
   setSearch,
+  repositories = [],
 }) {
-  const repositories = sampleRepositories.filter(
+  const visibleRepositories = repositories.filter(
     (repo) =>
       !removedRepos.includes(repo.name) &&
       repo.name.toLowerCase().includes(search.toLowerCase())
@@ -29,7 +29,7 @@ function Repositories({
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {repositories.length === 0 ? (
+      {visibleRepositories.length === 0 ? (
         <>
           <h3>No Repositories Yet</h3>
           <p className="intro">Add your first repository to get started.</p>
