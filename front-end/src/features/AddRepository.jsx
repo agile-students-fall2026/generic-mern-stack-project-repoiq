@@ -4,7 +4,7 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage, startAnalysis }) {
+function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
 

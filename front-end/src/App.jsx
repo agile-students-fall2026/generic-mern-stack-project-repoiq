@@ -126,7 +126,15 @@ function App() {
   }
 
   if (page === "add-repository") {
-    return <AddRepository setPage={setPage} startAnalysis={startAnalysis} />;
+    return (
+      <AddRepository
+        setPage={setPage}
+        startAnalysis={startAnalysis}
+        onRepositoryAdded={(repo) =>
+          setRepositories((previous) => [...previous, repo])
+        }
+      />
+    );
   }
   if (page === "map") {
     return (

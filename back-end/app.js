@@ -2,8 +2,10 @@ const express = require("express");
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
 const path = require("node:path").posix;
+const cors = require("cors");
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const progressById = new Map();
 
@@ -25,6 +27,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
       error: "Enter a GitHub URL",
     });
   }
+
   const progress = { step: 0 };
   const progressId = req.body.progressId;
 
