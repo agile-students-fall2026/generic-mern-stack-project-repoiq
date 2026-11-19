@@ -126,6 +126,26 @@ app.post("/api/repositories/analyze", async (req, res) => {
           });
         },
 
+        CallExpression(path) {
+          if (
+            path.node.callee.type === "Identifier" &&
+            path.node.callee.name === "require" &&
+            path.node.arguments[0]?.type === "StringLiteral"
+          ) {
+            node.imports.push(path.node.arguments[0].value);
+          }
+        },
+
+        ExportNamedDeclaration(path) {
+          if (path.node.source) {
+            node.imports.push(path.node.source.value);
+          }
+        },
+
+        ExportAllDeclaration(path) {
+          node.imports.push(path.node.source.value);
+        },
+
         ImportDeclaration(path) {
           node.imports.push(path.node.source.value);
         },
