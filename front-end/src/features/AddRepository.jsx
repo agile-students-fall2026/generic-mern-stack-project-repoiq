@@ -6,6 +6,7 @@ import "./AddRepository.css";
 
 function AddRepository({ setPage, onRepositoryAdded }) {  const [url, setUrl] = useState("");
   const [error, setError] = useState("");
+  const [githubConnected, setGithubConnected] = useState(false);
 
   async function handleAnalyze() {
     const repoUrl = url.trim();
@@ -78,8 +79,12 @@ function AddRepository({ setPage, onRepositoryAdded }) {  const [url, setUrl] = 
       </button>
 
       <p className="center">OR</p>
-      <button className="outline" type="button">
-        Connect to GitHub
+      <button
+        className="outline"
+        type="button"
+        onClick={() => setGithubConnected(true)}
+      >
+        {githubConnected ? "GitHub Connected" : "Connect to GitHub"}
       </button>
       <NavBar setPage={setPage} />
     </div>
