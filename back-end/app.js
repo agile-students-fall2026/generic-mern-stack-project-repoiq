@@ -48,6 +48,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
 
   const nodes = [];
   let fileCount = 0;
+  let classCount = 0;
 
   for (const item of filesData.tree) {
     if (item.type === "blob" || item.type === "tree") {
@@ -68,6 +69,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
 
       if (item.type === "blob") {
         fileCount++;
+        classCount += (node.classes || []).length;
       }
     }
   }
@@ -89,6 +91,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
     const node = nodes.find((node) => node.path === file.path);
 
     node.functions = [];
+    node.classes = [];
     node.imports = [];
 
     try {
@@ -98,18 +101,27 @@ app.post("/api/repositories/analyze", async (req, res) => {
       });
 
       traverse(tree, {
-        FunctionDeclaration(path) {
-          if (path.node.id) {
-            node.functions.push({
-              name: path.node.id.name,
-              parameters: path.node.params.map((param) =>
-                code.slice(param.start, param.end),
-              ),
-              startLine: path.node.loc.start.line,
-              endLine: path.node.loc.end.line,
-              code: code.slice(path.node.start, path.node.end),
-            });
-          }
+        Class(path) {
+          node.classes.push({
+            name: path.node.id?.name || path.parent.id?.name || "anonymous",
+            startLine: path.node.loc.start.line,
+            endLine: path.node.loc.end.line,
+          });
+        },
+        Function(path) {
+          node.functions.push({
+            name:
+              path.node.id?.name ||
+              path.parent.id?.name ||
+              path.node.key?.name ||
+              "anonymous",
+            parameters: path.node.params.map((param) =>
+              code.slice(param.start, param.end),
+            ),
+            startLine: path.node.loc.start.line,
+            endLine: path.node.loc.end.line,
+            code: code.slice(path.node.start, path.node.end),
+          });
         },
 
         ImportDeclaration(path) {
@@ -165,7 +177,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
       url: data.html_url,
       files: fileCount,
       functions: functionCount,
-      classes: 0,
+      classes: classCount,
       relationships: connections.length,
     },
     nodes: nodes,
