@@ -39,13 +39,31 @@ function App() {
     setAnalysisError("");
     setPage("progress");
 
+    const progressId = crypto.randomUUID();
+    setStep(0);
+
+    let active = true;
+
+    const timre = setInterval(async () => {
+      try {
+        const response = await fetch("/api/analysis-progress/" + progressId);
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (active) {
+            setStep((previous) => Math.max(previous, data.step));
+          }
+        }
+      } catch {}
+    }, 500);
     try {
       const response = await fetch("/api/repositories/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url, progressId }),
       });
 
       const data = await response.json();
@@ -114,13 +132,14 @@ function App() {
     );
   }
 
-  if (page === "progress") {
+  if (page === "progress" || page === "analysis-error") {
     return (
       <AnalysisProgress
         setPage={setPage}
         url={analysisUrl}
         error={analysisError}
         startAnalysis={startAnalysis}
+        step={step}
       />
     );
   }
