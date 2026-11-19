@@ -198,6 +198,7 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         repoBack={repoBack}
+        startAnalysis={startAnalysis}
       />
     );
   }
