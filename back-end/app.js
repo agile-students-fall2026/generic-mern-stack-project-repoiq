@@ -4,8 +4,11 @@ const traverse = require("@babel/traverse").default;
 const path = require("node:path").posix;
 const cors = require("cors");
 const app = express();
+const filePath = require("path");
 app.use(express.json());
 app.use(cors());
+app.use(express.static(filePath.join(__dirname, "public")));
+app.use(express.static(filePath.join(__dirname, "../front-end/dist")));
 
 const progressById = new Map();
 
@@ -379,6 +382,40 @@ app.post("/api/repositories/analyze", async (req, res) => {
     },
     nodes: nodes,
     connections: connections,
+  });
+});
+
+app.post("/api/login", (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Please enter your email and password.",
+    });
+  }
+
+  res.json({
+    success: true,
+    message: "Logged in.",
+    user: { name: "Demo User", email: email },
+  });
+});
+
+app.post("/api/signup", (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Please fill in all fields.",
+    });
+  }
+
+  res.status(201).json({
+    success: true,
+    message: "Account created.",
+    user: { name: name, email: email },
   });
 });
 
