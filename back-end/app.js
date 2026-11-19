@@ -69,7 +69,6 @@ app.post("/api/repositories/analyze", async (req, res) => {
 
       if (item.type === "blob") {
         fileCount++;
-        classCount += (node.classes || []).length;
       }
     }
   }
@@ -104,6 +103,9 @@ app.post("/api/repositories/analyze", async (req, res) => {
         Class(path) {
           node.classes.push({
             name: path.node.id?.name || path.parent.id?.name || "anonymous",
+            extends: path.node.superClass
+              ? code.slice(path.node.superClass.start, path.node.superClass.end)
+              : null,
             startLine: path.node.loc.start.line,
             endLine: path.node.loc.end.line,
           });
@@ -132,6 +134,50 @@ app.post("/api/repositories/analyze", async (req, res) => {
       node.parseError = "Could not read functions in this file";
     }
   }
+  const fileNodes = nodes.filter((node) => node.type === "File");
+
+  for (const file of fileNodes) {
+    const functions = file.functions || [];
+
+    for (let i = 0; i < functions.length; i++) {
+      const fn = functions[i];
+
+      nodes.push({
+        id: file.id + "#function:" + i,
+        name: fn.name,
+        type: "Function",
+        path: file.path,
+        parent: file.id,
+        repo: file.repo,
+        parameters: fn.parameters,
+        startLine: fn.startLine,
+        endLine: fn.endLine,
+        code: fn.code,
+        usedIn: [],
+      });
+    }
+  }
+  for (const file of fileNodes) {
+    const classes = file.classes || [];
+
+    for (let i = 0; i < classes.length; i++) {
+      const cls = classes[i];
+
+      nodes.push({
+        id: file.id + "#class:" + i,
+        name: cls.name,
+        type: "Class",
+        path: file.path,
+        parent: file.id,
+        repo: file.repo,
+        extends: cls.extends,
+        startLine: cls.startLine,
+        endLine: cls.endLine,
+        usedIn: [],
+      });
+    }
+  }
+
   const connections = [];
 
   for (const node of nodes) {
@@ -168,6 +214,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
   let functionCount = 0;
 
   for (const node of nodes) {
+    classCount += (node.classes || []).length;
     functionCount += (node.functions || []).length;
   }
 
