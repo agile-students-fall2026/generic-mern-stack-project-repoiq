@@ -24,18 +24,39 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
       repoNodes.find((node) => node.id === connection.to),
   );
   if (analysis) {
-    repoNodes = analysis.nodes.map((node, i) => {
-      const angle = (i / analysis.nodes.length) * Math.PI * 2;
-      const radius = node.type === "Repository" ? 0 : 120;
+    let mapRadius = 225;
 
-      return {
-        ...node,
-        x: 175 + Math.cos(angle) * radius,
-        y: 225 + Math.sin(angle) * radius,
-      };
-    });
+    if (analysis) {
+      repoNodes = [];
+      let ring = 1;
+      let position = 0;
 
-    repoConnections = analysis.connections;
+      for (const node of analysis.nodes) {
+        let radius = 0;
+        let angle = 0;
+
+        if (node.type !== "Repository") {
+          if (position === ring * 6) {
+            ring++;
+            position = 0;
+          }
+
+          radius = ring * 100;
+          angle = (position / (ring * 6)) * Math.PI * 2;
+          position++;
+
+          mapRadius = Math.max(mapRadius, radius + 50);
+        }
+
+        repoNodes.push({
+          ...node,
+          x: 175 + Math.cos(angle) * radius,
+          y: 225 + Math.sin(angle) * radius,
+        });
+      }
+
+      repoConnections = analysis.connections;
+    }
   }
   function handleRepositoryChange(e) {
     setSelectedRepository(e.target.value);
