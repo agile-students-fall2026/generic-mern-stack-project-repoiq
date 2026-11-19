@@ -45,7 +45,7 @@ function App() {
 
     let active = true;
 
-    const timre = setInterval(async () => {
+    const timer = setInterval(async () => {
       try {
         const response = await fetch("/api/analysis-progress/" + progressId);
 
@@ -56,13 +56,7 @@ function App() {
             setStep((previous) => Math.max(previous, data.step));
           }
         }
-      } catch (error) {
-        setAnalysisError(error.message);
-        setPage("analysis-error");
-      } finally {
-        active = false;
-        clearInterval(timer);
-      }
+      } catch (error) {}
     }, 500);
     try {
       const response = await fetch("/api/repositories/analyze", {
@@ -83,13 +77,27 @@ function App() {
         ...data,
         analyzedAt: new Date().toLocaleString(),
       });
-      setSelectedRepo(data.repository);
+      setSelectedRepo((previous) => ({
+        ...previous,
+        ...data.repository,
+        status: "Completed",
+      }));
       setPage("complete");
     } catch (error) {
       setAnalysisError(error.message);
       setPage("analysis-error");
+    } finally {
+      active = false;
+      clearInterval(timer);
     }
   }
+  useEffect(() => {
+    fetch("/api/repositories")
+      .then((res) => res.json())
+      .then((data) => setRepositories(data))
+      .catch((error) => console.error(error));
+  }, []);
+
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -133,9 +141,10 @@ function App() {
       <AddRepository
         setPage={setPage}
         startAnalysis={startAnalysis}
-        onRepositoryAdded={(repo) =>
-          setRepositories((previous) => [...previous, repo])
-        }
+        onRepositoryAdded={(repo) => {
+          setRepositories((previous) => [...previous, repo]);
+          setSelectedRepo(repo);
+        }}
       />
     );
   }
