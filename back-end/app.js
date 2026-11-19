@@ -64,7 +64,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
         type: item.type === "tree" ? "Folder" : "File",
         repo: data.name,
         info: item.path,
-        usedIn: [],
+        usedBy: [],
       });
 
       if (item.type === "blob") {
@@ -176,7 +176,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
         startLine: fn.startLine,
         endLine: fn.endLine,
         code: fn.code,
-        usedIn: [],
+        usedBy: [],
       });
     }
   }
@@ -196,7 +196,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
         extends: cls.extends,
         startLine: cls.startLine,
         endLine: cls.endLine,
-        usedIn: [],
+        usedBy: [],
       });
     }
   }
@@ -210,7 +210,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
     parent: null,
     repo: data.name,
     info: data.name,
-    usedIn: [],
+    usedBy: [],
   });
 
   const connections = [];
@@ -249,14 +249,14 @@ app.post("/api/repositories/analyze", async (req, res) => {
         (item) => item.type === "File" && possiblePaths.includes(item.path),
       );
 
-      if (dependency && !dependency.usedIn.includes(node.path)) {
+      if (dependency && !dependency.usedBy.includes(node.path)) {
         connections.push({
           from: node.id,
           to: dependency.id,
           type: "import",
         });
 
-        dependency.usedIn.push(node.path);
+        dependency.usedBy.push(node.path);
       }
     }
   }
