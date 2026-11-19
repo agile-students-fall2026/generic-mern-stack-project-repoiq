@@ -55,7 +55,13 @@ function App() {
             setStep((previous) => Math.max(previous, data.step));
           }
         }
-      } catch {}
+      } catch (error) {
+        setAnalysisError(error.message);
+        setPage("analysis-error");
+      } finally {
+        active = false;
+        clearInterval(timer);
+      }
     }, 500);
     try {
       const response = await fetch("/api/repositories/analyze", {
