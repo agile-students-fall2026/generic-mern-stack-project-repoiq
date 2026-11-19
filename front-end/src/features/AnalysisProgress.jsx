@@ -7,17 +7,11 @@ function AnalysisProgress({ setPage, url, error, startAnalysis, step }) {
         <h2>Analysis Failed</h2>
         <p>{error}</p>
 
-        <button
-          className="primary"
-          onClick={() => {
-            setStep(0);
-            setError(false);
-          }}
-        >
+        <button className="primary" onClick={() => startAnalysis(url)}>
           Retry Analysis
         </button>
 
-        <button className="outline" onClick={() => startAnalysis(url)}>
+        <button className="outline" onClick={() => setPage("repositories")}>
           Back to Repositories
         </button>
       </div>
@@ -46,7 +40,7 @@ function AnalysisProgress({ setPage, url, error, startAnalysis, step }) {
               step < 1 ? "dot" : step === 1 ? "dot half" : "dot filled"
             }
           ></span>
-          <b>Parsing source code</b>
+          <b>Downloading and parsing source code...</b>
           <p>
             {step < 1 ? "Pending" : step === 1 ? "In Progress..." : "Completed"}
           </p>
@@ -58,7 +52,7 @@ function AnalysisProgress({ setPage, url, error, startAnalysis, step }) {
               step < 2 ? "dot" : step === 2 ? "dot half" : "dot filled"
             }
           ></span>
-          <b>Building dependency graph</b>
+          <b>Preparing map data</b>
           <p>
             {step < 2 ? "Pending" : step === 2 ? "In Progress..." : "Completed"}
           </p>
@@ -77,9 +71,6 @@ function AnalysisProgress({ setPage, url, error, startAnalysis, step }) {
         </div>
       </div>
 
-      <button className="outline" onClick={() => setError(true)}>
-        Cancel Analysis
-      </button>
       <NavBar setPage={setPage} />
     </div>
   );
