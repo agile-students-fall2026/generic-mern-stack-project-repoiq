@@ -61,8 +61,7 @@ app.delete("/api/repositories/:id", (req, res) => {
 });
 
 app.post("/api/repositories", (req, res) => {
-  const { url } = req.body;
-
+  const url = typeof req.body?.url === "string" ? req.body.url.trim() : "";
   if (!url || !/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(url)) {
     return res.status(400).json({ error: "Invalid GitHub URL" });
   }
@@ -92,12 +91,9 @@ app.get("/api/analysis-progress/:id", (req, res) => {
 });
 
 app.post("/api/repositories/analyze", async (req, res) => {
-  const url = req.body?.url;
-
-  if (typeof url !== "string" || !url.trim()) {
-    return res.status(400).json({
-      error: "Enter a GitHub URL",
-    });
+  const url = typeof req.body?.url === "string" ? req.body.url.trim() : "";
+  if (!url || !/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(url)) {
+    return res.status(400).json({ error: "Invalid GitHub URL" });
   }
 
   const progress = { step: 0 };
@@ -106,7 +102,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
   if (progressId) {
     progressById.set(progressId, progress);
 
-    res.on("finish", () => {
+    res.once("close", () => {
       setTimeout(() => {
         progressById.delete(progressId);
       }, 60000).unref();
@@ -182,6 +178,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
   );
   progress.step = 1;
   for (const file of sourceFiles) {
+    if (res.destroyed) return;
     const response = await fetch(file.url);
     const data = await response.json();
 
@@ -369,6 +366,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
     functionCount += (node.functions || []).length;
   }
 
+  if (res.destroyed) return;
   let repo = repositories.find((item) => item.url === data.html_url);
 
   if (!repo) {
