@@ -1,9 +1,12 @@
 import { Check } from "lucide-react";
+import BackButton from "./BackButton.jsx";
+import NavBar from "./NavBar.jsx";
 function AnalysisComplete({ setPage, analysis, removeCompletedRepository }) {
   if (!analysis) return <p>No analysis available.</p>;
   return (
     <div className="complete">
       <header className="add-header">
+        <BackButton setPage={setPage} to="repository-details" />
         <h1>
           <Check size={48} />
         </h1>
@@ -34,6 +37,7 @@ function AnalysisComplete({ setPage, analysis, removeCompletedRepository }) {
       >
         Remove Repository
       </button>
+      <NavBar setPage={setPage} />
     </div>
   );
 }
