@@ -4,34 +4,12 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage, setAnalysis }) {
+function AddRepository({ setPage, startAnalysis }) {
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
 
   async function handleAnalyze() {
-    setError("");
-
-    try {
-      const response = await fetch("/api/repositories/analyze", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: url.trim() }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error);
-        return;
-      }
-
-      setAnalysis(data);
-      setPage("map");
-    } catch {
-      setError("api error");
-    }
+    startAnalysis(url.trim());
   }
 
   return (

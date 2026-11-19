@@ -5,12 +5,36 @@ const path = require("node:path").posix;
 const app = express();
 app.use(express.json());
 
+const progressById = new Map();
+
+app.get("/api/analysis-progress/:id", (req, res) => {
+  const progress = progressById.get(req.params.id);
+
+  if (!progress) {
+    return res.status(404).json({});
+  }
+
+  res.json(progress);
+});
+
 app.post("/api/repositories/analyze", async (req, res) => {
   const url = req.body?.url;
 
   if (typeof url !== "string" || !url.trim()) {
     return res.status(400).json({
       error: "Enter a GitHub URL",
+    });
+  }
+  const progress = { step: 0 };
+  const progressId = req.body.progressId;
+
+  if (progressId) {
+    progressById.set(progressId, progress);
+
+    res.on("finish", () => {
+      setTimeout(() => {
+        progressById.delete(progressId);
+      }, 60000).unref();
     });
   }
 
@@ -81,6 +105,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
         item.path.endsWith(".mjs") ||
         item.path.endsWith(".cjs")),
   );
+  progress.step = 1;
   for (const file of sourceFiles) {
     const response = await fetch(file.url);
     const data = await response.json();
@@ -157,6 +182,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
       node.parseError = "Could not read functions in this file";
     }
   }
+  progress.step = 2;
   const fileNodes = nodes.filter((node) => node.type === "File");
 
   for (const file of fileNodes) {
@@ -260,6 +286,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
       }
     }
   }
+  progress.step = 3;
   let functionCount = 0;
 
   for (const node of nodes) {
@@ -267,6 +294,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
     functionCount += (node.functions || []).length;
   }
 
+  progress.step = 4;
   res.json({
     repository: {
       name: data.name,

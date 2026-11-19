@@ -22,6 +22,9 @@ function App() {
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
   const [analysis, setAnalysis] = useState(null);
+  const [analysisUrl, setAnalysisUrl] = useState("");
+  const [step, setStep] = useState(0);
+  const [analysisError, setAnalysisError] = useState("");
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -30,6 +33,37 @@ function App() {
   const [repoBack, setRepoBack] = useState("home");
   function addRepository(url) {
     setRepositories([...repositories, url]);
+  }
+  async function startAnalysis(url) {
+    setAnalysisUrl(url);
+    setAnalysisError("");
+    setPage("progress");
+
+    try {
+      const response = await fetch("/api/repositories/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Analysis failed");
+      }
+
+      setAnalysis({
+        ...data,
+        analyzedAt: new Date().toLocaleString(),
+      });
+      setSelectedRepo(data.repository);
+      setPage("complete");
+    } catch (error) {
+      setAnalysisError(error.message);
+      setPage("analysis-error");
+    }
   }
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
@@ -68,7 +102,7 @@ function App() {
   }
 
   if (page === "add-repository") {
-    return <AddRepository setPage={setPage} setAnalysis={setAnalysis} />;
+    return <AddRepository setPage={setPage} startAnalysis={startAnalysis} />;
   }
   if (page === "map") {
     return (
@@ -81,11 +115,18 @@ function App() {
   }
 
   if (page === "progress") {
-    return <AnalysisProgress setPage={setPage} />;
+    return (
+      <AnalysisProgress
+        setPage={setPage}
+        url={analysisUrl}
+        error={analysisError}
+        startAnalysis={startAnalysis}
+      />
+    );
   }
 
   if (page === "complete") {
-    return <AnalysisComplete setPage={setPage} />;
+    return <AnalysisComplete setPage={setPage} analysis={analysis} />;
   }
 
   if (page === "searchresult") {
@@ -121,6 +162,8 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         removeRepository={removeRepository}
+        analysis={analysis}
+        startAnalysis={startAnalysis}
       />
     );
   }
