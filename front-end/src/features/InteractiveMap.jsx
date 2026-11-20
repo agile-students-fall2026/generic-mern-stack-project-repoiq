@@ -10,7 +10,7 @@ import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import "./InteractiveMap.css";
 
-function InteractiveMap({ setPage, selectedRepo, analysis }) {
+function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
   const [zoom, setZoom] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -97,6 +97,9 @@ function InteractiveMap({ setPage, selectedRepo, analysis }) {
         <p>Used by: {(selected.usedBy || []).join(", ") || "None"}</p>
         {selected.startLine && <p>Line: {selected.startLine}</p>}
         {selected.code && <pre>{selected.code}</pre>}
+        <button className="primary" onClick={() => onViewComponent(selected)}>
+          View component details
+        </button>
       </div>
     );
   }
