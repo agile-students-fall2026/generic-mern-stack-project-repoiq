@@ -38,7 +38,7 @@ return (
       Log in
     </button>
     <button className="outline">Continue with GitHub</button>
-    <p className="center">
+    <p className="center signup-prompt">
       Don't have an account? {' '}
       <button type="button" onClick={() => setPage('signup')}>
         Sign up
