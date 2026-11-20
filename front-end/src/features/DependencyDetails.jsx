@@ -3,7 +3,7 @@ import BackButton from "./BackButton.jsx";
 import NavBar from './NavBar.jsx';
 import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
-function DependencyDetails({ setPage }) {
+function DependencyDetails({ setPage, component }) {
   const [tab, setTab] = useState("depends"); // remembers what tab selected
 
   let files = [];
