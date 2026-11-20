@@ -30,7 +30,7 @@ return (
     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-    <button type="button" onClick={() => setPage('forgot-password')}>
+    <button type="button" className="forgot-password" onClick={() => setPage('forgot-password')}>
       Forgot Password?
     </button>
     {error && <p className="add-error">{error}</p>}

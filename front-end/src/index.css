@@ -337,3 +337,8 @@ button.outline {
   height: 32px;
   flex-shrink: 0;
 }
+
+.login .forgot-password {
+  display: block;
+  margin-left: auto;
+}
