@@ -254,7 +254,7 @@ function App() {
   }
 
   if (page === "dependencydetails") {
-    return <DependencyDetails setPage={setPage} />;
+    return <DependencyDetails setPage={setPage} component={selectedComponent}/>;
   }
 
   if (page === "componentdetails") {
