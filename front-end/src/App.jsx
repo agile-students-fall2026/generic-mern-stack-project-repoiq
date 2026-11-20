@@ -28,6 +28,8 @@ function App() {
   const [analysisUrl, setAnalysisUrl] = useState("");
   const [step, setStep] = useState(0);
   const [analysisError, setAnalysisError] = useState("");
+  const [selectedComponent, setSelectedComponent] = useState({});
+  const activeAnalysis = analysis?.repository?.id === selectedRepo?.id ? analysis : null;
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -206,6 +208,10 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         analysis={analysis}
+        onViewComponent={(node) => {
+          setSelectedComponent(node);
+          setPage("componentdetails");
+        }}
       />
     );
   }
@@ -235,7 +241,11 @@ function App() {
 
   if (page === "searchresult") {
     return (
-      <SearchResults setPage={setPage} setSelectedResult={setSelectedResult} />
+      <SearchResults 
+        setPage={setPage} 
+        setSelectedResult={setSelectedResult} 
+        analysis={activeAnalysis} 
+        selectedRepo={selectedRepo}/>
     );
   }
 
@@ -248,7 +258,7 @@ function App() {
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} />;
+    return <ComponentDetails setPage={setPage} component={selectedComponent}/>;
   }
   if (page === "repository-details") {
     return (
