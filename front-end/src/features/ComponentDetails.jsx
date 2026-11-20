@@ -1,9 +1,8 @@
 import { useState } from "react";
 import BackButton from "./BackButton.jsx";
 import NavBar from './NavBar.jsx';
-import { componentDetailSample } from "../data/mockData.js";
 
-function ComponentDetails({ setPage }) {
+function ComponentDetails({ setPage, component }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
 
   return (
@@ -14,8 +13,8 @@ function ComponentDetails({ setPage }) {
       </header>
 
       <div className="list-item">
-        <h2>{componentDetailSample.name}</h2>
-        <p>{componentDetailSample.path}</p>
+        <h2>{component.name}</h2>
+        <p>{component.path}</p>
       </div>
 
       <div className="tabs">
@@ -38,16 +37,16 @@ function ComponentDetails({ setPage }) {
         <section>
           <h2>Functions</h2>
           <ul>
-            {componentDetailSample.functions.map((name) => (
-              <li className="list-item" key={name}>{name}</li>
+            {(component.functions ?? []).map(({ name, startLine }) => (
+              <li className="list-item" key={name + ":" + startLine}>{name}</li>
             ))}
           </ul>
 
           <h2>Classes</h2>
 
           <ul>
-            {componentDetailSample.classes.map((name) => (
-              <li className="list-item" key={name}>{name}</li>
+            {(component.classes ?? []).map(({ name, startLine }) => (
+              <li className="list-item" key={name + ":" + startLine}>{name}</li>
             ))}
           </ul>
         </section>
@@ -56,14 +55,14 @@ function ComponentDetails({ setPage }) {
           <h2>Imports</h2>
 
           <ul>
-            {componentDetailSample.imports.map((path) => (
+            {(component.imports ?? []).map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
-            {componentDetailSample.usedBy.map((path) => (
+            {(component.usedBy ?? component.usedIn ?? []).map((path) => (
               <li key={path}>{path}</li>
             ))}
           </ul>
