@@ -4,9 +4,11 @@ import NavBar from './NavBar.jsx';
 import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
 function DependencyDetails({ setPage, component }) {
-  const [tab, setTab] = useState("depends"); // remembers what tab selected
+  const [tab, setTab] = useState("depends"); 
 
-  let files = [];
+  const dependsOn = component?.imports ?? [];
+  const usedBy = component?.usedBy ?? [];
+  const files = tab === "depends" ? dependsOn : usedBy;
 
   if (tab === "depends") {
     files = sampleDependsOn;
@@ -31,10 +33,9 @@ function DependencyDetails({ setPage, component }) {
         </button>
       </div>
 
-      {files.map((file) => (
-        <div className="list-item" key={file.path}>
-          <p>{file.name}</p>
-          <p className="path">{file.path}</p>
+      {files.map((path) => (
+        <div className="list-item" key={path}>
+          <p className="path">{path}</p>
         </div>
       ))}
       <NavBar setPage={setPage}/>
