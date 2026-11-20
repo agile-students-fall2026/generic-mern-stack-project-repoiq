@@ -17,7 +17,7 @@ function AddRepository({ setPage, onRepositoryAdded }) {  const [url, setUrl] = 
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/repositories", {
+      const response = await fetch("/api/repositories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: repoUrl }),
