@@ -8,7 +8,7 @@ function CheckEmail({ setPage }) {
             <button className="primary" onClick={() => {}}>
                 Resend email
             </button>
-            <button onClick={() => setPage('login')}>
+            <button className="outline" onClick={() => setPage('login')}>
                 Back to log in
             </button>
         </div>
