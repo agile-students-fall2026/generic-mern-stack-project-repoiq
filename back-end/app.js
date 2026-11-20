@@ -141,15 +141,59 @@ app.post("/api/repositories/analyze", async (req, res) => {
     return res.json({
       repository: {
         ...repo,
-        files: 1,
-        functions: 0,
-        classes: 0,
-        relationships: 0,
+        files: 2,
+        functions: 2,
+        classes: 1,
+        relationships: 4,
       },
       nodes: [
-        { id: "index.js", name: "index.js", path: "index.js", type: "File" },
+        {
+          id: "main.js",
+          name: "main.js",
+          path: "main.js",
+          type: "File",
+          usedBy: ["test.js"],
+          functions: [
+            { name: "foo", startLine: 1 },
+            { name: "baz", startLine: 3 },
+          ],
+          classes: [{ name: "Bar", startLine: 5 }],
+        },
+        {
+          id: "test.js",
+          name: "test.js",
+          path: "test.js",
+          type: "File",
+          imports: ["./main.js"],
+        },
+        {
+          id: "foo",
+          name: "foo",
+          path: "main.js",
+          type: "Function",
+          startLine: 1,
+        },
+        {
+          id: "baz",
+          name: "baz",
+          path: "main.js",
+          type: "Function",
+          startLine: 3,
+        },
+        {
+          id: "Bar",
+          name: "Bar",
+          path: "main.js",
+          type: "Class",
+          startLine: 5,
+        },
       ],
-      connections: [],
+      connections: [
+        { from: "test.js", to: "main.js", type: "import" },
+        { from: "main.js", to: "foo", type: "contains" },
+        { from: "main.js", to: "baz", type: "contains" },
+        { from: "main.js", to: "Bar", type: "contains" },
+      ],
     });
   }
 
