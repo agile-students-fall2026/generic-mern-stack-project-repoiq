@@ -115,8 +115,6 @@ app.post("/api/repositories/analyze", async (req, res) => {
   const name = parts[4];
 
   if (process.env.REPOIQ_LIVE_GITHUB !== "1") {
-    const { setTimeout: wait } = require("node:timers/promises");
-
     for (let step = 0; step <= 4; step++) {
       progress.step = step;
       await wait(750);
@@ -137,6 +135,8 @@ app.post("/api/repositories/analyze", async (req, res) => {
       };
       repositories.push(repo);
     }
+    repo.status = "Completed";
+    repo.updated = "Just now";
 
     return res.json({
       repository: {
