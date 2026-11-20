@@ -23,7 +23,7 @@ function Signup({ setPage }) {
   const data = await response.json();
 
   if (data.success) {
-    setPage('home');
+    setPage('check-email');
   } else {
     setError(data.message);
   }
