@@ -20,13 +20,13 @@ function ForgotPassword({ setPage }) {
                 <BackButton setPage={setPage} to="login" />
                 <h1>Forgot password</h1>
             </header>
-            <p> Enter your email to reset your password.</p>
             <input
                 type="email"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            {message && <p>{message}</p>}
+            {message && <p className="add-error">{message}</p>}
             <button className="primary" onClick={handleSubmit}>
                 Reset password
             </button>
