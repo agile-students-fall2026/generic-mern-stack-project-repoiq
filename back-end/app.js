@@ -29,6 +29,30 @@ app.get("/api/repositories/:id", (req, res) => {
     res.json(repo)
 })
 
+const analyses = {}
+
+app.get("/api/repositories/:id/analysis", (req, res) => {
+    const repo = repositories.find(r => r.id === Number(req.params.id))
+
+    if (!repo) {
+        return res.status(404).json({ error: "Repository not found" })
+    }
+
+    if (!analyses[repo.id]) {
+        analyses[repo.id] = {
+            repositoryId: repo.id,
+            analyzedAt: new Date().toISOString(),
+            status: "Completed",
+            files: 342,
+            functions: 28,
+            classes: 65,
+            relationships: 19
+        }
+    }
+
+    res.json(analyses[repo.id])
+})
+
 app.post("/api/repositories", (req, res) => {
     const { url } = req.body
 
