@@ -38,8 +38,12 @@ return (
       Log in
     </button>
     <button className="outline">Continue with GitHub</button>
-    <br />
-    <button onClick={() => setPage('signup')}>Create an account</button>
+    <p className="center">
+      Don't have an account? {' '}
+      <button type="button" onClick={() => setPage('signup')}>
+        Sign up
+      </button>
+    </p>
   </div>
 );
 }
