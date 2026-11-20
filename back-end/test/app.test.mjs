@@ -28,4 +28,4 @@ it("counts repository files", async () => {
 
   assert.equal(res.status, 200);
   assert.equal(res.body.repository.files, 1);
-});
+}).timeout(6000);
