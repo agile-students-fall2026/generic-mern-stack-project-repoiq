@@ -56,14 +56,14 @@ function ComponentDetails({ setPage, component }) {
 
           <ul>
             {(component.imports ?? []).map((path) => (
-              <li key={path}>{path}</li>
+              <li className="list-item" key={path}>{path}</li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
             {(component.usedBy ?? component.usedIn ?? []).map((path) => (
-              <li key={path}>{path}</li>
+              <li className="list-item" key={path}>{path}</li>
             ))}
           </ul>
 
