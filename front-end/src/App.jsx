@@ -16,6 +16,7 @@ import RepositoryDetails from "./features/RepositoryDetails.jsx";
 import AnalysisResults from "./features/AnalysisResults.jsx";
 import Profile from "./features/Profile.jsx";
 import ForgotPassword from "./features/ForgotPassword.jsx";
+import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
   const [page, setPage] = useState("welcome");
@@ -142,6 +143,10 @@ function App() {
 
   if (page === "forgot-password") {
     return <ForgotPassword setPage={setPage} />
+  }
+
+  if (page === "check-email") {
+    return <CheckEmail setPage={setPage} />;
   }
 }
 export default App;
