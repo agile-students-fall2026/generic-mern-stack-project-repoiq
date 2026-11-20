@@ -33,7 +33,7 @@ function App() {
     setRepositories([...repositories, url]);
   }
   useEffect(() => {
-    fetch("http://localhost:3000/api/repositories")
+    fetch("/api/repositories")
       .then((res) => res.json())
       .then((data) => setRepositories(data))
       .catch((err) => console.error(err));
