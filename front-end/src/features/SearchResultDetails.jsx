@@ -27,7 +27,7 @@ function SearchResultDetails({ result, setPage }) {
 
       <h2>Used in</h2>
       <ul>
-        {result.usedIn.map((path) => (
+        {(result.usedBy ?? result.usedIn ?? []).map((path) => (
           <li key={path}>{path}</li>
         ))}
       </ul>
