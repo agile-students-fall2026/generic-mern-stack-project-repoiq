@@ -1,5 +1,5 @@
-import NavBar from './NavBar.jsx';
-import BackButton from './BackButton.jsx';
+import NavBar from "./NavBar.jsx";
+import BackButton from "./BackButton.jsx";
 
 function Repositories({
   setPage,
@@ -13,7 +13,7 @@ function Repositories({
   const visibleRepositories = repositories.filter(
     (repo) =>
       !removedRepos.includes(repo.name) &&
-      repo.name.toLowerCase().includes(search.toLowerCase())
+      repo.name.toLowerCase().includes(search.toLowerCase()),
   );
   return (
     <div className="repositories">
@@ -21,7 +21,7 @@ function Repositories({
         <BackButton setPage={setPage} to="home" />
         <h1>Repositories</h1>
       </header>
-      
+
       <input
         type="text"
         placeholder="Search repositories..."
@@ -36,14 +36,14 @@ function Repositories({
         </>
       ) : (
         <ul>
-          {repositories.map((repo) => (
+          {visibleRepositories.map((repo) => (
             <li
               key={repo.id}
               className="list-item"
               onClick={() => {
                 setSelectedRepo(repo);
-                setRepoBack('repositories');
-                setPage('repository-details');
+                setRepoBack("repositories");
+                setPage("repository-details");
               }}
             >
               <p>{repo.name}</p>
@@ -55,7 +55,7 @@ function Repositories({
         </ul>
       )}
 
-      <button className="primary" onClick={() => setPage('add-repository')}>
+      <button className="primary" onClick={() => setPage("add-repository")}>
         + Add Repository
       </button>
 

@@ -4,36 +4,12 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage, onRepositoryAdded }) {  const [url, setUrl] = useState("");
+function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
+  const [url, setUrl] = useState("");
   const [error, setError] = useState("");
 
   async function handleAnalyze() {
-    const repoUrl = url.trim();
-
-    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(repoUrl)) {
-      setError("Please enter a valid GitHub repository URL.");
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3000/api/repositories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: repoUrl }),
-      });
-
-      if (!response.ok) {
-        setError("Failed to add repository.");
-        return;
-      }
-
-      const repo = await response.json();
-      onRepositoryAdded(repo);
-      setError("");
-      setPage("progress");
-    } catch (err) {
-      setError("Cannot connect to the server.");
-    }
+    startAnalysis(url.trim());
   }
 
   return (

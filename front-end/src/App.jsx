@@ -22,6 +22,10 @@ function App() {
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
+  const [analysis, setAnalysis] = useState(null);
+  const [analysisUrl, setAnalysisUrl] = useState("");
+  const [step, setStep] = useState(0);
+  const [analysisError, setAnalysisError] = useState("");
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -31,12 +35,69 @@ function App() {
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
+  async function startAnalysis(url) {
+    setAnalysisUrl(url);
+    setAnalysisError("");
+    setPage("progress");
+
+    const progressId = crypto.randomUUID();
+    setStep(0);
+
+    let active = true;
+
+    const timer = setInterval(async () => {
+      try {
+        const response = await fetch("/api/analysis-progress/" + progressId);
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (active) {
+            setStep((previous) => Math.max(previous, data.step));
+          }
+        }
+      } catch (error) {}
+    }, 500);
+    try {
+      const response = await fetch("/api/repositories/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url, progressId }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Analysis failed");
+      }
+      setRepositories((previous) => [
+        ...previous.filter((repo) => repo.id !== data.repository.id),
+        data.repository,
+      ]);
+
+      setAnalysis({
+        ...data,
+        analyzedAt: new Date().toLocaleString(),
+      });
+      setSelectedRepo(data.repository);
+      setPage("complete");
+    } catch (error) {
+      setAnalysisError(error.message);
+      setPage("analysis-error");
+    } finally {
+      active = false;
+      clearInterval(timer);
+    }
+  }
   useEffect(() => {
-    fetch("http://localhost:3000/api/repositories")
+    fetch("/api/repositories")
       .then((res) => res.json())
       .then((data) => setRepositories(data))
-      .catch((err) => console.error(err));
+      .catch((error) => console.error(error));
   }, []);
+
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -79,23 +140,39 @@ function App() {
     return (
       <AddRepository
         setPage={setPage}
-        onRepositoryAdded={(repo) =>
-          setRepositories((prev) => [...prev, repo])
-        }
+        startAnalysis={startAnalysis}
+        onRepositoryAdded={(repo) => {
+          setRepositories((previous) => [...previous, repo]);
+          setSelectedRepo(repo);
+        }}
       />
     );
   }
-  
+
   if (page === "map") {
-    return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
+    return (
+      <InteractiveMap
+        setPage={setPage}
+        selectedRepo={selectedRepo}
+        analysis={analysis}
+      />
+    );
   }
 
-  if (page === "progress") {
-    return <AnalysisProgress setPage={setPage} />;
+  if (page === "progress" || page === "analysis-error") {
+    return (
+      <AnalysisProgress
+        setPage={setPage}
+        url={analysisUrl}
+        error={analysisError}
+        startAnalysis={startAnalysis}
+        step={step}
+      />
+    );
   }
 
   if (page === "complete") {
-    return <AnalysisComplete setPage={setPage} />;
+    return <AnalysisComplete setPage={setPage} analysis={analysis} />;
   }
 
   if (page === "searchresult") {
@@ -121,6 +198,7 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         repoBack={repoBack}
+        startAnalysis={startAnalysis}
       />
     );
   }
@@ -131,6 +209,8 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         removeRepository={removeRepository}
+        analysis={analysis}
+        startAnalysis={startAnalysis}
       />
     );
   }
