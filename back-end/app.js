@@ -1,6 +1,7 @@
 const express = require("express");
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
+const { setTimeout: wait } = require("node:timers/promises");
 const path = require("node:path").posix;
 const cors = require("cors");
 const app = express();
@@ -112,6 +113,45 @@ app.post("/api/repositories/analyze", async (req, res) => {
   const parts = url.split("/");
   const owner = parts[3];
   const name = parts[4];
+
+  if (process.env.REPOIQ_LIVE_GITHUB !== "1") {
+    const { setTimeout: wait } = require("node:timers/promises");
+
+    for (let step = 0; step <= 4; step++) {
+      progress.step = step;
+      await wait(750);
+      if (res.destroyed) return;
+    }
+
+    const repoUrl = url.replace(/\/$/, "");
+    let repo = repositories.find((item) => item.url === repoUrl);
+
+    if (!repo) {
+      repo = {
+        id: Date.now(),
+        name,
+        url: repoUrl,
+        language: "JavaScript",
+        updated: "Just now",
+        status: "Completed",
+      };
+      repositories.push(repo);
+    }
+
+    return res.json({
+      repository: {
+        ...repo,
+        files: 1,
+        functions: 0,
+        classes: 0,
+        relationships: 0,
+      },
+      nodes: [
+        { id: "index.js", name: "index.js", path: "index.js", type: "File" },
+      ],
+      connections: [],
+    });
+  }
 
   const response = await fetch(`https://api.github.com/repos/${owner}/${name}`);
 
