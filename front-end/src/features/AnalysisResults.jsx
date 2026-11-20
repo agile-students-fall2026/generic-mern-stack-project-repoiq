@@ -11,7 +11,16 @@ function AnalysisResults({
   startAnalysis,
 }) {
   if (!analysis || selectedRepo?.name !== analysis.repository.name) {
-    return <p>Analyze this repository first.</p>;
+    return (
+      <div className="analysis-results">
+        <header className="add-header">
+          <BackButton setPage={setPage} to="repository-details"/>
+          <h1>Repository Analysis Details</h1>
+        </header>
+        <p>Analyze this repository first.</p>
+        <NavBar setPage={setPage}/>
+      </div>
+    )
   }
   return (
     <div className="analysis-results">
