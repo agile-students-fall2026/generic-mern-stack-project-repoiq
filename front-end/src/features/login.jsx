@@ -29,11 +29,15 @@ return (
     </header>
     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+    <button type="button" onClick={() => setPage('forgot-password')}>
+      Forgot Password?
+    </button>
     {error && <p className="add-error">{error}</p>}
     <button className="primary" onClick={handleLogin}>
       Log in
     </button>
-    <button>Continue with GitHub</button>
+    <button className="outline">Continue with GitHub</button>
     <br />
     <button onClick={() => setPage('signup')}>Create an account</button>
   </div>
