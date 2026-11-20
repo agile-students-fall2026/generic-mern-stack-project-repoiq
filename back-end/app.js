@@ -1,6 +1,7 @@
 const express = require("express");
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
+const { setTimeout: wait } = require("node:timers/promises");
 const path = require("node:path").posix;
 const cors = require("cors");
 const app = express();
@@ -112,6 +113,89 @@ app.post("/api/repositories/analyze", async (req, res) => {
   const parts = url.split("/");
   const owner = parts[3];
   const name = parts[4];
+
+  if (process.env.REPOIQ_LIVE_GITHUB !== "1") {
+    for (let step = 0; step <= 4; step++) {
+      progress.step = step;
+      await wait(750);
+      if (res.destroyed) return;
+    }
+
+    const repoUrl = url.replace(/\/$/, "");
+    let repo = repositories.find((item) => item.url === repoUrl);
+
+    if (!repo) {
+      repo = {
+        id: Date.now(),
+        name,
+        url: repoUrl,
+        language: "JavaScript",
+        updated: "Just now",
+        status: "Completed",
+      };
+      repositories.push(repo);
+    }
+    repo.status = "Completed";
+    repo.updated = "Just now";
+
+    return res.json({
+      repository: {
+        ...repo,
+        files: 2,
+        functions: 2,
+        classes: 1,
+        relationships: 4,
+      },
+      nodes: [
+        {
+          id: "main.js",
+          name: "main.js",
+          path: "main.js",
+          type: "File",
+          usedBy: ["test.js"],
+          functions: [
+            { name: "foo", startLine: 1 },
+            { name: "baz", startLine: 3 },
+          ],
+          classes: [{ name: "Bar", startLine: 5 }],
+        },
+        {
+          id: "test.js",
+          name: "test.js",
+          path: "test.js",
+          type: "File",
+          imports: ["./main.js"],
+        },
+        {
+          id: "foo",
+          name: "foo",
+          path: "main.js",
+          type: "Function",
+          startLine: 1,
+        },
+        {
+          id: "baz",
+          name: "baz",
+          path: "main.js",
+          type: "Function",
+          startLine: 3,
+        },
+        {
+          id: "Bar",
+          name: "Bar",
+          path: "main.js",
+          type: "Class",
+          startLine: 5,
+        },
+      ],
+      connections: [
+        { from: "test.js", to: "main.js", type: "import" },
+        { from: "main.js", to: "foo", type: "contains" },
+        { from: "main.js", to: "baz", type: "contains" },
+        { from: "main.js", to: "Bar", type: "contains" },
+      ],
+    });
+  }
 
   const response = await fetch(`https://api.github.com/repos/${owner}/${name}`);
 
