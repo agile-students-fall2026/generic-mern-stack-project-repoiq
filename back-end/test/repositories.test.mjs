@@ -23,5 +23,22 @@ describe("Repository API", () => {
 
     expect(res.status).to.equal(404);
     expect(res.body.error).to.equal("Repository not found");
-    });
+  });  
+  it("adds a repository with a valid URL", async () => {
+    const res = await request(app)
+        .post("/api/repositories")
+        .send({ url: "https://github.com/facebook/react" });
+
+    expect(res.status).to.equal(201);
+    expect(res.body.name).to.equal("react");
+    expect(res.body.url).to.equal("https://github.com/facebook/react");
+  });
+  it("rejects an invalid GitHub URL", async () => {
+    const res = await request(app)
+        .post("/api/repositories")
+        .send({ url: "invalid-url" });
+
+    expect(res.status).to.equal(400);
+    expect(res.body.error).to.equal("Invalid GitHub URL");
+  });
 });
