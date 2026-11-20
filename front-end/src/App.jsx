@@ -18,6 +18,7 @@ import Profile from "./features/Profile.jsx";
 
 function App() {
   const [page, setPage] = useState("welcome");
+  const [user, setUser] = useState(null);
   const [repositories, setRepositories] = useState([]);
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
@@ -42,7 +43,7 @@ function App() {
   }
 
   if (page === "login") {
-    return <Login setPage={setPage} />;
+    return <Login setPage={setPage} setUser={setUser} />;
   }
   if (page === "signup") {
     return <Signup setPage={setPage} />;
@@ -50,6 +51,7 @@ function App() {
   if (page === "home") {
     return (
       <Home
+        user={user}
         setPage={setPage}
         setSelectedRepo={setSelectedRepo}
         search={repoSearch}
