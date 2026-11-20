@@ -342,3 +342,7 @@ button.outline {
   display: block;
   margin-left: auto;
 }
+
+.signup-prompt {
+  color: var(--muted);
+}
