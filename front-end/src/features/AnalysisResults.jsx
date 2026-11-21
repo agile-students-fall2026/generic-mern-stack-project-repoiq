@@ -2,7 +2,6 @@ import "./AnalysisResults.css";
 import NavBar from "./NavBar.jsx";
 import BackButton from "./BackButton.jsx";
 import { CodeXml } from "lucide-react";
-const { repository, analyzedAt } = analysis;
 
 function AnalysisResults({
   setPage,
@@ -11,7 +10,7 @@ function AnalysisResults({
   analysis,
   startAnalysis,
 }) {
-  if (!analysis || selectedRepo?.name !== analysis.repository.name) {
+  if (!analysis) {
     return (
       <div className="analysis-results">
         <header className="add-header">
@@ -23,6 +22,8 @@ function AnalysisResults({
       </div>
     );
   }
+  const { repository, analyzedAt } = analysis;
+
   return (
     <div className="analysis-results">
       <header className="add-header">
@@ -34,7 +35,7 @@ function AnalysisResults({
         <div className="analysis-repo-header">
           <CodeXml size={32} strokeWidth={2.5} className="analysis-repo-icon" />
           <div>
-            <h3>{selectedRepo?.name || "Repository"}</h3>
+            <h3>{repository.name || "Repository"}</h3>
             <p>{repository.url}</p>
           </div>
         </div>

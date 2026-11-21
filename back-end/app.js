@@ -62,30 +62,6 @@ app.delete("/api/repositories/:id", (req, res) => {
   res.json({ success: true });
 });
 
-const analyses = {};
-
-app.get("/api/repositories/:id/analysis", (req, res) => {
-  const repo = repositories.find((r) => r.id === Number(req.params.id));
-
-  if (!repo) {
-    return res.status(404).json({ error: "Repository not found" });
-  }
-
-  if (!analyses[repo.id]) {
-    analyses[repo.id] = {
-      repositoryId: repo.id,
-      analyzedAt: new Date().toISOString(),
-      status: "Completed",
-      files: 342,
-      functions: 28,
-      classes: 65,
-      relationships: 19,
-    };
-  }
-
-  res.json(analyses[repo.id]);
-});
-
 app.post("/api/repositories", (req, res) => {
   const url = typeof req.body?.url === "string" ? req.body.url.trim() : "";
   if (!url || !/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(url)) {
@@ -163,7 +139,8 @@ app.post("/api/repositories/analyze", async (req, res) => {
     repo.status = "Completed";
     repo.updated = "Just now";
 
-    return res.json({
+    const analysis = {
+      analyzedAt: new Date().toISOString(),
       repository: {
         ...repo,
         files: 2,
@@ -219,7 +196,9 @@ app.post("/api/repositories/analyze", async (req, res) => {
         { from: "main.js", to: "baz", type: "contains" },
         { from: "main.js", to: "Bar", type: "contains" },
       ],
-    });
+    };
+    analysesByRepoId.set(repo.id, analysis);
+    return res.json(analysis);
   }
 
   const response = await fetch(`https://api.github.com/repos/${owner}/${name}`);
