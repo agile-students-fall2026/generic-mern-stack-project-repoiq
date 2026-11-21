@@ -2,6 +2,7 @@ import "./AnalysisResults.css";
 import NavBar from "./NavBar.jsx";
 import BackButton from "./BackButton.jsx";
 import { CodeXml } from "lucide-react";
+const { repository, analyzedAt } = analysis;
 
 function AnalysisResults({
   setPage,
@@ -14,13 +15,13 @@ function AnalysisResults({
     return (
       <div className="analysis-results">
         <header className="add-header">
-          <BackButton setPage={setPage} to="repository-details"/>
+          <BackButton setPage={setPage} to="repository-details" />
           <h1>Repository Analysis Details</h1>
         </header>
         <p>Analyze this repository first.</p>
-        <NavBar setPage={setPage}/>
+        <NavBar setPage={setPage} />
       </div>
-    )
+    );
   }
   return (
     <div className="analysis-results">
@@ -34,7 +35,7 @@ function AnalysisResults({
           <CodeXml size={32} strokeWidth={2.5} className="analysis-repo-icon" />
           <div>
             <h3>{selectedRepo?.name || "Repository"}</h3>
-            <p>https://github.com/username/repo</p>
+            <p>{repository.url}</p>
           </div>
         </div>
 
@@ -42,7 +43,7 @@ function AnalysisResults({
 
         <div className="analysis-info-row">
           <span>Last analyzed</span>
-          <span>Oct 14, 2026 · 9:31 pm</span>
+          <span>{new Date(analyzedAt).toLocaleString()}</span>
         </div>
 
         <div className="analysis-info-row">
@@ -56,19 +57,19 @@ function AnalysisResults({
       <div className="analysis-metrics">
         <div>
           <span>Files</span>
-          <strong>342</strong>
+          <strong>{repository.files}</strong>
         </div>
         <div>
           <span>Functions</span>
-          <strong>28</strong>
+          <strong>{repository.functions}</strong>
         </div>
         <div>
           <span>Classes</span>
-          <strong>65</strong>
+          <strong>{repository.classes}</strong>
         </div>
         <div>
           <span>Relationships</span>
-          <strong>19</strong>
+          <strong>{repository.relationships}</strong>
         </div>
       </div>
 
