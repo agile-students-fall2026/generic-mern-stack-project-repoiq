@@ -37,6 +37,9 @@ function AnalysisResults({
           <div>
             <h3>{repository.name || "Repository"}</h3>
             <p>{repository.url}</p>
+            <p>
+              Last analyzed {new Date(analysis.analyzedAt).toLocaleString()}
+            </p>
           </div>
         </div>
 
