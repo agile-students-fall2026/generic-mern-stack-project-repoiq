@@ -524,6 +524,16 @@ app.post("/api/login", (req, res) => {
   });
 });
 
+app.get("/api/repositories/:id/analysis", (req, res) => {
+  const analysis = analysesByRepoId.get(Number(req.params.id));
+
+  if (!analysis) {
+    return res.status(404).json({ error: "Analysis not found" });
+  }
+
+  res.json(analysis);
+});
+
 app.post("/api/signup", (req, res) => {
   const { name, email, password } = req.body;
 
