@@ -29,7 +29,8 @@ function App() {
   const [step, setStep] = useState(0);
   const [analysisError, setAnalysisError] = useState("");
   const [selectedComponent, setSelectedComponent] = useState({});
-  const activeAnalysis = analysis?.repository?.id === selectedRepo?.id ? analysis : null;
+  const activeAnalysis =
+    analysis?.repository?.id === selectedRepo?.id ? analysis : null;
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -202,13 +203,15 @@ function App() {
     );
   }
 
-  if (page === "map") {
+  if (page === "map" || page === "map-highlight") {
     return (
       <InteractiveMap
         setPage={setPage}
         selectedRepo={selectedRepo}
-        analysis={analysis}
-        highlightedResult={selectedResult}
+        analysis={activeAnalysis}
+        highlightedResult={
+          page === "map-highlight" && activeAnalysis ? selectedResult : null
+        }
         onViewComponent={(node) => {
           setSelectedComponent(node);
           setPage("componentdetails");
@@ -242,11 +245,12 @@ function App() {
 
   if (page === "searchresult") {
     return (
-      <SearchResults 
-        setPage={setPage} 
-        setSelectedResult={setSelectedResult} 
-        analysis={activeAnalysis} 
-        selectedRepo={selectedRepo}/>
+      <SearchResults
+        setPage={setPage}
+        setSelectedResult={setSelectedResult}
+        analysis={activeAnalysis}
+        selectedRepo={selectedRepo}
+      />
     );
   }
 
@@ -255,11 +259,13 @@ function App() {
   }
 
   if (page === "dependencydetails") {
-    return <DependencyDetails setPage={setPage} component={selectedComponent}/>;
+    return (
+      <DependencyDetails setPage={setPage} component={selectedComponent} />
+    );
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} component={selectedComponent}/>;
+    return <ComponentDetails setPage={setPage} component={selectedComponent} />;
   }
   if (page === "repository-details") {
     return (
@@ -289,7 +295,7 @@ function App() {
   }
 
   if (page === "forgot-password") {
-    return <ForgotPassword setPage={setPage} />
+    return <ForgotPassword setPage={setPage} />;
   }
 
   if (page === "check-email") {
