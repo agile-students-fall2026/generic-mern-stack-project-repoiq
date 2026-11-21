@@ -248,7 +248,7 @@ function App() {
       <InteractiveMap
         setPage={setPage}
         selectedRepo={selectedRepo}
-        analysis={analysis}
+        analysis={activeAnalysis}
         onViewComponent={(node) => {
           setSelectedComponent(node);
           setPage("componentdetails");
@@ -274,7 +274,7 @@ function App() {
     return (
       <AnalysisComplete
         setPage={setPage}
-        analysis={analysis}
+        analysis={activeAnalysis}
         removeCompletedRepository={removeCompletedRepository}
       />
     );
