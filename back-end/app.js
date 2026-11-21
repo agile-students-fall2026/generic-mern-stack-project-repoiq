@@ -511,4 +511,21 @@ app.post("/api/signup", (req, res) => {
   });
 });
 
+app.post("/api/forgot-password", (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({
+      success: false,
+      message: "Please enter your email.",
+    });
+  }
+
+  res.json({
+    success: true,
+    message: "A password reset link has been sent to your email.",
+  });
+});
+
+
 module.exports = app;
