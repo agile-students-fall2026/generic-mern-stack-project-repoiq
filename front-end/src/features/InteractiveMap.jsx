@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   nodes,
   connections,
@@ -18,6 +18,13 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
   const [search, setSearch] = useState("");
   const [selectedRepository, setSelectedRepository] = useState(repository.name);
   const [nodeType, setNodeType] = useState("All");
+  
+  useEffect(() => {
+    if (!highlightedResult) return;
+
+    setNodeType("All");
+    setSelected(higlightedResult);
+  }, [highlightedResult]);
 
   const colors = {
     Repository: "#d7e5ff",
@@ -216,7 +223,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
                       ? "#828282"
                       : "#cbd1df"
                   }
-                  strokeWidth="1.5"
+                  strokeWidth={node.id === highlightedResult?.id ? "4" : "1.5"}
                 />
 
                 <text
