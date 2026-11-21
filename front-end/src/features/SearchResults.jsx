@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import BackButton from './BackButton.jsx';
 import NavBar from './NavBar.jsx';
-import { nodes } from '../data/mockData';
 
-function SearchResults({ setPage, setSelectedResult, analysis, selectedRepo }) {
+function SearchResults({ setPage, setSelectedResult, analysis }) {
   const [searchText, setSearchText] = useState(''); // store input text
   const [selectedType, setSelectedType] = useState('All'); // store selected category
 
-  // create array that stores res matching search
+  // stores res matching search
   const filteredRes = [];
 
-  const repoNodes =
-    analysis?.nodes ?? nodes.filter((node) => node.repo === selectedRepo?.name);
+  const repoNodes = analysis?.nodes ?? [];
+  const query = searchText.toLowerCase();
+
   for (const result of repoNodes) {
     const matchesText =
-      result.name.includes(searchText) || result.path.includes(searchText);
+      result.name.toLowerCase().includes(query) || 
+      result.path.toLowerCase().includes(query);
 
     const matchesType = selectedType === 'All' || result.type === selectedType;
 
