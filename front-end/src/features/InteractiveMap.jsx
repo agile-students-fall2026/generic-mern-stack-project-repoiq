@@ -18,13 +18,6 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
   const [search, setSearch] = useState("");
   const [selectedRepository, setSelectedRepository] = useState(repository.name);
   const [nodeType, setNodeType] = useState("All");
-  
-  useEffect(() => {
-    if (!highlightedResult) return;
-
-    setNodeType("All");
-    setSelected(higlightedResult);
-  }, [highlightedResult]);
 
   const colors = {
     Repository: "#d7e5ff",
@@ -74,6 +67,21 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
       repoConnections = analysis.connections;
     }
   }
+
+  useEffect(() => {
+  if (!highlightedResult) return;
+
+  const node = repoNodes.find((item) => item.id === highlightedResult.id);
+    if (!node) return;
+
+    const newZoom = 1.5;
+
+    setNodeType("All");
+    setSelected(node);
+    setZoom(newZoom);
+    setX(newZoom * (175 - node.x));
+    setY(newZoom * (225 - node.y));
+  }, [highlightedResult, analysis]);
 
   repoNodes = repoNodes.filter(
     (node) =>
@@ -223,7 +231,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
                       ? "#828282"
                       : "#cbd1df"
                   }
-                  strokeWidth={node.id === highlightedResult?.id ? "4" : "1.5"}
+                  strokeWidth={node.id === selected?.id ? "4" : "1.5"}
                 />
 
                 <text
