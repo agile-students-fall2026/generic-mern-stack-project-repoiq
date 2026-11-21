@@ -6,6 +6,7 @@ const path = require("node:path").posix;
 const cors = require("cors");
 const app = express();
 const filePath = require("path");
+const mapData = require("./data/mapData");
 app.use(express.json());
 app.use(cors());
 app.use(express.static(filePath.join(__dirname, "public")));
@@ -475,6 +476,10 @@ app.post("/api/repositories/analyze", async (req, res) => {
     nodes: nodes,
     connections: connections,
   });
+});
+
+app.get("/api/map", (req, res) => {
+  res.json(mapData);
 });
 
 app.post("/api/login", (req, res) => {

@@ -1,10 +1,4 @@
 import { useState } from "react";
-import {
-  nodes,
-  connections,
-  repository,
-  sampleRepositories,
-} from "../data/mockData";
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
@@ -16,8 +10,27 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
-  const [selectedRepository, setSelectedRepository] = useState(repository.name);
+  const [selectedRepository, setSelectedRepository] = useState("");
   const [nodeType, setNodeType] = useState("All");
+  const [repository, setRepository] = useState(null);
+  const [sampleRepositories, setSampleRepositories] = useState([]);
+  const [nodes, setNodes] = useState([]);
+  const [connections, setConnections] = useState([]);
+
+  useEffect(() => {
+    async function loadMap() {
+      const response = await fetch("/api/map");
+      const data = await response.json();
+
+      setRepository(data.repository);
+      setSampleRepositories(data.sampleRepositories);
+      setNodes(data.nodes);
+      setConnections(data.connections);
+      setSelectedRepository(data.repository.name);
+    }
+
+    loadMap();
+  }, []);
 
   const colors = {
     Repository: "#d7e5ff",
@@ -102,6 +115,10 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
         </button>
       </div>
     );
+  }
+
+  if (!repository) {
+    return <p>Loading map...</p>;
   }
 
   return (
