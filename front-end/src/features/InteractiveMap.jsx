@@ -1,4 +1,4 @@
-import { useState, useState } from "react";
+import { useState, useEffect } from "react";
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
