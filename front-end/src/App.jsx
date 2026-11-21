@@ -153,31 +153,6 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
-  if (page === "welcome") {
-    return <Welcome setPage={setPage} />;
-  }
-
-  if (page === "login") {
-    return <Login setPage={setPage} setUser={setUser} />;
-  }
-  if (page === "signup") {
-    return <Signup setPage={setPage} />;
-  }
-  if (page === "home") {
-    return (
-      <Home
-        user={user}
-        setPage={setPage}
-        setSelectedRepo={setSelectedRepo}
-        search={repoSearch}
-        setSearch={setRepoSearch}
-        setRepoBack={setRepoBack}
-        removedRepos={removedRepos}
-        repositories={repositories}
-      />
-    );
-  }
-
   const selectedRepoId = selectedRepo?.id;
 
   useEffect(() => {
@@ -215,6 +190,31 @@ function App() {
 
     return () => controller.abort();
   }, [selectedRepoId]);
+
+  if (page === "welcome") {
+    return <Welcome setPage={setPage} />;
+  }
+
+  if (page === "login") {
+    return <Login setPage={setPage} setUser={setUser} />;
+  }
+  if (page === "signup") {
+    return <Signup setPage={setPage} />;
+  }
+  if (page === "home") {
+    return (
+      <Home
+        user={user}
+        setPage={setPage}
+        setSelectedRepo={setSelectedRepo}
+        search={repoSearch}
+        setSearch={setRepoSearch}
+        setRepoBack={setRepoBack}
+        removedRepos={removedRepos}
+        repositories={repositories}
+      />
+    );
+  }
 
   if (page === "repositories") {
     return (
