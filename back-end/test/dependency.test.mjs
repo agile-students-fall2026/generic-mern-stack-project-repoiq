@@ -5,7 +5,7 @@ import app from "../app.js";
 it("provides dependencies for component details", async () => {
     const res = await request(app)
         .post("/api/repositories/analyze")
-        .send({ url: "https://github.com/test/my-repo" })
+        .send({ url: "https://github.com/test/my-repo" });
 
     assert.equal(res.status, 200);
 
@@ -25,3 +25,16 @@ it("rejects an invalid repository URL", async () => {
   assert.equal(res.status, 400);
   assert.equal(res.body.error, "Invalid GitHub URL");
 });
+
+it("provides functions and classes for component details", async () => {
+  const res = await request(app)
+    .post("/api/repositories/analyze")
+    .send({ url: "https://github.com/test/my-repo" });
+
+  assert.equal(res.status, 200);
+
+  const main = res.body.nodes.find((node) => node.id === "main.js");
+
+  assert.equal(main.functions[0].name, "foo");
+  assert.equal(main.classes[0].name, "Bar");
+}).timeout(6000);
