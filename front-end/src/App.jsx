@@ -292,7 +292,13 @@ function App() {
   }
 
   if (page === "searchresultdetails") {
-    return <SearchResultsDetails setPage={setPage} result={selectedResult} />;
+    return (
+      <SearchResultsDetails
+        setPage={setPage}
+        result={selectedResult}
+        repository={activeAnalysis?.repository}
+      />
+    );
   }
 
   if (page === "dependencydetails") {
@@ -310,7 +316,13 @@ function App() {
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} component={selectedComponent} />;
+    return (
+      <ComponentDetails
+        setPage={setPage}
+        component={selectedComponent}
+        repository={activeAnalysis?.repository}
+      />
+    );
   }
   if (page === "repository-details") {
     return (

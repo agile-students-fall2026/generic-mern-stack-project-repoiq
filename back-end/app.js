@@ -143,6 +143,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
       analyzedAt: new Date().toISOString(),
       repository: {
         ...repo,
+        defaultBranch: "main",
         files: 2,
         functions: 2,
         classes: 1,
@@ -472,6 +473,7 @@ app.post("/api/repositories/analyze", async (req, res) => {
   const analysis = {
     repository: {
       ...repo,
+      defaultBranch: data.default_branch,
       files: fileCount,
       functions: functionCount,
       classes: classCount,

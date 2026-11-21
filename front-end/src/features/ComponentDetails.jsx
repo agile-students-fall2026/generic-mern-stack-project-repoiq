@@ -1,10 +1,10 @@
 import { useState } from "react";
 import BackButton from "./BackButton.jsx";
-import NavBar from './NavBar.jsx';
+import NavBar from "./NavBar.jsx";
 
-function ComponentDetails({ setPage, component }) {
+function ComponentDetails({ setPage, component, repository }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
-
+  const item = component;
   return (
     <div className="component-details">
       <header className="add-header">
@@ -38,7 +38,9 @@ function ComponentDetails({ setPage, component }) {
           <h2>Functions</h2>
           <ul>
             {(component.functions ?? []).map(({ name, startLine }) => (
-              <li className="list-item" key={name + ":" + startLine}>{name}</li>
+              <li className="list-item" key={name + ":" + startLine}>
+                {name}
+              </li>
             ))}
           </ul>
 
@@ -46,7 +48,9 @@ function ComponentDetails({ setPage, component }) {
 
           <ul>
             {(component.classes ?? []).map(({ name, startLine }) => (
-              <li className="list-item" key={name + ":" + startLine}>{name}</li>
+              <li className="list-item" key={name + ":" + startLine}>
+                {name}
+              </li>
             ))}
           </ul>
         </section>
@@ -56,25 +60,43 @@ function ComponentDetails({ setPage, component }) {
 
           <ul>
             {(component.imports ?? []).map((path) => (
-              <li className="list-item" key={path}>{path}</li>
+              <li className="list-item" key={path}>
+                {path}
+              </li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
             {(component.usedBy ?? component.usedIn ?? []).map((path) => (
-              <li className="list-item" key={path}>{path}</li>
+              <li className="list-item" key={path}>
+                {path}
+              </li>
             ))}
           </ul>
 
-          <button className="primary" onClick={() => setPage('dependencydetails')}>View all dependencies</button>
+          <button
+            className="primary"
+            onClick={() => setPage("dependencydetails")}
+          >
+            View all dependencies
+          </button>
         </section>
       )}
 
-      {/*add later*/}
-      <button className="outline" type="button">View source on GitHub</button>
+      {repository?.url &&
+        repository.defaultBranch &&
+        item.path &&
+        ["File", "Function", "Class"].includes(item.type) && (
+          <a
+            className="outline"
+            href={`${repository.url}/blob/${encodeURIComponent(repository.defaultBranch)}/${item.path.split("/").map(encodeURIComponent).join("/")}${item.startLine ? `#L${item.startLine}` : ""}`}
+          >
+            View source on GitHub
+          </a>
+        )}
 
-      <NavBar setPage={setPage}/>
+      <NavBar setPage={setPage} />
     </div>
   );
 }
