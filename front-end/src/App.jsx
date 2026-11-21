@@ -230,11 +230,13 @@ function App() {
     );
   }
 
-  if (page === "add-repository") {
+  if (page === "add-repository" || page === "edit-repository-url") {
     return (
       <AddRepository
         setPage={setPage}
         startAnalysis={startAnalysis}
+        key={page}
+        initialUrl={page === "edit-repository-url" ? analysisUrl : ""}
         onRepositoryAdded={(repo) => {
           setRepositories((previous) => [...previous, repo]);
           setSelectedRepo(repo);

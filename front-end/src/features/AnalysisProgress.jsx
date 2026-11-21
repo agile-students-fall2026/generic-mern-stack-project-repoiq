@@ -17,6 +17,13 @@ function AnalysisProgress({
         <button className="primary" onClick={() => startAnalysis(url)}>
           Retry Analysis
         </button>
+        <button
+          className="outline"
+          type="button"
+          onClick={() => setPage("edit-repository-url")}
+        >
+          Edit Repository URL
+        </button>
 
         <button className="outline" onClick={() => setPage("repositories")}>
           Back to Repositories

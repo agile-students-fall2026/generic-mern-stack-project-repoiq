@@ -4,8 +4,13 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
-  const [url, setUrl] = useState("");
+function AddRepository({
+  setPage,
+  startAnalysis,
+  onRepositoryAdded,
+  initialUrl = "",
+}) {
+  const [url, setUrl] = useState(initialUrl);
   const [error, setError] = useState("");
   const [githubConnected, setGithubConnected] = useState(false);
 
