@@ -297,7 +297,15 @@ function App() {
 
   if (page === "dependencydetails") {
     return (
-      <DependencyDetails setPage={setPage} component={selectedComponent} />
+      <DependencyDetails
+        setPage={setPage}
+        component={selectedComponent}
+        analysis={activeAnalysis}
+        onViewComponent={(file) => {
+          setSelectedComponent(file);
+          setPage("componentdetails");
+        }}
+      />
     );
   }
 
