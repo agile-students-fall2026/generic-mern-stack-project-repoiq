@@ -59,6 +59,7 @@ app.delete("/api/repositories/:id", (req, res) => {
   if (index === -1)
     return res.status(404).json({ error: "Repository not found." });
   repositories.splice(index, 1);
+  analysesByRepoId.delete(Number(req.params.id));
   res.json({ success: true });
 });
 

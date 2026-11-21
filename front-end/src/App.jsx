@@ -340,7 +340,7 @@ function App() {
       <AnalysisResults
         setPage={setPage}
         selectedRepo={selectedRepo}
-        removeRepository={removeRepository}
+        removeCompletedRepository={removeCompletedRepository}
         analysis={activeAnalysis}
         startAnalysis={startAnalysis}
       />

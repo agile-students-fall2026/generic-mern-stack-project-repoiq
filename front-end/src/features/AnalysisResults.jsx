@@ -6,7 +6,7 @@ import { CodeXml } from "lucide-react";
 function AnalysisResults({
   setPage,
   selectedRepo,
-  removeRepository,
+  removeCompletedRepository,
   analysis,
   startAnalysis,
 }) {
@@ -87,11 +87,9 @@ function AnalysisResults({
           type="button"
           onClick={() => {
             if (
-              selectedRepo &&
               window.confirm("Are you sure you want to remove this repository?")
             ) {
-              removeRepository(selectedRepo.name);
-              setPage("home");
+              removeCompletedRepository(repository.id);
             }
           }}
         >
