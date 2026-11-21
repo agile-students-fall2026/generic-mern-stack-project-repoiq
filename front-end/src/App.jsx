@@ -208,6 +208,7 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         analysis={analysis}
+        highlightedResult={selectedResult}
         onViewComponent={(node) => {
           setSelectedComponent(node);
           setPage("componentdetails");
