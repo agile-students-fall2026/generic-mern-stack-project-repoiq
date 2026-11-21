@@ -74,7 +74,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
   const node = repoNodes.find((item) => item.id === highlightedResult.id);
     if (!node) return;
 
-    const newZoom = 1.5;
+    const newZoom = 1.2;
 
     setNodeType("All");
     setSelected(node);
@@ -101,6 +101,13 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
     setSelected(null);
     setSearch("");
   }
+
+  function selectNode(node) {
+    setSelected(node);
+    setX(zoom * (175 - node.x));
+    setY(zoom * (225 - node.y));
+  }
+
   let details = null;
 
   if (selected) {
@@ -209,7 +216,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
             })}
 
             {repoNodes.map((node) => (
-              <g key={node.id} onClick={() => setSelected(node)}>
+              <g key={node.id} onClick={() => selectNode(node)}>
                 <circle
                   cx={node.x}
                   cy={node.y}
