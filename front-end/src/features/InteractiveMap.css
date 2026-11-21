@@ -99,3 +99,9 @@ select {
   font-weight: bold;
   margin-top: 5px;
 }
+
+.details pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}

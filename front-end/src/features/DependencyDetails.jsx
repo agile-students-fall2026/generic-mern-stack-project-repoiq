@@ -1,18 +1,13 @@
 import { useState } from "react";
 import BackButton from "./BackButton.jsx";
 import NavBar from './NavBar.jsx';
-import { sampleDependsOn, sampleUsedBy } from "../data/mockData.js";
 
-function DependencyDetails({ setPage }) {
-  const [tab, setTab] = useState("depends"); // remembers what tab selected
+function DependencyDetails({ setPage, component }) {
+  const [tab, setTab] = useState("depends"); 
 
-  let files = [];
-
-  if (tab === "depends") {
-    files = sampleDependsOn;
-  } else if (tab === "used") {
-    files = sampleUsedBy;
-  }
+  const dependsOn = component?.imports ?? [];
+  const usedBy = component?.usedBy ?? [];
+  const files = tab === "depends" ? dependsOn : usedBy;
 
   return (
     <div className="dependencies">
@@ -23,18 +18,17 @@ function DependencyDetails({ setPage }) {
 
       <div className="tabs">
         <button onClick={() => setTab("depends")} disabled={tab === "depends"}>
-          Depends on ({sampleDependsOn.length})
+          Depends on ({dependsOn.length})
         </button>
 
         <button onClick={() => setTab("used")} disabled={tab === "used"}>
-          Used by ({sampleUsedBy.length})
+          Used by ({usedBy.length})
         </button>
       </div>
 
-      {files.map((file) => (
-        <div className="list-item" key={file.path}>
-          <p>{file.name}</p>
-          <p className="path">{file.path}</p>
+      {files.map((path) => (
+        <div className="list-item" key={path}>
+          <p className="path">{path}</p>
         </div>
       ))}
       <NavBar setPage={setPage}/>

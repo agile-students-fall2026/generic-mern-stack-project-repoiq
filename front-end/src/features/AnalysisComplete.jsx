@@ -1,8 +1,12 @@
-import { Check } from 'lucide-react';
-function AnalysisComplete({ setPage }) {
+import { Check } from "lucide-react";
+import BackButton from "./BackButton.jsx";
+import NavBar from "./NavBar.jsx";
+function AnalysisComplete({ setPage, analysis, removeCompletedRepository }) {
+  if (!analysis) return <p>No analysis available.</p>;
   return (
     <div className="complete">
       <header className="add-header">
+        <BackButton setPage={setPage} to="repository-details" />
         <h1>
           <Check size={48} />
         </h1>
@@ -12,24 +16,28 @@ function AnalysisComplete({ setPage }) {
       <p className="small">We successfully analysed your repository</p>
 
       <div className="stats">
-        <div>342 Files</div>
-        <div>28 Functions</div>
-        <div>65 Classes</div>
-        <div>19 Relationships</div>
+        <div>{analysis.repository.files} Files</div>
+        <div>{analysis.repository.functions} Functions</div>
+        <div>{analysis.repository.classes} Classes</div>
+        <div>{analysis.repository.relationships} Relationships</div>
       </div>
 
       <div className="repository">
-        <h3>repository-name</h3>
-        <p>https://github.com/username/repo</p>
+        <h3>{analysis.repository.name}</h3>
+        <p>{analysis.repository.url}</p>
       </div>
 
-      <button className="primary" onClick={() => setPage('map')}>
+      <button className="primary" onClick={() => setPage("map")}>
         Explore Codebase
       </button>
 
-      <button className="outline" onClick={() => setPage('home')}>
+      <button
+        className="outline"
+        onClick={() => removeCompletedRepository(analysis.repository.id)}
+      >
         Remove Repository
       </button>
+      <NavBar setPage={setPage} />
     </div>
   );
 }

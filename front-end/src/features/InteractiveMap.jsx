@@ -10,19 +10,77 @@ import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import "./InteractiveMap.css";
 
-function InteractiveMap({ setPage, selectedRepo }) {
+function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
   const [zoom, setZoom] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
   const [selectedRepository, setSelectedRepository] = useState(repository.name);
-  const repoNodes = nodes.filter((node) => node.repo === selectedRepository);
-  const repoConnections = connections.filter(
+  const [nodeType, setNodeType] = useState("All");
+
+  const colors = {
+    Repository: "#d7e5ff",
+    Folder: "#faf4dc",
+    File: "#f2def9",
+    Function: "#ffeaef",
+    Class: "#defbfb",
+  };
+  let repoNodes = nodes.filter((node) => node.repo === selectedRepository);
+  let repoConnections = connections.filter(
     (connection) =>
       repoNodes.find((node) => node.id === connection.from) &&
       repoNodes.find((node) => node.id === connection.to),
   );
+  if (analysis) {
+    let mapRadius = 225;
+
+    if (analysis) {
+      repoNodes = [];
+      let ring = 1;
+      let position = 0;
+
+      for (const node of analysis.nodes) {
+        let radius = 0;
+        let angle = 0;
+
+        if (node.type !== "Repository") {
+          if (position === ring * 6) {
+            ring++;
+            position = 0;
+          }
+
+          radius = ring * 100;
+          angle = (position / (ring * 6)) * Math.PI * 2;
+          position++;
+
+          mapRadius = Math.max(mapRadius, radius + 50);
+        }
+
+        repoNodes.push({
+          ...node,
+          x: 175 + Math.cos(angle) * radius,
+          y: 225 + Math.sin(angle) * radius,
+        });
+      }
+
+      repoConnections = analysis.connections;
+    }
+  }
+
+  repoNodes = repoNodes.filter(
+    (node) =>
+      nodeType === "All" ||
+      node.type === nodeType ||
+      node.type === "Repository",
+  );
+
+  repoConnections = repoConnections.filter(
+    (connection) =>
+      repoNodes.some((node) => node.id === connection.from) &&
+      repoNodes.some((node) => node.id === connection.to),
+  );
+
   function handleRepositoryChange(e) {
     setSelectedRepository(e.target.value);
     setSelected(null);
@@ -34,23 +92,12 @@ function InteractiveMap({ setPage, selectedRepo }) {
     details = (
       <div className="details">
         <h3>{selected.name}</h3>
-        <p>{selected.info}</p>
-        <p className="connections">Connections:</p>
-
-        {repoConnections.map((c, i) => {
-          if (c.from === selected.id)
-            return <p key={i}>{repoNodes.find((n) => n.id === c.to).name}</p>;
-
-          if (c.to === selected.id)
-            return <p key={i}>{repoNodes.find((n) => n.id === c.from).name}</p>;
-
-          return null;
-        })}
-        <button
-          className="outline"
-          type="button"
-          onClick={() => setPage("componentdetails")}
-        >
+        <p>Type: {selected.type}</p>
+        <p>File: {selected.path}</p>
+        <p>Used by: {(selected.usedBy || []).join(", ") || "None"}</p>
+        {selected.startLine && <p>Line: {selected.startLine}</p>}
+        {selected.code && <pre>{selected.code}</pre>}
+        <button className="primary" onClick={() => onViewComponent(selected)}>
           View component details
         </button>
       </div>
@@ -64,26 +111,49 @@ function InteractiveMap({ setPage, selectedRepo }) {
           setPage={setPage}
           to={selectedRepo ? "repository-details" : "home"}
         />
-        <h1>{selectedRepository}</h1>
+        <h1>{analysis ? analysis.repository.name : selectedRepository}</h1>
       </header>
-      <select value={selectedRepository} onChange={handleRepositoryChange}>
-        <option value={repository.name}>{repository.name}</option>
-        {sampleRepositories.map((repo) => (
-          <option key={repo.id} value={repo.name}>
-            {repo.name}
-          </option>
-        ))}
-      </select>
+      {!analysis && (
+        <select value={selectedRepository} onChange={handleRepositoryChange}>
+          <option value={repository.name}>{repository.name}</option>
+          {sampleRepositories.map((repo) => (
+            <option key={repo.id} value={repo.name}>
+              {repo.name}
+            </option>
+          ))}
+        </select>
+      )}
       <input
         placeholder="Search in codebase..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      <select
+        label="Filter"
+        value={nodeType}
+        onChange={(e) => {
+          setNodeType(e.target.value);
+          setSelected(null);
+        }}
+      >
+        <option value="All">All</option>
+        <option value="Folder">Folders</option>
+        <option value="File">Files</option>
+        <option value="Function">Functions</option>
+        <option value="Class">Classes</option>
+      </select>
+
       <div className="legend">
         <p className="import">– Imports</p>
-        <p className="call">– Calls</p>
-        <p className="dependency">– Dependencies</p>
+        {analysis ? (
+          <p className="dependency">– Contains</p>
+        ) : (
+          <div>
+            <p className="call">– Calls</p>
+            <p className="dependency">– Dependencies</p>
+          </div>
+        )}
       </div>
 
       <div className="map">
@@ -138,7 +208,7 @@ function InteractiveMap({ setPage, selectedRepo }) {
                     search &&
                     node.name.toLowerCase().includes(search.toLowerCase())
                       ? "#d8d6d6"
-                      : "#ffffff"
+                      : colors[node.type]
                   }
                   stroke={
                     search &&
@@ -157,7 +227,9 @@ function InteractiveMap({ setPage, selectedRepo }) {
                   fill="#343947"
                   fontWeight="500"
                 >
-                  {node.name}
+                  {node.name.length > 9
+                    ? node.name.slice(0, 8) + "…"
+                    : node.name}
                 </text>
               </g>
             ))}

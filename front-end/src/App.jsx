@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AnalysisProgress from "./features/AnalysisProgress.jsx";
 import AnalysisComplete from "./features/AnalysisComplete.jsx";
 import InteractiveMap from "./features/InteractiveMap.jsx";
@@ -15,6 +15,8 @@ import Repositories from "./features/Repositories.jsx";
 import RepositoryDetails from "./features/RepositoryDetails.jsx";
 import AnalysisResults from "./features/AnalysisResults.jsx";
 import Profile from "./features/Profile.jsx";
+import ForgotPassword from "./features/ForgotPassword.jsx";
+import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
   const [page, setPage] = useState("welcome");
@@ -23,21 +25,133 @@ function App() {
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [removedRepos, setRemovedRepos] = useState([]);
+  const [analysis, setAnalysis] = useState(null);
+  const [analysisUrl, setAnalysisUrl] = useState("");
+  const [step, setStep] = useState(0);
+  const [analysisError, setAnalysisError] = useState("");
+  const [selectedComponent, setSelectedComponent] = useState({});
+  const activeAnalysis = analysis?.repository?.id === selectedRepo?.id ? analysis : null;
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
+  }
+  async function removeCompletedRepository(id) {
+    try {
+      const response = await fetch(`/api/repositories/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error();
+
+      setRepositories((previous) => previous.filter((repo) => repo.id !== id));
+      setSelectedRepo(null);
+      setAnalysis(null);
+      setPage("home");
+    } catch {
+      window.alert("Couldn't remove the repository. Please try again.");
+    }
   }
   const [repoSearch, setRepoSearch] = useState("");
   const [repoBack, setRepoBack] = useState("home");
   function addRepository(url) {
     setRepositories([...repositories, url]);
   }
+  const currentRun = useRef(null);
+
+  function stopAnalysis() {
+    const run = currentRun.current;
+    currentRun.current = null;
+    if (!run) return;
+
+    clearInterval(run.timer);
+    run.controller.abort();
+  }
+
+  function leaveAnalysis(nextPage) {
+    stopAnalysis();
+    setPage(nextPage);
+  }
+
+  function cancelAnalysis() {
+    stopAnalysis();
+    setAnalysisError("Analysis cancelled.");
+    setPage("analysis-error");
+  }
+
+  async function startAnalysis(url) {
+    stopAnalysis();
+    setAnalysisUrl(url);
+    setAnalysisError("");
+    setPage("progress");
+
+    const progressId = crypto.randomUUID();
+    setStep(0);
+
+    const run = { controller: new AbortController() };
+    currentRun.current = run;
+    const signal = run.controller.signal;
+
+    run.timer = setInterval(async function () {
+      try {
+        const response = await fetch(`/api/analysis-progress/${progressId}`, {
+          signal,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (currentRun.current === run) {
+            setStep((previous) => Math.max(previous, data.step));
+          }
+        }
+      } catch (error) {}
+    }, 500);
+    try {
+      const response = await fetch("/api/repositories/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url, progressId }),
+        signal,
+      });
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error("Analysis failed. Please try again.");
+      }
+      if (currentRun.current !== run) return;
+
+      if (!response.ok || !data?.repository) {
+        throw new Error(data?.error || "Analysis failed");
+      }
+      setRepositories((previous) => [
+        ...previous.filter((repo) => repo.id !== data.repository.id),
+        data.repository,
+      ]);
+
+      setAnalysis({
+        ...data,
+        analyzedAt: new Date().toLocaleString(),
+      });
+      setSelectedRepo(data.repository);
+      setPage("complete");
+    } catch (error) {
+      if (signal.aborted) return;
+      setAnalysisError(error.message);
+      setPage("analysis-error");
+    } finally {
+      if (currentRun.current === run) stopAnalysis();
+    }
+  }
   useEffect(() => {
     fetch("/api/repositories")
       .then((res) => res.json())
       .then((data) => setRepositories(data))
-      .catch((err) => console.error(err));
+      .catch((error) => console.error(error));
   }, []);
+
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
@@ -81,28 +195,59 @@ function App() {
     return (
       <AddRepository
         setPage={setPage}
-        onRepositoryAdded={(repo) =>
-          setRepositories((prev) => [...prev, repo])
-        }
+        startAnalysis={startAnalysis}
+        onRepositoryAdded={(repo) => {
+          setRepositories((previous) => [...previous, repo]);
+          setSelectedRepo(repo);
+        }}
       />
     );
   }
-  
+
   if (page === "map") {
-    return <InteractiveMap setPage={setPage} selectedRepo={selectedRepo} />;
+    return (
+      <InteractiveMap
+        setPage={setPage}
+        selectedRepo={selectedRepo}
+        analysis={analysis}
+        onViewComponent={(node) => {
+          setSelectedComponent(node);
+          setPage("componentdetails");
+        }}
+      />
+    );
   }
 
-  if (page === "progress") {
-    return <AnalysisProgress setPage={setPage} />;
+  if (page === "progress" || page === "analysis-error") {
+    return (
+      <AnalysisProgress
+        setPage={leaveAnalysis}
+        url={analysisUrl}
+        error={analysisError}
+        cancelAnalysis={cancelAnalysis}
+        startAnalysis={startAnalysis}
+        step={step}
+      />
+    );
   }
 
   if (page === "complete") {
-    return <AnalysisComplete setPage={setPage} />;
+    return (
+      <AnalysisComplete
+        setPage={setPage}
+        analysis={analysis}
+        removeCompletedRepository={removeCompletedRepository}
+      />
+    );
   }
 
   if (page === "searchresult") {
     return (
-      <SearchResults setPage={setPage} setSelectedResult={setSelectedResult} />
+      <SearchResults 
+        setPage={setPage} 
+        setSelectedResult={setSelectedResult} 
+        analysis={activeAnalysis} 
+        selectedRepo={selectedRepo}/>
     );
   }
 
@@ -111,11 +256,11 @@ function App() {
   }
 
   if (page === "dependencydetails") {
-    return <DependencyDetails setPage={setPage} />;
+    return <DependencyDetails setPage={setPage} component={selectedComponent}/>;
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} />;
+    return <ComponentDetails setPage={setPage} component={selectedComponent}/>;
   }
   if (page === "repository-details") {
     return (
@@ -123,6 +268,7 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         repoBack={repoBack}
+        startAnalysis={startAnalysis}
       />
     );
   }
@@ -133,12 +279,22 @@ function App() {
         setPage={setPage}
         selectedRepo={selectedRepo}
         removeRepository={removeRepository}
+        analysis={analysis}
+        startAnalysis={startAnalysis}
       />
     );
   }
 
   if (page === "profile") {
     return <Profile setPage={setPage} />;
+  }
+
+  if (page === "forgot-password") {
+    return <ForgotPassword setPage={setPage} />
+  }
+
+  if (page === "check-email") {
+    return <CheckEmail setPage={setPage} />;
   }
 }
 export default App;
