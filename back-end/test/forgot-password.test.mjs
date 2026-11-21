@@ -13,9 +13,7 @@ describe("POST /api/forgot-password", () => {
   });
 
   it("returns 400 when the email is missing", async () => {
-    const res = await request(app)
-      .post("/api/forgot-password")
-      .send({});
+    const res = await request(app).post("/api/forgot-password").send({});
 
     assert.equal(res.status, 400);
     assert.equal(res.body.success, false);

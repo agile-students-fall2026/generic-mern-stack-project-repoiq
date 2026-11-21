@@ -527,5 +527,4 @@ app.post("/api/forgot-password", (req, res) => {
   });
 });
 
-
 module.exports = app;
