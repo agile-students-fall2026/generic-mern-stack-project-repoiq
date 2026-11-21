@@ -6,6 +6,7 @@ const path = require("node:path").posix;
 const cors = require("cors");
 const app = express();
 const filePath = require("path");
+const analysesByRepoId = new Map();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(filePath.join(__dirname, "public")));
@@ -61,29 +62,29 @@ app.delete("/api/repositories/:id", (req, res) => {
   res.json({ success: true });
 });
 
-const analyses = {}
+const analyses = {};
 
 app.get("/api/repositories/:id/analysis", (req, res) => {
-    const repo = repositories.find(r => r.id === Number(req.params.id))
+  const repo = repositories.find((r) => r.id === Number(req.params.id));
 
-    if (!repo) {
-        return res.status(404).json({ error: "Repository not found" })
-    }
+  if (!repo) {
+    return res.status(404).json({ error: "Repository not found" });
+  }
 
-    if (!analyses[repo.id]) {
-        analyses[repo.id] = {
-            repositoryId: repo.id,
-            analyzedAt: new Date().toISOString(),
-            status: "Completed",
-            files: 342,
-            functions: 28,
-            classes: 65,
-            relationships: 19
-        }
-    }
+  if (!analyses[repo.id]) {
+    analyses[repo.id] = {
+      repositoryId: repo.id,
+      analyzedAt: new Date().toISOString(),
+      status: "Completed",
+      files: 342,
+      functions: 28,
+      classes: 65,
+      relationships: 19,
+    };
+  }
 
-    res.json(analyses[repo.id])
-})
+  res.json(analyses[repo.id]);
+});
 
 app.post("/api/repositories", (req, res) => {
   const url = typeof req.body?.url === "string" ? req.body.url.trim() : "";
@@ -488,7 +489,8 @@ app.post("/api/repositories/analyze", async (req, res) => {
   repo.updated = "Just now";
   repo.status = "Completed";
   progress.step = 4;
-  res.json({
+
+  const analysis = {
     repository: {
       ...repo,
       files: fileCount,
@@ -496,9 +498,13 @@ app.post("/api/repositories/analyze", async (req, res) => {
       classes: classCount,
       relationships: connections.length,
     },
+    analyzedAt: new Date().toISOString(),
     nodes: nodes,
     connections: connections,
-  });
+  };
+
+  analysesByRepoId.set(repo.id, analysis);
+  return res.json(analysis);
 });
 
 app.post("/api/login", (req, res) => {
