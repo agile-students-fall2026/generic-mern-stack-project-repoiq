@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BackButton from './BackButton.jsx';
 
-function ForgotPassword({ setPagee, setEmailRequest }) {
+function ForgotPassword({ setPage, setEmailRequest }) {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
