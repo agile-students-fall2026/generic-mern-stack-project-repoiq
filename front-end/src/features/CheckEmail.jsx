@@ -1,4 +1,26 @@
-function CheckEmail({ setPage }) {
+import { useState } from "react";
+
+function CheckEmail({ setPage, emailRequest }) {
+    const [message, setMessage] = useState("");
+
+    async function handleResend() {
+        try {
+            const response = await fetch("/api/resend-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON. stringify(emailRequest),
+            });
+
+            const data = await response.json();
+            setMessage(
+                response.ok
+                ? data.message
+                : "Could not resend the email. Please try again"
+            );
+        } catch {
+            setMessage("Could not resend the email. Please try again");
+        }
+    }
 
     return (
         <div>
