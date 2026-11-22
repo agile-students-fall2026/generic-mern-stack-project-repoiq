@@ -18,6 +18,24 @@ function AddRepository({
     startAnalysis(url.trim());
   }
 
+  async function handleGitHubConnect() {
+    setError("");
+
+    try {
+      const response = await fetch("/api/github/connect", { method: "POST" });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(data.message || "Could not connect GitHub.");
+        return;
+      }
+
+      setGithubConnected(true);
+    } catch {
+      setError("Could not connect GitHub.");
+    }
+  }
+
   return (
     <div className="add-repository-page">
       <div className="add-header">
@@ -63,7 +81,8 @@ function AddRepository({
       <button
         className="outline"
         type="button"
-        onClick={() => setGithubConnected(true)}
+        onClick={handleGitHubConnect}
+        disabled={githubConnected}
       >
         {githubConnected ? "GitHub Connected" : "Connect to GitHub"}
       </button>
