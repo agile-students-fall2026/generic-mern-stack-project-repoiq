@@ -13,7 +13,23 @@ function Signup({ setPage }) {
       setError("Passwords don't match.");
       return;
     }
+    
+  async function handleGitHubSignup() {
+    try {
+      const response = await fetch("/api/auth/github", { method: "POST" });
+      const data = await response.json();
 
+      if (!response.ok || !data.success) {
+        setError(data.message || "Could not sign in with GitHub.");
+        return;
+      }
+
+      setUser(data.user);
+      setPage("home");
+    } catch {
+      setError("Could not sign in with GitHub.");
+    }
+  }
   
   const response = await fetch('/api/signup', {
     method: 'POST',
@@ -67,7 +83,7 @@ function Signup({ setPage }) {
 
       <p className="center">——— or continue with ———</p>
 
-      <button className="outline">Continue with GitHub</button>
+      <button className="outline" onClick={handleGitHubSignup}>Continue with GitHub</button>
 
       <p className="center">
         Already have an account?{' '}
