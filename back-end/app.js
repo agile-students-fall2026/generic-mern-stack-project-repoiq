@@ -578,4 +578,19 @@ app.post("/api/resend-email", (req, res) => {
   });
 });
 
+app.post("/api/auth/github", (req, res) => {
+  res.json({
+    success: true,
+    message: "Signed in with GitHub (demo).",
+    user: { name: "Demo GitHub User", email: "github@example.com" },
+  });
+});
+
+app.post("/api/github/connect", (req, res) => {
+  res.json({
+    success: true,
+    message: "GitHub connected (demo).",
+  });
+});
+
 module.exports = app;
