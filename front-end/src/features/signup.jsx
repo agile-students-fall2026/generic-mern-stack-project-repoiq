@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Lock, Mail, User } from 'lucide-react';
 import BackButton from './BackButton.jsx';
-function Signup({ setPage }) {
+function Signup({ setPage, setUser }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,23 +13,6 @@ function Signup({ setPage }) {
       setError("Passwords don't match.");
       return;
     }
-    
-  async function handleGitHubSignup() {
-    try {
-      const response = await fetch("/api/auth/github", { method: "POST" });
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        setError(data.message || "Could not sign in with GitHub.");
-        return;
-      }
-
-      setUser(data.user);
-      setPage("home");
-    } catch {
-      setError("Could not sign in with GitHub.");
-    }
-  }
   
   const response = await fetch('/api/signup', {
     method: 'POST',
@@ -44,6 +27,23 @@ function Signup({ setPage }) {
     setError(data.message);
   }
 }       
+
+async function handleGitHubSignup() {
+  try {
+    const response = await fetch("/api/auth/github", { method: "POST" });
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      setError(data.message || "Could not sign in with GitHub.");
+      return;
+    }
+
+    setUser(data.user);
+    setPage("home");
+  } catch {
+    setError("Could not sign in with GitHub.");
+  }
+}
 
   return (
     <div className="signup">
