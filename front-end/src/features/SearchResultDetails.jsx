@@ -1,11 +1,11 @@
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 
-function SearchResultDetails({ result, setPage }) {
+function SearchResultDetails({ result, setPage, repository }) {
   if (!result) {
     return <p>No result selected.</p>;
   }
-
+  const item = result;
   return (
     <div>
       <header className="add-header">
@@ -33,10 +33,21 @@ function SearchResultDetails({ result, setPage }) {
       </ul>
 
       {/* link to interactice map later */}
-      <button className="primary" onClick={() => setPage("map")}>Highlight on Map</button>
+      <button className="primary" onClick={() => setPage("map")}>
+        Highlight on Map
+      </button>
 
-      {/* link to source later */}
-      <button className="outline">View source on GitHub</button>
+      {repository?.url &&
+        repository.defaultBranch &&
+        item.path &&
+        ["File", "Function", "Class"].includes(item.type) && (
+          <a
+            className="outline"
+            href={`${repository.url}/blob/${encodeURIComponent(repository.defaultBranch)}/${item.path.split("/").map(encodeURIComponent).join("/")}${item.startLine ? `#L${item.startLine}` : ""}`}
+          >
+            View source on GitHub
+          </a>
+        )}
 
       <NavBar setPage={setPage} />
     </div>

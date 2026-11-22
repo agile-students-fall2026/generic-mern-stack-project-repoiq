@@ -9,7 +9,7 @@ function RepositoryDetails({ setPage, selectedRepo, repoBack, startAnalysis }) {
   useEffect(() => {
     if (!selectedRepo?.id) return;
 
-    fetch(`http://localhost:3000/api/repositories/${selectedRepo.id}`)
+    fetch(`/api/repositories/${selectedRepo.id}`)
       .then((res) => res.json())
       .then((data) => setRepo(data))
       .catch((err) => console.error(err));

@@ -4,9 +4,15 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
-  const [url, setUrl] = useState("");
+function AddRepository({
+  setPage,
+  startAnalysis,
+  onRepositoryAdded,
+  initialUrl = "",
+}) {
+  const [url, setUrl] = useState(initialUrl);
   const [error, setError] = useState("");
+  const [githubConnected, setGithubConnected] = useState(false);
 
   async function handleAnalyze() {
     startAnalysis(url.trim());
@@ -54,8 +60,12 @@ function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
       </button>
 
       <p className="center">OR</p>
-      <button className="outline" type="button">
-        Connect to GitHub
+      <button
+        className="outline"
+        type="button"
+        onClick={() => setGithubConnected(true)}
+      >
+        {githubConnected ? "GitHub Connected" : "Connect to GitHub"}
       </button>
       <NavBar setPage={setPage} />
     </div>

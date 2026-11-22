@@ -25,6 +25,7 @@ function AnalysisComplete({ setPage, analysis, removeCompletedRepository }) {
       <div className="repository">
         <h3>{analysis.repository.name}</h3>
         <p>{analysis.repository.url}</p>
+        <p>Last analyzed {new Date(analysis.analyzedAt).toLocaleString()}</p>
       </div>
 
       <button className="primary" onClick={() => setPage("map")}>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BackButton from './BackButton.jsx';
 
-function Login({ setPage }) {
+function Login({ setPage, setUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,6 +15,7 @@ function Login({ setPage }) {
   const data = await response.json();
 
   if (data.success) {
+    setUser(data.user);
     setPage('home');
   } else {
     setError(data.message);

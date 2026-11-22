@@ -5,15 +5,30 @@ function ForgotPassword({ setPage }) {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (!email.trim()) {
             setMessage('Please enter your email.');
             return;
         }
 
-        setMessage('Password reset is not available yet.')
+        const response = await fetch('/api/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email }),
+        });
+        const data = await response.json();
+
+
+        if (data.success) {
+            setPage('check-email');
+        } else {
+            setMessage(data.message);
+        }
+
+       
     }
 
+    
     return (
         <div>
             <header className="add-header">

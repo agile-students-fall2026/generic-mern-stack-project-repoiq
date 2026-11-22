@@ -117,6 +117,18 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
     );
   }
 
+  if (selectedRepo && !analysis) {
+    return (
+      <div className="phone">
+        <header className="add-header">
+          <BackButton setPage={setPage} to="repository-details" />
+          <h1>Code Map</h1>
+        </header>
+        <p>Analyze this repository first.</p>
+        <NavBar setPage={setPage} />
+      </div>
+    );
+
   if (!repository) {
     return <p>Loading map...</p>;
   }
