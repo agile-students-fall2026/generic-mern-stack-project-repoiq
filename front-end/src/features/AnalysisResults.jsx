@@ -6,22 +6,24 @@ import { CodeXml } from "lucide-react";
 function AnalysisResults({
   setPage,
   selectedRepo,
-  removeRepository,
+  removeCompletedRepository,
   analysis,
   startAnalysis,
 }) {
-  if (!analysis || selectedRepo?.name !== analysis.repository.name) {
+  if (!analysis) {
     return (
       <div className="analysis-results">
         <header className="add-header">
-          <BackButton setPage={setPage} to="repository-details"/>
+          <BackButton setPage={setPage} to="repository-details" />
           <h1>Repository Analysis Details</h1>
         </header>
         <p>Analyze this repository first.</p>
-        <NavBar setPage={setPage}/>
+        <NavBar setPage={setPage} />
       </div>
-    )
+    );
   }
+  const { repository, analyzedAt } = analysis;
+
   return (
     <div className="analysis-results">
       <header className="add-header">
@@ -33,8 +35,8 @@ function AnalysisResults({
         <div className="analysis-repo-header">
           <CodeXml size={32} strokeWidth={2.5} className="analysis-repo-icon" />
           <div>
-            <h3>{selectedRepo?.name || "Repository"}</h3>
-            <p>https://github.com/username/repo</p>
+            <h3>{repository.name || "Repository"}</h3>
+            <p>{repository.url}</p>
           </div>
         </div>
 
@@ -42,7 +44,7 @@ function AnalysisResults({
 
         <div className="analysis-info-row">
           <span>Last analyzed</span>
-          <span>Oct 14, 2026 · 9:31 pm</span>
+          <span>{new Date(analyzedAt).toLocaleString()}</span>
         </div>
 
         <div className="analysis-info-row">
@@ -56,19 +58,19 @@ function AnalysisResults({
       <div className="analysis-metrics">
         <div>
           <span>Files</span>
-          <strong>342</strong>
+          <strong>{repository.files}</strong>
         </div>
         <div>
           <span>Functions</span>
-          <strong>28</strong>
+          <strong>{repository.functions}</strong>
         </div>
         <div>
           <span>Classes</span>
-          <strong>65</strong>
+          <strong>{repository.classes}</strong>
         </div>
         <div>
           <span>Relationships</span>
-          <strong>19</strong>
+          <strong>{repository.relationships}</strong>
         </div>
       </div>
 
@@ -85,11 +87,9 @@ function AnalysisResults({
           type="button"
           onClick={() => {
             if (
-              selectedRepo &&
               window.confirm("Are you sure you want to remove this repository?")
             ) {
-              removeRepository(selectedRepo.name);
-              setPage("home");
+              removeCompletedRepository(repository.id);
             }
           }}
         >
