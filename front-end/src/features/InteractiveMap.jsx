@@ -128,6 +128,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
         <NavBar setPage={setPage} />
       </div>
     );
+  }
 
   if (!repository) {
     return <p>Loading map...</p>;
