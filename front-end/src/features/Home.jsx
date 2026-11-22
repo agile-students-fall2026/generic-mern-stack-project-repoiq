@@ -3,10 +3,10 @@ import EmptyState from "./EmptyState.jsx";
 import repoLogo from "../assets/repo-logo.png";
 import userIcon from "../assets/user-icon.png";
 import { CodeXml } from "lucide-react";
-import { profile } from "../data/mockData";
 import { User } from "lucide-react";
 
 function Home({
+  user,
   setPage,
   setSelectedRepo,
   setRepoBack,
@@ -27,7 +27,7 @@ function Home({
           <User size={22} />
         </span>
       </div>
-      <h2>Good morning, {profile.name}</h2>{" "}
+      <h2>Good morning, {user?.name || "User"}</h2>
       <p>Explore your repositories and discover your codebase.</p>
       <input
         type="text"

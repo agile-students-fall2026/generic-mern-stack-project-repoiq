@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Lock, Mail, User } from 'lucide-react';
 import BackButton from './BackButton.jsx';
-function Signup({ setPage }) {
+function Signup({ setPage, setUser, setEmailRequest }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +13,6 @@ function Signup({ setPage }) {
       setError("Passwords don't match.");
       return;
     }
-
   
   const response = await fetch('/api/signup', {
     method: 'POST',
@@ -23,11 +22,29 @@ function Signup({ setPage }) {
   const data = await response.json();
 
   if (data.success) {
+    setEmailRequest({ email: email.trim(), purpose: "signup" });
     setPage('check-email');
   } else {
     setError(data.message);
   }
 }       
+
+async function handleGitHubSignup() {
+  try {
+    const response = await fetch("/api/auth/github", { method: "POST" });
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      setError(data.message || "Could not sign in with GitHub.");
+      return;
+    }
+
+    setUser(data.user);
+    setPage("home");
+  } catch {
+    setError("Could not sign in with GitHub.");
+  }
+}
 
   return (
     <div className="signup">
@@ -67,7 +84,7 @@ function Signup({ setPage }) {
 
       <p className="center">——— or continue with ———</p>
 
-      <button className="outline">Continue with GitHub</button>
+      <button className="outline" onClick={handleGitHubSignup}>Continue with GitHub</button>
 
       <p className="center">
         Already have an account?{' '}

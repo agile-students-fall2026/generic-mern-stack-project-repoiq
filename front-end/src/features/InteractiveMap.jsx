@@ -1,10 +1,4 @@
 import { useState, useEffect } from "react";
-import {
-  nodes,
-  connections,
-  repository,
-  sampleRepositories,
-} from "../data/mockData";
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
@@ -16,8 +10,27 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
   const [y, setY] = useState(0);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState("");
-  const [selectedRepository, setSelectedRepository] = useState(repository.name);
+  const [selectedRepository, setSelectedRepository] = useState("");
   const [nodeType, setNodeType] = useState("All");
+  const [repository, setRepository] = useState(null);
+  const [sampleRepositories, setSampleRepositories] = useState([]);
+  const [nodes, setNodes] = useState([]);
+  const [connections, setConnections] = useState([]);
+
+  useEffect(() => {
+    async function loadMap() {
+      const response = await fetch("/api/map");
+      const data = await response.json();
+
+      setRepository(data.repository);
+      setSampleRepositories(data.sampleRepositories);
+      setNodes(data.nodes);
+      setConnections(data.connections);
+      setSelectedRepository(data.repository.name);
+    }
+
+    loadMap();
+  }, []);
 
   const colors = {
     Repository: "#d7e5ff",
@@ -69,18 +82,18 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
   }
 
   useEffect(() => {
-  if (!highlightedResult) return;
+    if (!highlightedResult) return;
 
-  const node = repoNodes.find((item) => item.id === highlightedResult.id);
-    if (!node) return;
+    const node = repoNodes.find((item) => item.id === highlightedResult.id);
+      if (!node) return;
 
-    const newZoom = 1.2;
+      const newZoom = 1.2;
 
-    setNodeType("All");
-    setSelected(node);
-    setZoom(newZoom);
-    setX(newZoom * (175 - node.x));
-    setY(newZoom * (225 - node.y));
+      setNodeType("All");
+      setSelected(node);
+      setZoom(newZoom);
+      setX(newZoom * (175 - node.x));
+      setY(newZoom * (225 - node.y));
   }, [highlightedResult, analysis]);
 
   repoNodes = repoNodes.filter(
@@ -124,6 +137,23 @@ function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, on
         </button>
       </div>
     );
+  }
+
+  if (selectedRepo && !analysis) {
+    return (
+      <div className="phone">
+        <header className="add-header">
+          <BackButton setPage={setPage} to="repository-details" />
+          <h1>Code Map</h1>
+        </header>
+        <p>Analyze this repository first.</p>
+        <NavBar setPage={setPage} />
+      </div>
+    );
+  }
+
+  if (!repository) {
+    return <p>Loading map...</p>;
   }
 
   return (

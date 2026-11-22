@@ -4,12 +4,36 @@ import BackButton from "./BackButton.jsx";
 import connection from "../assets/connection.png";
 import "./AddRepository.css";
 
-function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
-  const [url, setUrl] = useState("");
+function AddRepository({
+  setPage,
+  startAnalysis,
+  onRepositoryAdded,
+  initialUrl = "",
+}) {
+  const [url, setUrl] = useState(initialUrl);
   const [error, setError] = useState("");
+  const [githubConnected, setGithubConnected] = useState(false);
 
   async function handleAnalyze() {
     startAnalysis(url.trim());
+  }
+
+  async function handleGitHubConnect() {
+    setError("");
+
+    try {
+      const response = await fetch("/api/github/connect", { method: "POST" });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(data.message || "Could not connect GitHub.");
+        return;
+      }
+
+      setGithubConnected(true);
+    } catch {
+      setError("Could not connect GitHub.");
+    }
   }
 
   return (
@@ -54,8 +78,13 @@ function AddRepository({ setPage, startAnalysis, onRepositoryAdded }) {
       </button>
 
       <p className="center">OR</p>
-      <button className="outline" type="button">
-        Connect to GitHub
+      <button
+        className="outline"
+        type="button"
+        onClick={handleGitHubConnect}
+        disabled={githubConnected}
+      >
+        {githubConnected ? "GitHub Connected" : "Connect to GitHub"}
       </button>
       <NavBar setPage={setPage} />
     </div>

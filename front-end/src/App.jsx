@@ -20,9 +20,13 @@ import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
   const [page, setPage] = useState("welcome");
+  const [user, setUser] = useState(null);
   const [repositories, setRepositories] = useState([]);
   const [selectedResult, setSelectedResult] = useState(null);
-  const [selectedRepo, setSelectedRepo] = useState(null);
+  const [selectedRepo, setSelectedRepo] = useState(() => {
+    const savedId = sessionStorage.getItem("selectedRepoId");
+    return savedId ? { id: Number(savedId) } : null;
+  });
   const [removedRepos, setRemovedRepos] = useState([]);
   const [analysis, setAnalysis] = useState(null);
   const [analysisUrl, setAnalysisUrl] = useState("");
@@ -31,6 +35,10 @@ function App() {
   const [selectedComponent, setSelectedComponent] = useState({});
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
+const [emailRequest, setEmailRequest] = useState({
+  email: "",
+  purpose: "",
+});
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -131,10 +139,7 @@ function App() {
         data.repository,
       ]);
 
-      setAnalysis({
-        ...data,
-        analyzedAt: new Date().toLocaleString(),
-      });
+      setAnalysis(data);
       setSelectedRepo(data.repository);
       setPage("complete");
     } catch (error) {
@@ -152,19 +157,64 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
+  const selectedRepoId = selectedRepo?.id;
+
+  useEffect(() => {
+    if (!selectedRepoId) {
+      sessionStorage.removeItem("selectedRepoId");
+      return;
+    }
+
+    sessionStorage.setItem("selectedRepoId", String(selectedRepoId));
+    const controller = new AbortController();
+
+    async function loadAnalysis() {
+      const response = await fetch(
+        `/api/repositories/${selectedRepoId}/analysis`,
+        { signal: controller.signal },
+      );
+
+      if (response.status === 404) {
+        setAnalysis(null);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Bad response");
+      }
+
+      setAnalysis(await response.json());
+    }
+
+    loadAnalysis().catch((error) => {
+      if (error.name !== "AbortError") {
+        console.error(error);
+      }
+    });
+
+    return () => controller.abort();
+  }, [selectedRepoId]);
+
   if (page === "welcome") {
     return <Welcome setPage={setPage} />;
   }
 
   if (page === "login") {
-    return <Login setPage={setPage} />;
+    return <Login setPage={setPage} setUser={setUser} />;
   }
   if (page === "signup") {
-    return <Signup setPage={setPage} />;
+    return (
+      <Signup
+        setPage={setPage}
+        setUser={setUser}
+        setEmailRequest={setEmailRequest}
+      />
+    );
   }
   if (page === "home") {
     return (
       <Home
+        user={user}
         setPage={setPage}
         setSelectedRepo={setSelectedRepo}
         search={repoSearch}
@@ -190,11 +240,13 @@ function App() {
     );
   }
 
-  if (page === "add-repository") {
+  if (page === "add-repository" || page === "edit-repository-url") {
     return (
       <AddRepository
         setPage={setPage}
         startAnalysis={startAnalysis}
+        key={page}
+        initialUrl={page === "edit-repository-url" ? analysisUrl : ""}
         onRepositoryAdded={(repo) => {
           setRepositories((previous) => [...previous, repo]);
           setSelectedRepo(repo);
@@ -237,7 +289,7 @@ function App() {
     return (
       <AnalysisComplete
         setPage={setPage}
-        analysis={analysis}
+        analysis={activeAnalysis}
         removeCompletedRepository={removeCompletedRepository}
       />
     );
@@ -255,17 +307,37 @@ function App() {
   }
 
   if (page === "searchresultdetails") {
-    return <SearchResultsDetails setPage={setPage} result={selectedResult} />;
+    return (
+      <SearchResultsDetails
+        setPage={setPage}
+        result={selectedResult}
+        repository={activeAnalysis?.repository}
+      />
+    );
   }
 
   if (page === "dependencydetails") {
     return (
-      <DependencyDetails setPage={setPage} component={selectedComponent} />
+      <DependencyDetails
+        setPage={setPage}
+        component={selectedComponent}
+        analysis={activeAnalysis}
+        onViewComponent={(file) => {
+          setSelectedComponent(file);
+          setPage("componentdetails");
+        }}
+      />
     );
   }
 
   if (page === "componentdetails") {
-    return <ComponentDetails setPage={setPage} component={selectedComponent} />;
+    return (
+      <ComponentDetails
+        setPage={setPage}
+        component={selectedComponent}
+        repository={activeAnalysis?.repository}
+      />
+    );
   }
   if (page === "repository-details") {
     return (
@@ -283,8 +355,8 @@ function App() {
       <AnalysisResults
         setPage={setPage}
         selectedRepo={selectedRepo}
-        removeRepository={removeRepository}
-        analysis={analysis}
+        removeCompletedRepository={removeCompletedRepository}
+        analysis={activeAnalysis}
         startAnalysis={startAnalysis}
       />
     );
@@ -295,11 +367,11 @@ function App() {
   }
 
   if (page === "forgot-password") {
-    return <ForgotPassword setPage={setPage} />;
+    return <ForgotPassword setPage={setPage} setEmailRequest={setEmailRequest} />;
   }
 
   if (page === "check-email") {
-    return <CheckEmail setPage={setPage} />;
+    return <CheckEmail setPage={setPage} emailRequest={emailRequest} />;
   }
 }
 export default App;

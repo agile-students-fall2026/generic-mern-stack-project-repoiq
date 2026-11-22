@@ -6,6 +6,8 @@ const path = require("node:path").posix;
 const cors = require("cors");
 const app = express();
 const filePath = require("path");
+const mapData = require("./data/mapData");
+const analysesByRepoId = new Map();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(filePath.join(__dirname, "public")));
@@ -58,6 +60,7 @@ app.delete("/api/repositories/:id", (req, res) => {
   if (index === -1)
     return res.status(404).json({ error: "Repository not found." });
   repositories.splice(index, 1);
+  analysesByRepoId.delete(Number(req.params.id));
   res.json({ success: true });
 });
 
@@ -138,9 +141,11 @@ app.post("/api/repositories/analyze", async (req, res) => {
     repo.status = "Completed";
     repo.updated = "Just now";
 
-    return res.json({
+    const analysis = {
+      analyzedAt: new Date().toISOString(),
       repository: {
         ...repo,
+        defaultBranch: "main",
         files: 2,
         functions: 2,
         classes: 1,
@@ -194,7 +199,9 @@ app.post("/api/repositories/analyze", async (req, res) => {
         { from: "main.js", to: "baz", type: "contains" },
         { from: "main.js", to: "Bar", type: "contains" },
       ],
-    });
+    };
+    analysesByRepoId.set(repo.id, analysis);
+    return res.json(analysis);
   }
 
   const response = await fetch(`https://api.github.com/repos/${owner}/${name}`);
@@ -464,17 +471,27 @@ app.post("/api/repositories/analyze", async (req, res) => {
   repo.updated = "Just now";
   repo.status = "Completed";
   progress.step = 4;
-  res.json({
+
+  const analysis = {
     repository: {
       ...repo,
+      defaultBranch: data.default_branch,
       files: fileCount,
       functions: functionCount,
       classes: classCount,
       relationships: connections.length,
     },
+    analyzedAt: new Date().toISOString(),
     nodes: nodes,
     connections: connections,
-  });
+  };
+
+  analysesByRepoId.set(repo.id, analysis);
+  return res.json(analysis);
+});
+
+app.get("/api/map", (req, res) => {
+  res.json(mapData);
 });
 
 app.post("/api/login", (req, res) => {
@@ -494,6 +511,16 @@ app.post("/api/login", (req, res) => {
   });
 });
 
+app.get("/api/repositories/:id/analysis", (req, res) => {
+  const analysis = analysesByRepoId.get(Number(req.params.id));
+
+  if (!analysis) {
+    return res.status(404).json({ error: "Analysis not found" });
+  }
+
+  res.json(analysis);
+});
+
 app.post("/api/signup", (req, res) => {
   const { name, email, password } = req.body;
 
@@ -508,6 +535,73 @@ app.post("/api/signup", (req, res) => {
     success: true,
     message: "Account created.",
     user: { name: name, email: email },
+  });
+});
+
+app.post("/api/forgot-password", (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({
+      success: false,
+      message: "Please enter your email.",
+    });
+  }
+
+  res.json({
+    success: true,
+    message: "A password reset link has been sent to your email.",
+  });
+});
+
+app.post("/api/auth/github", (req, res) => {
+  res.json({
+    success: true,
+    message: "Signed in with GitHub (demo).",
+    user: { name: "Demo GitHub User", email: "github@example.com" },
+  });
+});
+
+app.post("/api/github/connect", (req, res) => {
+  res.json({
+    success: true,
+    message: "GitHub connected (demo).",
+// Mock the resend action for the Check Email page; no email is actually sent.
+app.post("/api/resend-email", (req, res) => {
+  const { email, purpose } = req.body;
+
+  if (!email) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing email",
+    });
+  }
+
+  if (!["signup", "reset"].includes(purpose)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid email purpose. Expected 'signup' or 'reset'"
+    });
+  }
+
+  res.json({
+    success: true,
+    message: `Simulated ${purpose === "signup" ? "verification" : "password reset"} email for ${email}. No email was sent.`,
+  });
+});
+
+app.post("/api/auth/github", (req, res) => {
+  res.json({
+    success: true,
+    message: "Signed in with GitHub (demo).",
+    user: { name: "Demo GitHub User", email: "github@example.com" },
+  });
+});
+
+app.post("/api/github/connect", (req, res) => {
+  res.json({
+    success: true,
+    message: "GitHub connected (demo).",
   });
 });
 

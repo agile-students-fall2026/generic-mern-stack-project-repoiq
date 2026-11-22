@@ -1,12 +1,26 @@
 import { useState } from "react";
 import BackButton from "./BackButton.jsx";
-import NavBar from './NavBar.jsx';
+import NavBar from "./NavBar.jsx";
 
-function DependencyDetails({ setPage, component }) {
-  const [tab, setTab] = useState("depends"); 
+function DependencyDetails({ setPage, component, analysis, onViewComponent }) {
+  const [tab, setTab] = useState("depends");
 
-  const dependsOn = component?.imports ?? [];
-  const usedBy = component?.usedBy ?? [];
+  const nodes = analysis?.nodes ?? [];
+  const imports = (analysis?.connections ?? []).filter(
+    (connection) => connection.type === "import",
+  );
+  const findFile = (id) =>
+    nodes.find((node) => node.id === id && node.type === "File");
+
+  const dependsOn = imports
+    .filter((connection) => connection.from === component?.id)
+    .map((connection) => findFile(connection.to))
+    .filter(Boolean);
+  const usedBy = imports
+    .filter((connection) => connection.to === component?.id)
+    .map((connection) => findFile(connection.from))
+    .filter(Boolean);
+
   const files = tab === "depends" ? dependsOn : usedBy;
 
   return (
@@ -26,12 +40,17 @@ function DependencyDetails({ setPage, component }) {
         </button>
       </div>
 
-      {files.map((path) => (
-        <div className="list-item" key={path}>
-          <p className="path">{path}</p>
-        </div>
+      {files.map((file) => (
+        <button
+          key={file.id}
+          className="list-item"
+          type="button"
+          onClick={() => onViewComponent(file)}
+        >
+          {file.path}
+        </button>
       ))}
-      <NavBar setPage={setPage}/>
+      <NavBar setPage={setPage} />
     </div>
   );
 }
