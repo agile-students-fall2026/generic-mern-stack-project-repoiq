@@ -562,4 +562,11 @@ app.post("/api/auth/github", (req, res) => {
   });
 });
 
+app.post("/api/github/connect", (req, res) => {
+  res.json({
+    success: true,
+    message: "GitHub connected (demo).",
+  });
+});
+
 module.exports = app;
