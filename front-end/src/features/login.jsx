@@ -7,13 +7,20 @@ function Login({ setPage, setUser }) {
   const [error, setError] = useState('');
 
   async function handleLogin() {
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, password: password }),
-  });
-  const data = await response.json();
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password }),
+    });
+    const data = await response.json();
 
+    if (data.success) {
+      setUser(data.user);
+      setPage('home');
+    } else {
+      setError(data.message);
+    }
+  }
   async function handleGitHubLogin() {
     try {
       const response = await fetch("/api/auth/github", {
@@ -32,14 +39,6 @@ function Login({ setPage, setUser }) {
       setError("Could not sign in with GitHub")
     }
   }
-
-  if (data.success) {
-    setUser(data.user);
-    setPage('home');
-  } else {
-    setError(data.message);
-  }
-}
 
 return (
   <div className="login">
