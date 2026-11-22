@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Lock, Mail, User } from 'lucide-react';
 import BackButton from './BackButton.jsx';
-function Signup({ setPage }) {
+function Signup({ setPage, setEmailRequest }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
