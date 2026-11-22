@@ -23,6 +23,7 @@ function Signup({ setPage }) {
   const data = await response.json();
 
   if (data.success) {
+    setEmailRequest({ email: email.trim(), purpose: "signup" });
     setPage('check-email');
   } else {
     setError(data.message);
