@@ -35,6 +35,10 @@ function App() {
   const [selectedComponent, setSelectedComponent] = useState({});
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
+  const [emailRequest, setEmailRequest] = useState({
+    email: "",
+    purpose: "",
+  });
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -199,7 +203,7 @@ function App() {
     return <Login setPage={setPage} setUser={setUser} />;
   }
   if (page === "signup") {
-    return <Signup setPage={setPage} />;
+    return <Signup setPage={setPage} setEmailRequest={setEmailRequest}/>;
   }
   if (page === "home") {
     return (
@@ -354,11 +358,11 @@ function App() {
   }
 
   if (page === "forgot-password") {
-    return <ForgotPassword setPage={setPage} />;
+    return <ForgotPassword setPage={setPage} setEmailRequest={setEmailRequest} />;
   }
 
   if (page === "check-email") {
-    return <CheckEmail setPage={setPage} />;
+    return <CheckEmail setPage={setPage} emailRequest={emailRequest} />;
   }
 }
 export default App;
