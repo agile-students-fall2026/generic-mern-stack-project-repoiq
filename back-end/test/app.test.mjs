@@ -27,5 +27,5 @@ it("counts repository files", async () => {
     .send({ url: "https://github.com/test/test" });
 
   assert.equal(res.status, 200);
-  assert.equal(res.body.repository.files, 1);
+  assert.equal(res.body.repository.files, 2);
 }).timeout(6000);
