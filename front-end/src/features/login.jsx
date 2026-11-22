@@ -14,6 +14,25 @@ function Login({ setPage, setUser }) {
   });
   const data = await response.json();
 
+  async function handleGitHubLogin() {
+    try {
+      const response = await fetch("/api/auth/github", {
+        method:"POST",
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(data.message || "Could not sign in with GitHub.");
+        return;
+      }
+
+      setUser(data.user);
+      setPage("home");
+    } catch {
+      setError("Could not sign in with GitHub")
+    }
+  }
+
   if (data.success) {
     setUser(data.user);
     setPage('home');
@@ -38,7 +57,7 @@ return (
     <button className="primary" onClick={handleLogin}>
       Log in
     </button>
-    <button className="outline">Continue with GitHub</button>
+    <button className="outline" onClick={handleGitHubLogin}>Continue with GitHub</button>
     <p className="center signup-prompt">
       Don't have an account? {' '}
       <button type="button" onClick={() => setPage('signup')}>
