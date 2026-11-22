@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BackButton from './BackButton.jsx';
 
-function ForgotPassword({ setPage }) {
+function ForgotPassword({ setPage, setEmailRequest }) {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
@@ -20,6 +20,7 @@ function ForgotPassword({ setPage }) {
 
 
         if (data.success) {
+            setEmailRequest({ email: email.trim(), purpose: "reset" });
             setPage('check-email');
         } else {
             setMessage(data.message);

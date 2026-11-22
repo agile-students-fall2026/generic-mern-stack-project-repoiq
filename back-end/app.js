@@ -566,6 +566,27 @@ app.post("/api/github/connect", (req, res) => {
   res.json({
     success: true,
     message: "GitHub connected (demo).",
+// Mock the resend action for the Check Email page; no email is actually sent.
+app.post("/api/resend-email", (req, res) => {
+  const { email, purpose } = req.body;
+
+  if (!email) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing email",
+    });
+  }
+
+  if (!["signup", "reset"].includes(purpose)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid email purpose. Expected 'signup' or 'reset'"
+    });
+  }
+
+  res.json({
+    success: true,
+    message: `Simulated ${purpose === "signup" ? "verification" : "password reset"} email for ${email}. No email was sent.`,
   });
 });
 

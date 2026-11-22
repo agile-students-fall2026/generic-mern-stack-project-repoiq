@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Lock, Mail, User } from 'lucide-react';
 import BackButton from './BackButton.jsx';
-function Signup({ setPage, setUser }) {
+function Signup({ setPage, setUser, setEmailRequest }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +22,7 @@ function Signup({ setPage, setUser }) {
   const data = await response.json();
 
   if (data.success) {
+    setEmailRequest({ email: email.trim(), purpose: "signup" });
     setPage('check-email');
   } else {
     setError(data.message);
