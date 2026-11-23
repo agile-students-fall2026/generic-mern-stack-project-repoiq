@@ -19,7 +19,10 @@ import ForgotPassword from "./features/ForgotPassword.jsx";
 import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = sessionStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [repositories, setRepositories] = useState([]);
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(() => {
@@ -35,16 +38,21 @@ function App() {
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
   const [page, setPage] = useState(
-    () => sessionStorage.getItem("currentPage") || "welcome"
+    () => (sessionStorage.getItem("user") ? "home" : "welcome")
   );
 
-  useEffect(() => {
-    sessionStorage.setItem("currentPage", page);
-  }, [page]);
   const [emailRequest, setEmailRequest] = useState({
     email: "",
     purpose: "",
   });
+
+  useEffect(() => {
+    if (user) {
+      sessionStorage.setItem("user", JSON.stringify(user));
+    } else {
+      sessionStorage.removeItem("user");
+    }
+  }, [user]);
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
