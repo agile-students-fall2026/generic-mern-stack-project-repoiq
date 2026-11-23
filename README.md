@@ -1,6 +1,6 @@
 # RepoIQ
 
-RepoIQ is a web-app that is intended to help developers manage and understand their codebases visually and easily. By visually showing the codebase, making dependencies, parent-child relations, and showing function definitions and calls, the app will make it very easy to look up how your code works.
+RepoIQ is a web app that helps developers manage and understand their codebases visually and easily. By showing the codebase as a map, including dependencies, parent-child relationships, and function definitions and calls, the app makes it easy to look up how your code works.
 
 # Product Vision Statement
 
@@ -11,8 +11,8 @@ For developers who have to work in large or unfamiliar codebases, RepoIQ turns a
 - **Codebase Visualization:** Displays codebases by turning GitHub repositories into maps of files, functions, classes and APIs.
 - **Relationship Mapping:** Illustrates connections between components to show how code is structured.
 - **Search:** Has a search tool to locate files, functions and API endpoints.
-- **Feature Discovery:** Allows devs to find where certain logic/features are implemented.
-- **Source Code Navigation:** Depends on a project and where the source code is hosted, there is a chance that they will lead directly to the project's source code.
+- **Feature Discovery:** Allows developers to find where certain logic and features are implemented.
+- **Source Code Navigation:** Depending on a project and where the source code is hosted, links may lead directly to the project's source code.
 
 ---
 
@@ -27,7 +27,7 @@ For developers who have to work in large or unfamiliar codebases, RepoIQ turns a
 
 # History
 
-There is no worse feeling than spending hours looking through 100 files trying to figure out how an API call is handled. This tool is by developers for developers meant to be a good quality of life upgrade to coding/dealing with large codebases. The student with the original idea for the project unfortunately is not on the project; however, all of our team members see this to be a worthwhile project to develop.
+There is no worse feeling than spending hours looking through 100 files trying to figure out how an API call is handled. This tool is by developers, for developers, and is meant to be a quality-of-life upgrade for working with large codebases. The student with the original idea for the project unfortunately is not on the project; however, all of our team members see this as a worthwhile project to develop.
 
 ---
 
@@ -37,20 +37,78 @@ You can see how to contribute to the project [here](CONTRIBUTING.md).
 
 ---
 
-# Building and Testing
+# Getting Started
 
-Run npm run build and npm run lint from front-end. Run npm test from back-end to execute the backend tests and generate a coverage report.
+Follow these steps to run RepoIQ on your own computer.
 
-For local setup, see the Local Development Setup section in [CONTRIBUTING.md](CONTRIBUTING.md).
+## Prerequisites
 
----
+- [Git](https://git-scm.com/downloads)
+- [Node.js](https://nodejs.org/) version 20 or newer, which also installs npm
 
-# Relevant Reading
+## Install
 
-NONE FOR NOW
+Clone the repository and go into the project folder:
 
----
+```bash
+git clone https://github.com/agile-students-fall2026/generic-mern-stack-project-repoiq.git
+cd generic-mern-stack-project-repoiq
+```
 
-# Important
+The front end and the back end each have their own `package.json`, so install the dependencies in both folders:
 
-## NONE FOR NOW
+```bash
+cd front-end
+npm install
+cd ../back-end
+npm install
+cd ..
+```
+
+## Start the App
+
+Open two terminals in the project folder.
+
+In the first terminal, start the back end:
+
+```bash
+cd back-end
+node server.js
+```
+
+You should see `Server running on port 3000`.
+
+In the second terminal, start the front end:
+
+```bash
+cd front-end
+npm run dev
+```
+
+Then open [RepoIQ in your browser](http://localhost:5173). The front end sends every `/api` request to the back end on port 3000, so keep both terminals running.
+
+## Build
+
+To build the front end, run this from the `front-end` folder:
+
+```bash
+npm run build
+```
+
+This creates a `dist` folder. The back end serves this folder, so after building, you can start only the back end with `node server.js` and open [RepoIQ on port 3000](http://localhost:3000).
+
+## Test
+
+To run the back-end tests, run this from the `back-end` folder:
+
+```bash
+npm test
+```
+
+This runs the Mocha and Chai tests and prints a c8 coverage report.
+
+To check the front-end code for lint errors, run this from the `front-end` folder:
+
+```bash
+npm run lint
+```
