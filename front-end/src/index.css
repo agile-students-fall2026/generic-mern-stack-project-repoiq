@@ -344,6 +344,13 @@ a.outline {
   text-align: left;
 }
 
+.dependencies button.list-item {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+}
+
 .repo-icon {
   width: 32px;
   height: 32px;
