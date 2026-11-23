@@ -8,6 +8,7 @@ const app = express();
 const filePath = require("path");
 const mapData = require("./data/mapData");
 const analysesByRepoId = new Map();
+const mockUsers = new Map();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(filePath.join(__dirname, "public")));
@@ -507,7 +508,10 @@ app.post("/api/login", (req, res) => {
   res.json({
     success: true,
     message: "Logged in.",
-    user: { name: "Demo User", email: email },
+    user: {
+      name: mockUsers.get(email.toLowerCase()) || email.split("@")[0],
+      email: email,
+    },
   });
 });
 
@@ -530,7 +534,7 @@ app.post("/api/signup", (req, res) => {
       message: "Please fill in all fields.",
     });
   }
-
+  mockUsers.set(email.toLowerCase(), name);
   res.status(201).json({
     success: true,
     message: "Account created.",
