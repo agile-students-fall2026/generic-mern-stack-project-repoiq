@@ -31,7 +31,7 @@ function Profile({ setPage, user, onLogout }) {
         <p>{profile?.bio}</p>
       </div>
 
-      <button type="button" onClick={onLogout}>
+      <button type="button" className="primary" onClick={onLogout} >
         Log out
       </button>
     </div>
