@@ -39,12 +39,15 @@ You can see how to contribute to the project [here](CONTRIBUTING.md).
 
 # Building and Testing
 
-We haven't started writing code yet, so there's nothing to build or test right now. We'll add the steps here once the front-end and back-end are set up. For local setup, see the Local Development Setup section in [CONTRIBUTING.md](CONTRIBUTING.md).
+Run npm run build and npm run lint from front-end. Run npm test from back-end to execute the backend tests and generate a coverage report.
+
+For local setup, see the Local Development Setup section in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
 # Relevant Reading
- NONE FOR NOW
+
+NONE FOR NOW
 
 ---
 
