@@ -571,7 +571,6 @@ app.post("/api/github/connect", (req, res) => {
 
 // Mock the resend action for the Check Email page; no email is actually sent.
 app.post("/api/resend-email", (req, res) => {
-  const { email, purpose } = req.body;
 
   if (!email) {
     return res.status(400).json({
