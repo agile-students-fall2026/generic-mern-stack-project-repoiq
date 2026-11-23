@@ -2,9 +2,27 @@ import { useState } from "react";
 import BackButton from "./BackButton.jsx";
 import NavBar from "./NavBar.jsx";
 
-function ComponentDetails({ setPage, component, repository }) {
+function ComponentDetails({ setPage, component, repository, analysis, onViewComponent }) {
   const [activeTab, setActiveTab] = useState("contents"); // save chosen tab: content/dependencies
   const item = component;
+
+  const nodes = analysis?.nodes ?? [];
+  const importConnections = (analysis?.connections ?? []).filter(
+    (connection) => connection.type === "import"
+  );
+  const findFile = (id) =>
+    nodes.find((node) => node.id === id && node.type === "File");
+
+  const imports = importConnections
+    .filter((connection) => connection.from === component?.id)
+    .map((connection) => findFile(connection.to))
+    .filter(Boolean);
+
+  const usedBy = importConnections
+    .filter((connection) => connection.to === component?.id)
+    .map((connection) => findFile(connection.from))
+    .filter(Boolean);
+
   return (
     <div className="component-details">
       <header className="add-header">
@@ -59,18 +77,30 @@ function ComponentDetails({ setPage, component, repository }) {
           <h2>Imports</h2>
 
           <ul>
-            {(component.imports ?? []).map((path) => (
-              <li className="list-item" key={path}>
-                {path}
+            {imports.map((file) => (
+              <li key={file.id}>
+                <button
+                  type="button"
+                  className="list-item"
+                  onClick={() => onViewComponent(file)}
+                >
+                  {file.path}
+                </button>
               </li>
             ))}
           </ul>
 
           <h2>Used by</h2>
           <ul>
-            {(component.usedBy ?? component.usedIn ?? []).map((path) => (
-              <li className="list-item" key={path}>
-                {path}
+            {usedBy.map((file) => (
+              <li key={file.id}>
+                <button
+                  type="button"
+                  className="list-item"
+                  onClick={() => onViewComponent(file)}
+                >
+                  {file.path}
+                </button>
               </li>
             ))}
           </ul>

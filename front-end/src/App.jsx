@@ -19,8 +19,10 @@ import ForgotPassword from "./features/ForgotPassword.jsx";
 import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
-  const [page, setPage] = useState("welcome");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = sessionStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [repositories, setRepositories] = useState([]);
   const [selectedResult, setSelectedResult] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(() => {
@@ -35,10 +37,27 @@ function App() {
   const [selectedComponent, setSelectedComponent] = useState({});
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
-const [emailRequest, setEmailRequest] = useState({
-  email: "",
-  purpose: "",
-});
+  const [page, setPage] = useState(
+    () => (sessionStorage.getItem("user") ? "home" : "welcome")
+  );
+
+  const [emailRequest, setEmailRequest] = useState({
+    email: "",
+    purpose: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      sessionStorage.setItem("user", JSON.stringify(user));
+    } else {
+      sessionStorage.removeItem("user");
+    }
+  }, [user]);
+
+  function handleLogout() {
+    setUser(null);
+    setPage("welcome");
+  }
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -336,6 +355,11 @@ const [emailRequest, setEmailRequest] = useState({
         setPage={setPage}
         component={selectedComponent}
         repository={activeAnalysis?.repository}
+        analysis={activeAnalysis}
+        onViewComponent={(file) => {
+          setSelectedComponent(file);
+          setPage("componentdetails");
+        }}
       />
     );
   }
@@ -363,7 +387,7 @@ const [emailRequest, setEmailRequest] = useState({
   }
 
   if (page === "profile") {
-    return <Profile setPage={setPage} />;
+    return <Profile setPage={setPage} user={user} onLogout={handleLogout}/>;
   }
 
   if (page === "forgot-password") {
