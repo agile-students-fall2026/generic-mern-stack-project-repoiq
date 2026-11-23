@@ -41,10 +41,10 @@ function App() {
   useEffect(() => {
     sessionStorage.setItem("currentPage", page);
   }, [page]);
-const [emailRequest, setEmailRequest] = useState({
-  email: "",
-  purpose: "",
-});
+  const [emailRequest, setEmailRequest] = useState({
+    email: "",
+    purpose: "",
+  });
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
