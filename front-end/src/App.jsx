@@ -355,6 +355,11 @@ function App() {
         setPage={setPage}
         component={selectedComponent}
         repository={activeAnalysis?.repository}
+        analysis={activeAnalysis}
+        onViewComponent={(file) => {
+          setSelectedComponent(file);
+          setPage("componentdetails");
+        }}
       />
     );
   }
