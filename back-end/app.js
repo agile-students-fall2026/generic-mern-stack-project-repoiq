@@ -566,6 +566,9 @@ app.post("/api/github/connect", (req, res) => {
   res.json({
     success: true,
     message: "GitHub connected (demo).",
+  });
+});
+
 // Mock the resend action for the Check Email page; no email is actually sent.
 app.post("/api/resend-email", (req, res) => {
   const { email, purpose } = req.body;
@@ -587,21 +590,6 @@ app.post("/api/resend-email", (req, res) => {
   res.json({
     success: true,
     message: `Simulated ${purpose === "signup" ? "verification" : "password reset"} email for ${email}. No email was sent.`,
-  });
-});
-
-app.post("/api/auth/github", (req, res) => {
-  res.json({
-    success: true,
-    message: "Signed in with GitHub (demo).",
-    user: { name: "Demo GitHub User", email: "github@example.com" },
-  });
-});
-
-app.post("/api/github/connect", (req, res) => {
-  res.json({
-    success: true,
-    message: "GitHub connected (demo).",
   });
 });
 
