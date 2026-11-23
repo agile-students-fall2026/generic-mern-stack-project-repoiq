@@ -77,7 +77,7 @@ function ComponentDetails({ setPage, component, repository, analysis, onViewComp
           <h2>Imports</h2>
 
           <ul>
-            {usedBy.map((file) => (
+            {imports.map((file) => (
               <li key={file.id}>
                 <button
                   type="button"
