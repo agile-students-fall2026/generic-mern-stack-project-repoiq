@@ -382,7 +382,7 @@ function App() {
   }
 
   if (page === "profile") {
-    return <Profile setPage={setPage} onLogout={handleLogout}/>;
+    return <Profile setPage={setPage} user={user} onLogout={handleLogout}/>;
   }
 
   if (page === "forgot-password") {

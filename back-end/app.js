@@ -593,4 +593,11 @@ app.post("/api/resend-email", (req, res) => {
   });
 });
 
+app.get("/api/profile", (req, res) => {
+  res.json({
+    username: "demo",
+    bio: "Learning about codebases",
+  });
+});
+
 module.exports = app;
