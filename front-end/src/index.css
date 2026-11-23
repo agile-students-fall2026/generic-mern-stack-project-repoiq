@@ -337,6 +337,13 @@ a.outline {
   border-radius: 4px;
 }
 
+.component-details li button.list-item {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+}
+
 .repo-icon {
   width: 32px;
   height: 32px;
