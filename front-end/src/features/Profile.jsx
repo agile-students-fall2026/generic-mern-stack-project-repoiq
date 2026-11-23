@@ -2,7 +2,7 @@ import { profile } from "../data/mockData";
 import "./Profile.css";
 import BackButton from "./BackButton.jsx";
 
-function Profile({ setPage }) {
+function Profile({ setPage, onLogout }) {
   return (
     <div className="phone">
       <header className="add-header">
@@ -17,6 +17,10 @@ function Profile({ setPage }) {
         <p>{profile.email}</p>
         <p>{profile.bio}</p>
       </div>
+
+      <button type="button" onClick={onLogout}>
+        Log out
+      </button>
     </div>
   );
 }
