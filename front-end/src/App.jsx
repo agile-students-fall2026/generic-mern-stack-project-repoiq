@@ -35,10 +35,10 @@ function App() {
   const [selectedComponent, setSelectedComponent] = useState({});
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
-  const [emailRequest, setEmailRequest] = useState({
-    email: "",
-    purpose: "",
-  });
+const [emailRequest, setEmailRequest] = useState({
+  email: "",
+  purpose: "",
+});
 
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
@@ -255,12 +255,15 @@ function App() {
     );
   }
 
-  if (page === "map") {
+  if (page === "map" || page === "map-highlight") {
     return (
       <InteractiveMap
         setPage={setPage}
         selectedRepo={selectedRepo}
         analysis={activeAnalysis}
+        highlightedResult={
+          page === "map-highlight" && activeAnalysis ? selectedResult : null
+        }
         onViewComponent={(node) => {
           setSelectedComponent(node);
           setPage("componentdetails");
