@@ -131,6 +131,7 @@ a.outline {
   color: #3f5fb5;
   text-align: center;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 .placeholder-img {
