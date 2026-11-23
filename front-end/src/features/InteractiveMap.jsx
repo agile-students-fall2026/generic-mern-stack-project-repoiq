@@ -4,7 +4,7 @@ import NavBar from "./NavBar.jsx";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import "./InteractiveMap.css";
 
-function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
+function InteractiveMap({ setPage, selectedRepo, analysis, highlightedResult, onViewComponent }) {
   const [zoom, setZoom] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -81,6 +81,21 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
     }
   }
 
+  useEffect(() => {
+    if (!highlightedResult) return;
+
+    const node = repoNodes.find((item) => item.id === highlightedResult.id);
+      if (!node) return;
+
+      const newZoom = 1.2;
+
+      setNodeType("All");
+      setSelected(node);
+      setZoom(newZoom);
+      setX(newZoom * (175 - node.x));
+      setY(newZoom * (225 - node.y));
+  }, [highlightedResult, analysis]);
+
   repoNodes = repoNodes.filter(
     (node) =>
       nodeType === "All" ||
@@ -99,6 +114,13 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
     setSelected(null);
     setSearch("");
   }
+
+  function selectNode(node) {
+    setSelected(node);
+    setX(zoom * (175 - node.x));
+    setY(zoom * (225 - node.y));
+  }
+
   let details = null;
 
   if (selected) {
@@ -224,7 +246,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
             })}
 
             {repoNodes.map((node) => (
-              <g key={node.id} onClick={() => setSelected(node)}>
+              <g key={node.id} onClick={() => selectNode(node)}>
                 <circle
                   cx={node.x}
                   cy={node.y}
@@ -246,7 +268,7 @@ function InteractiveMap({ setPage, selectedRepo, analysis, onViewComponent }) {
                       ? "#828282"
                       : "#cbd1df"
                   }
-                  strokeWidth="1.5"
+                  strokeWidth={node.id === selected?.id ? "4" : "1.5"}
                 />
 
                 <text
