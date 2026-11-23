@@ -19,7 +19,6 @@ import ForgotPassword from "./features/ForgotPassword.jsx";
 import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
-  const [page, setPage] = useState("welcome");
   const [user, setUser] = useState(null);
   const [repositories, setRepositories] = useState([]);
   const [selectedResult, setSelectedResult] = useState(null);
@@ -35,6 +34,13 @@ function App() {
   const [selectedComponent, setSelectedComponent] = useState({});
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
+  const [page, setPage] = useState(
+    () => sessionStorage.getItem("currentPage") || "welcome"
+  );
+
+  useEffect(() => {
+    sessionStorage.setItem("currentPage", page);
+  }, [page]);
 const [emailRequest, setEmailRequest] = useState({
   email: "",
   purpose: "",
