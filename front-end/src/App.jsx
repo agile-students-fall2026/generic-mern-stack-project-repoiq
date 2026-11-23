@@ -54,6 +54,11 @@ function App() {
     }
   }, [user]);
 
+  function handleLogout() {
+    setUser(null);
+    setPage("welcome");
+  }
+
   function removeRepository(name) {
     setRemovedRepos((prev) => [...prev, name]);
   }
@@ -377,7 +382,7 @@ function App() {
   }
 
   if (page === "profile") {
-    return <Profile setPage={setPage} />;
+    return <Profile setPage={setPage} onLogout={handleLogout}/>;
   }
 
   if (page === "forgot-password") {
