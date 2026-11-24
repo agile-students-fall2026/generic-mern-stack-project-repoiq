@@ -53,6 +53,7 @@ describe("POST /api/signup", () => {
       name: "Test User",
       email: "test@example.com",
       password: "abc12345",
+      securityAnswer: "Max",
     });
 
     assert.isUndefined(res.body.user.password);
