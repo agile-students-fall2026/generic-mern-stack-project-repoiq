@@ -216,13 +216,7 @@ function App() {
     return <Login setPage={setPage} setUser={setUser} />;
   }
   if (page === "signup") {
-    return (
-      <Signup
-        setPage={setPage}
-        setUser={setUser}
-        setEmailRequest={setEmailRequest}
-      />
-    );
+    return <Signup setPage={setPage} setUser={setUser} />;
   }
   if (page === "home") {
     return (
@@ -385,10 +379,8 @@ function App() {
   }
 
   if (page === "forgot-password") {
-    return (
-      <ForgotPassword setPage={setPage} setEmailRequest={setEmailRequest} />
-    );
+    return <ForgotPassword setPage={setPage} />;
   }
-  return <ForgotPassword setPage={setPage} />;
 }
+
 export default App;
