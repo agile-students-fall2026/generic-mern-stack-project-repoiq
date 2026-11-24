@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Lock, Mail, User } from "lucide-react";
+import { KeyRound, Lock, Mail, User } from "lucide-react";
 import BackButton from "./BackButton.jsx";
-function Signup({ setPage, setUser, setEmailRequest }) {
+function Signup({ setPage, setUser }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [securityAnswer, setSecurityAnswer] = useState("");
   const [error, setError] = useState("");
 
   async function handleSignup() {
@@ -17,13 +18,18 @@ function Signup({ setPage, setUser, setEmailRequest }) {
     const response = await fetch("/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name, email: email, password: password }),
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        securityAnswer: securityAnswer,
+      }),
     });
     const data = await response.json();
 
     if (data.success) {
-      setEmailRequest({ email: email.trim(), purpose: "signup" });
-      setPage("check-email");
+      setUser(data.user);
+      setPage("home");
     } else {
       setError(data.message);
     }
