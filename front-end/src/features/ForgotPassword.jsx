@@ -2,11 +2,11 @@ import { useState } from "react";
 import BackButton from "./BackButton.jsx";
 
 function ForgotPassword({ setPage }) {
-  const [email, setEmail] = useState(""); // same as before
-  const [securityAnswer, setSecurityAnswer] = useState(""); // NEW
-  const [newPassword, setNewPassword] = useState(""); // NEW
-  const [message, setMessage] = useState(""); // same as before
-  const [isReset, setIsReset] = useState(false); // NEW: becomes true after a successful reset
+  const [email, setEmail] = useState("");
+  const [securityAnswer, setSecurityAnswer] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isReset, setIsReset] = useState(false);
 
   async function handleSubmit() {
     if (!email.trim() || !securityAnswer.trim() || !newPassword) {
