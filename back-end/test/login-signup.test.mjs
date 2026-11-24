@@ -26,9 +26,12 @@ describe("POST /api/login", () => {
 
 describe("POST /api/signup", () => {
   it("creates an account when all fields are filled in", async () => {
-    const res = await request(app)
-      .post("/api/signup")
-      .send({ name: "Test User", email: "test@example.com", password: "abc12345" });
+    const res = await request(app).post("/api/signup").send({
+      name: "Test User",
+      email: "test@example.com",
+      password: "abc12345",
+      securityAnswer: "Max",
+    });
 
     assert.equal(res.status, 201);
     assert.equal(res.body.success, true);
@@ -46,9 +49,11 @@ describe("POST /api/signup", () => {
   });
 
   it("does not send the password back", async () => {
-    const res = await request(app)
-      .post("/api/signup")
-      .send({ name: "Test User", email: "test@example.com", password: "abc12345" });
+    const res = await request(app).post("/api/signup").send({
+      name: "Test User",
+      email: "test@example.com",
+      password: "abc12345",
+    });
 
     assert.isUndefined(res.body.user.password);
   });
