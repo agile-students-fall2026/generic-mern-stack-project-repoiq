@@ -36,7 +36,7 @@ function Login({ setPage, setUser }) {
       setUser(data.user);
       setPage("home");
     } catch {
-      setError("Could not sign in with GitHub")
+      setError("Could not sign in with GitHub");
     }
   }
 
