@@ -16,7 +16,6 @@ import RepositoryDetails from "./features/RepositoryDetails.jsx";
 import AnalysisResults from "./features/AnalysisResults.jsx";
 import Profile from "./features/Profile.jsx";
 import ForgotPassword from "./features/ForgotPassword.jsx";
-import CheckEmail from "./features/CheckEmail.jsx";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -37,14 +36,9 @@ function App() {
   const [selectedComponent, setSelectedComponent] = useState({});
   const activeAnalysis =
     analysis?.repository?.id === selectedRepo?.id ? analysis : null;
-  const [page, setPage] = useState(
-    () => (sessionStorage.getItem("user") ? "home" : "welcome")
+  const [page, setPage] = useState(() =>
+    sessionStorage.getItem("user") ? "home" : "welcome",
   );
-
-  const [emailRequest, setEmailRequest] = useState({
-    email: "",
-    purpose: "",
-  });
 
   useEffect(() => {
     if (user) {
@@ -387,15 +381,14 @@ function App() {
   }
 
   if (page === "profile") {
-    return <Profile setPage={setPage} user={user} onLogout={handleLogout}/>;
+    return <Profile setPage={setPage} user={user} onLogout={handleLogout} />;
   }
 
   if (page === "forgot-password") {
-    return <ForgotPassword setPage={setPage} setEmailRequest={setEmailRequest} />;
+    return (
+      <ForgotPassword setPage={setPage} setEmailRequest={setEmailRequest} />
+    );
   }
-
-  if (page === "check-email") {
-    return <CheckEmail setPage={setPage} emailRequest={emailRequest} />;
-  }
+  return <ForgotPassword setPage={setPage} />;
 }
 export default App;
