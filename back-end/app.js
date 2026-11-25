@@ -586,7 +586,7 @@ app.post("/api/resend-email", (req, res) => {
   if (!["signup", "reset"].includes(purpose)) {
     return res.status(400).json({
       success: false,
-      message: "Invalid email purpose. Expected 'signup' or 'reset'"
+      message: "Invalid email purpose. Expected 'signup' or 'reset'",
     });
   }
 
@@ -600,6 +600,7 @@ app.get("/api/profile", (req, res) => {
   res.json({
     username: "demo",
     bio: "Learning about codebases",
+    image: "/images/profile.png",
   });
 });
 
