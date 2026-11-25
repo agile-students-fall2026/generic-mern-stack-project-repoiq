@@ -9,6 +9,7 @@ const filePath = require("path");
 const mapData = require("./data/mapData");
 const analysesByRepoId = new Map();
 const mockUsers = new Map();
+const securityAnswers = new Map();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(filePath.join(__dirname, "public")));
@@ -526,15 +527,16 @@ app.get("/api/repositories/:id/analysis", (req, res) => {
 });
 
 app.post("/api/signup", (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, securityAnswer } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !securityAnswer) {
     return res.status(400).json({
       success: false,
       message: "Please fill in all fields.",
     });
   }
   mockUsers.set(email.toLowerCase(), name);
+  securityAnswers.set(email.toLowerCase(), securityAnswer.trim().toLowerCase());
   res.status(201).json({
     success: true,
     message: "Account created.",
@@ -542,19 +544,28 @@ app.post("/api/signup", (req, res) => {
   });
 });
 
-app.post("/api/forgot-password", (req, res) => {
-  const { email } = req.body;
+app.post("/api/reset-password", (req, res) => {
+  const { email, securityAnswer, newPassword } = req.body;
 
-  if (!email) {
+  if (!email || !securityAnswer || !newPassword) {
     return res.status(400).json({
       success: false,
-      message: "Please enter your email.",
+      message: "Please fill in all fields.",
+    });
+  }
+
+  const savedAnswer = securityAnswers.get(email.toLowerCase());
+
+  if (savedAnswer !== securityAnswer.trim().toLowerCase()) {
+    return res.status(400).json({
+      success: false,
+      message: "The email or answer is incorrect.",
     });
   }
 
   res.json({
     success: true,
-    message: "A password reset link has been sent to your email.",
+    message: "Your password has been reset. You can now log in.",
   });
 });
 
@@ -570,29 +581,6 @@ app.post("/api/github/connect", (req, res) => {
   res.json({
     success: true,
     message: "GitHub connected (demo).",
-  });
-});
-
-// Mock the resend action for the Check Email page; no email is actually sent.
-app.post("/api/resend-email", (req, res) => {
-  const { email, purpose } = req.body;
-  if (!email) {
-    return res.status(400).json({
-      success: false,
-      message: "Missing email",
-    });
-  }
-
-  if (!["signup", "reset"].includes(purpose)) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid email purpose. Expected 'signup' or 'reset'"
-    });
-  }
-
-  res.json({
-    success: true,
-    message: `Simulated ${purpose === "signup" ? "verification" : "password reset"} email for ${email}. No email was sent.`,
   });
 });
 
